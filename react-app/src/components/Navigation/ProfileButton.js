@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../Login/LoginFormModal/index";
+import SignupFormModal from "../Signup/SignupFormModal/index";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -39,16 +40,47 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
+      {user.profile_picture ? (
+        <img
+          className="navigation-profile-picture"
+          src={user.profile_picture}
+          onClick={openMenu}
+          alt="user profile pic"
+        ></img>
+      ) : (
+        <i
+          style={{ fontSize: "40px", cursor: "pointer" }}
+          className="fas fa-user-circle"
+          onClick={openMenu}
+        />
+      )}
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
+            <li>{`${user.first_name} ${user.last_name}`}</li>
+            <hr></hr>
             <li>
-              <button onClick={handleLogout}>Log Out</button>
+              <i
+                className="fa-regular fa-user"
+                style={{ color: "#757575" }}
+              ></i>
+              <NavLink
+                onClick={closeMenu}
+                className="profile-menu-prof"
+                to={`/profiles/${user.id}`}
+              >
+                Profile
+              </NavLink>
+            </li>
+            <hr></hr>
+            <li>
+              <i
+                className="fas fa-regular fa-arrow-right-from-bracket"
+                style={{ color: "#757575" }}
+              ></i>
+              <span className="profile-dropdown-logout" onClick={handleLogout}>
+                Sign Out
+              </span>
             </li>
           </>
         ) : (

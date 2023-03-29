@@ -1,0 +1,50 @@
+.login-button {
+  border: none;
+  background-color: white;
+  padding-right: 20px;
+  cursor: pointer;
+}
+
+.log-in-modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.log-in-modal-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 250px;
+}
+
+.log-in-modal-form > input {
+  width: 75%;
+  height: 25px;
+  margin: 5px 0px;
+  padding: 0px 5px;
+}
+
+.login-form-button {
+  width: 80%;
+  height: 35px;
+  background-color: #344afb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.demo-user-button {
+  width: 80%;
+  height: 35px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+}

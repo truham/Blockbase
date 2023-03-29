@@ -1,0 +1,78 @@
+.signup-button {
+  padding: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  width: 100px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.sign-up-modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: auto;
+  padding: 10px 5px;
+}
+
+.sign-up-modal-container > input,
+textarea {
+  width: 75%;
+  height: 25px;
+  margin: 5px 0px;
+  padding: 0px 5px;
+}
+
+.signup-modal-button {
+  width: 80%;
+  height: 35px;
+  background-color: #344afb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+}
+
+.sign-up-modal-bio-textarea {
+  resize: none;
+  height: 100px;
+}
+
+#sign-up-modal-profile-pic-upload {
+  display: none;
+}
+
+.prof-pic-text {
+  font-size: 13px;
+  color: #858585;
+}
+
+.prof-pic-upload-click {
+  cursor: pointer;
+  font-size: 13px;
+  color: #22851b;
+}
+
+.sign-up-prof-pic-preview {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.sign-up-prof-pic-container {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+}
+
+.prof-pic-inner-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  justify-content: center;
+}
