@@ -37,6 +37,10 @@ textarea {
   cursor: pointer;
 }
 
+.signup-modal-button:hover {
+  background-color: #011082;
+}
+
 .sign-up-modal-bio-textarea {
   resize: none;
   height: 100px;

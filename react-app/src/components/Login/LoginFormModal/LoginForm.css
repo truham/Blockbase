@@ -38,6 +38,10 @@
   cursor: pointer;
 }
 
+.login-form-button:hover {
+  background-color: #011082;
+}
+
 .demo-user-button {
   width: 80%;
   height: 35px;
@@ -47,4 +51,8 @@
   border-radius: 5px;
   margin: 5px;
   cursor: pointer;
+}
+
+.demo-user-button:hover {
+  background-color: #262628;  
 }

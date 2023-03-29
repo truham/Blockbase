@@ -6,6 +6,7 @@ import "./Navigation.css";
 import LoginFormModal from "../Login/LoginFormModal/index";
 import SignupFormModal from "../Signup/SignupFormModal/index";
 import OpenModalButton from "../OpenModalButton";
+import logo from "../../assets/blockbase-logo.png";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,11 +16,7 @@ function Navigation({ isLoaded }) {
       <ul className="navbar-content">
         <li className="nav-left-section">
           <NavLink exact to="/">
-            <img
-              className="logo-image"
-              src="https://pyxis.nymag.com/v1/imgs/9e4/3ea/e598087fd3841797d51b6b4b371d7132ab-17-totoro-studio-ghibli-hbomax.1x.rsquare.w1400.jpg"
-              alt="logo"
-            ></img>
+            <img className="logo-image" src={logo} alt="logo"></img>
           </NavLink>
         </li>
         {isLoaded && sessionUser ? (
