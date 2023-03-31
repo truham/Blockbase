@@ -21,7 +21,9 @@ function Navigation({ isLoaded }) {
         </li>
 
         <div>
-          <NavLink className="nav-explore" to="/explore">Explore</NavLink>
+          <NavLink className="nav-explore" to="/explore">
+            Explore
+          </NavLink>
         </div>
 
         {isLoaded && sessionUser ? (

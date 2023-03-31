@@ -5,6 +5,8 @@ import SignupFormPage from "./components/Signup/SignupFormPage";
 import LoginFormPage from "./components/Login/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
+import Explore from "./components/Explore/Explore";
+import Featured from "./components/Featured/Featured";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +20,14 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/login" >
+          <Route exact path="/">
+            {/* Hero */}
+            <Featured />
+          </Route>
+          <Route>
+            <Explore exact path="/explore" />
+          </Route>
+          <Route path="/login">
             <LoginFormPage />
           </Route>
           <Route path="/signup">
