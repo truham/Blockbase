@@ -28,6 +28,7 @@ Mako = "==1.2.4"
 boto3 = "*"
 email-validator = "*"
 requests = "*"
+flask-caching = "*"
 
 [dev-packages]
 

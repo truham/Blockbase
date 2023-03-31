@@ -1,10 +1,12 @@
-from flask import Blueprint, jsonify, session
+from flask import Blueprint, jsonify, session, current_app
 import requests
+from app.cache import cache
 
 coins_routes = Blueprint('coins', __name__)
 
 
 @coins_routes.route('/featured')
+@cache.cached(timeout=120)
 def featured_cryptocurrencies():
     """
     Fetching data from Coingecko for 6 cryptocurrencies
@@ -14,4 +16,3 @@ def featured_cryptocurrencies():
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&locale=en")
     data = res.json()
     return jsonify(data)
-

@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { getFeaturedThunk } from "../../store/coins";
 import "./Featured.css";
 
 const Featured = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const featured = useSelector((state) => state.coins.featured);
 
   useEffect(() => {
@@ -15,6 +17,10 @@ const Featured = () => {
     getFeatured();
   }, [dispatch]);
 
+  const handleSeeAssets = () => {
+    history.push("/explore");
+  };
+
   if (!featured) return null;
 
   return (
@@ -23,7 +29,7 @@ const Featured = () => {
         <div className="featured-left">
           <h3>Explore crypto like Bitcoin, Ethereum, and Dogecoin</h3>
           <p>View all available assets: cryptocurrencies and NFTs</p>
-          <button>See more assets</button>
+          <button onClick={handleSeeAssets}>See more assets</button>
         </div>
 
         <div className="featured-right">

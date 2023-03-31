@@ -14,6 +14,15 @@ export const getFeaturedThunk = () => async (dispatch) => {
     const featured = await res.json();
     dispatch(getFeaturedAction(featured));
     return featured;
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return {
+      errors: ["A server error occurred. Please try again in a bit."],
+    };
   }
 };
 

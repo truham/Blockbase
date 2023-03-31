@@ -10,6 +10,7 @@ from .api.auth_routes import auth_routes
 from .api.coins_routes import coins_routes
 from .seeds import seed_commands
 from .config import Config
+from .cache import cache, cache_config
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -35,6 +36,11 @@ Migrate(app, db)
 
 # Application Security
 CORS(app)
+
+
+# Cache setup
+app.config.from_mapping(cache_config)
+cache.init_app(app)
 
 
 # Since we are deploying with Docker and Flask,
