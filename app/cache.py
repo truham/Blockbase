@@ -4,6 +4,6 @@ from flask_caching import Cache
 cache_config = {
     "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
     # timeout in seconds, how long we store the data for before expiration
-    "CACHE_DEFAULT_TIMEOUT": 120
+    "CACHE_DEFAULT_TIMEOUT": 60
 }
 cache = Cache(config=cache_config)

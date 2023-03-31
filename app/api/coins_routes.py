@@ -6,7 +6,7 @@ coins_routes = Blueprint('coins', __name__)
 
 
 @coins_routes.route('/featured')
-@cache.cached(timeout=120)
+@cache.cached(timeout=60)
 def featured_cryptocurrencies():
     """
     Fetching data from Coingecko for 6 cryptocurrencies
