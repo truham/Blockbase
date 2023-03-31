@@ -118,3 +118,18 @@ ul > hr {
 .nav-right-signup-button:hover {
   background-color: #011082;
 }
+
+.nav-explore {
+  text-decoration: none;
+  color: #434345;
+}
+
+.nav-explore:hover {
+  padding: 8px;
+  background-color: #011082;
+  color: white;
+  border: none;
+  width: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+}

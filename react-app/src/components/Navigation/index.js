@@ -19,6 +19,11 @@ function Navigation({ isLoaded }) {
             <img className="logo-image" src={logo} alt="logo"></img>
           </NavLink>
         </li>
+
+        <div>
+          <NavLink className="nav-explore" to="/explore">Explore</NavLink>
+        </div>
+
         {isLoaded && sessionUser ? (
           <div className="nav-right-section">
             <li className="nav-right-login">
@@ -32,7 +37,6 @@ function Navigation({ isLoaded }) {
               modalComponent={<LoginFormModal />}
               buttonStyle="nav-right-login-button"
             />
-
             <OpenModalButton
               buttonText="Sign up"
               modalComponent={<SignupFormModal />}
