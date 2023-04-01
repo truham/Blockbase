@@ -15,7 +15,8 @@
   justify-content: center;
   width: 350px;
   height: auto;
-  padding: 10px 5px;
+  padding: 15px 5px;
+  margin: 15px 0;
 }
 
 .sign-up-modal-container > input,
