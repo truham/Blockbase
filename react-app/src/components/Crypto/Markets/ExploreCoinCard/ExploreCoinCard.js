@@ -25,7 +25,7 @@ const ExploreCoinCard = ({ coin }) => {
   };
 
   return (
-    <tr>
+    <tr className="explore-coin-card-container" style={{ cursor: "pointer" }}>
       <td className="explore-coin-card-name-container">
         <img
           style={{ height: "35px", marginRight: "10px" }}

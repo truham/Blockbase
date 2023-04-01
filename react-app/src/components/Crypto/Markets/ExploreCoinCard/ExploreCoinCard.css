@@ -2,6 +2,11 @@ td {
   padding: 20px 5px;
 }
 
+.explore-coin-card-container:hover {
+  background-color: rgb(245, 245, 245);
+  cursor: pointer
+}
+
 .explore-coin-card-name-container {
   display: flex;
   flex-direction: row;
