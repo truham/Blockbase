@@ -16,3 +16,12 @@ def featured_cryptocurrencies():
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&locale=en")
     data = res.json()
     return jsonify(data)
+
+
+@coins_routes.route('/explore')
+@cache.cached(timeout=60)
+def explore_cryptocurrencies():
+    res = requests.get(
+        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
+    data = res.json()
+    return jsonify(data)

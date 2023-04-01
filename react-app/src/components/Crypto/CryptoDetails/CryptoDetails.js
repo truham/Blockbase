@@ -1,0 +1,1 @@
+import "./CryptoDetails.css";

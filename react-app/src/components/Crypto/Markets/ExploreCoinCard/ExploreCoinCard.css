@@ -1,0 +1,23 @@
+td {
+  padding: 15px 5px;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.explore-coin-card-name-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.explore-coin-card-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.explore-coin-card-up {
+  color: #098551;
+}
+
+.explore-coin-card-down {
+  color: #cf202f;
+}
