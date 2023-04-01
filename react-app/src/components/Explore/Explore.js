@@ -4,7 +4,7 @@ import "./Explore.css";
 
 const Explore = () => {
   return (
-    <div>
+    <div className="explore-container">
       <>Top Search Intro Area</>
       <Markets />
     </div>

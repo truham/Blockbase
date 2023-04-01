@@ -33,7 +33,7 @@ const ExploreCoinCard = ({ coin }) => {
           alt={coin.name}
         ></img>
         <div className="explore-coin-card-name">
-          <span>{coin.name}</span>
+          <span style={{ fontWeight: "bold" }}>{coin.name}</span>
           <span>{`(${coin.symbol.toUpperCase()})`}</span>
         </div>
       </td>
