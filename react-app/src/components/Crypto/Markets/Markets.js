@@ -1,14 +1,15 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { getExploreThunk } from "../../../store/coins";
-import ExploreCoinsTable from "./ExploreCoinTable/ExploreCoinsTable"
+import ExploreCoinsTable from "./ExploreCoinTable/ExploreCoinsTable";
 import "./Markets.css";
 
 const Markets = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const exploreCoins = useSelector((state) => state.coins.coins);
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const getExploreCoins = async () => {
