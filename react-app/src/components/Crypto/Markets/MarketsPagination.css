@@ -1,0 +1,25 @@
+.markets-pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.markets-pagination-buttons {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  color: #333;
+  margin: 0 0.25rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.markets-pagination-buttons:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.markets-pagination-buttons:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
