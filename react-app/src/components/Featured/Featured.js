@@ -18,7 +18,7 @@ const Featured = () => {
   }, [dispatch]);
 
   const handleSeeAssets = () => {
-    history.push("/explore");
+    history.push("/cryptocurrencies");
   };
 
   if (!featured) return null;

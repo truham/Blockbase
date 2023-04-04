@@ -119,12 +119,12 @@ ul > hr {
   background-color: #2c3fd6;
 }
 
-.nav-explore {
+.nav-cryptocurrencies {
   text-decoration: none;
   color: #434345;
 }
 
-.nav-explore:hover {
+.nav-cryptocurrencies:hover {
   padding: 8px;
   background-color: #2c3fd6;
   color: white;

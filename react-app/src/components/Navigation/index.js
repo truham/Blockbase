@@ -14,16 +14,17 @@ function Navigation({ isLoaded }) {
   return (
     <nav className="navbar">
       <ul className="navbar-content">
-        <li className="nav-left-section">
-          <NavLink exact to="/">
-            <img className="logo-image" src={logo} alt="logo"></img>
-          </NavLink>
-        </li>
-
         <div>
-          <NavLink className="nav-explore" to="/explore">
-            Explore
-          </NavLink>
+          <li className="nav-left-section">
+            <NavLink exact to="/">
+              <img className="logo-image" src={logo} alt="logo"></img>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className="nav-cryptocurrencies" to="/cryptocurrencies">
+              Cryptocurrencies
+            </NavLink>
+          </li>
         </div>
 
         {isLoaded && sessionUser ? (

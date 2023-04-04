@@ -25,7 +25,7 @@ function App() {
             <Featured />
           </Route>
           <Route>
-            <Explore exact path="/explore" />
+            <Explore exact path="/cryptocurrencies" />
           </Route>
           <Route path="/login">
             <LoginFormPage />
