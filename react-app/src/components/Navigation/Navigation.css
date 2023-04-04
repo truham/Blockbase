@@ -20,6 +20,17 @@
   padding: 0px;
 }
 
+.nav-left-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-cryptocurrencies {
+  margin: 0 1.5rem;
+  padding: 8px;
+}
+
 .nav-right-section {
   display: flex;
   align-items: center;

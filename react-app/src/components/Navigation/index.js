@@ -14,8 +14,8 @@ function Navigation({ isLoaded }) {
   return (
     <nav className="navbar">
       <ul className="navbar-content">
-        <div>
-          <li className="nav-left-section">
+        <div className="nav-left-section">
+          <li className="nav-logo">
             <NavLink exact to="/">
               <img className="logo-image" src={logo} alt="logo"></img>
             </NavLink>
