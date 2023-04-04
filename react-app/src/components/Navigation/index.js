@@ -25,6 +25,11 @@ function Navigation({ isLoaded }) {
               Cryptocurrencies
             </NavLink>
           </li>
+          <li>
+            <NavLink className="nav-nfts" to="/nft">
+              NFT
+            </NavLink>
+          </li>
         </div>
 
         {isLoaded && sessionUser ? (
