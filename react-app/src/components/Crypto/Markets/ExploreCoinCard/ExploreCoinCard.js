@@ -1,7 +1,10 @@
 import { BsArrowUpRight, BsArrowDownRight } from "react-icons/bs";
+import { useHistory } from "react-router-dom";
 import "./ExploreCoinCard.css";
 
 const ExploreCoinCard = ({ coin }) => {
+  const history = useHistory();
+
   const numCoverter = (num) => {
     if (num === null || num === undefined) {
       return "N/A";
@@ -24,8 +27,16 @@ const ExploreCoinCard = ({ coin }) => {
     return newNum;
   };
 
+  const handleDetailsDirect = () => {
+    history.push(`/cryptocurrencies/${coin.id}`);
+  };
+
   return (
-    <tr className="explore-coin-card-container" style={{ cursor: "pointer" }}>
+    <tr
+      className="explore-coin-card-container"
+      style={{ cursor: "pointer" }}
+      onClick={handleDetailsDirect}
+    >
       <td className="explore-coin-card-name-container">
         <img
           style={{ height: "35px", marginRight: "10px" }}

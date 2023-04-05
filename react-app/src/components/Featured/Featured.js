@@ -21,6 +21,10 @@ const Featured = () => {
     history.push("/cryptocurrencies");
   };
 
+  const handleDetailsDirect = (coin) => {
+    history.push(`/cryptocurrencies/${coin.id}`);
+  };
+
   if (!featured) return null;
 
   return (
@@ -34,17 +38,21 @@ const Featured = () => {
 
         <div className="featured-right">
           {featured.map((coin, idx) => (
-            <div className="featured-card-container" key={idx}>
+            <div
+              className="featured-card-container"
+              key={idx}
+              onClick={(e) => handleDetailsDirect(coin)}
+            >
               <div>
                 <img
                   className="featured-card-img"
                   src={coin.image}
-                  alt=""
+                  alt={coin.name}
                 ></img>
               </div>
               <div>
                 <h4>{coin.name}</h4>
-                <span>{`$${coin.current_price}`}</span>
+                <span>{`$${coin.current_price.toFixed(2)}`}</span>
               </div>
               {coin.price_change_percentage_24h < 0 ? (
                 <span className="featured-card-down">

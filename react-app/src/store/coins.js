@@ -1,6 +1,7 @@
 /* ----- CONSTANTS ----- */
 const GET_FEATURED = "cryptocurrencies/GET_FEATURED";
 const GET_EXPLORE = "cryptocurrencies/GET_EXPLORE";
+const GET_COIN_DETAILS = "cryptocurrencies/GET_COIN_DETAILS";
 
 /* ----- ACTIONS ----- */
 const getFeaturedAction = (featured) => ({
@@ -11,6 +12,11 @@ const getFeaturedAction = (featured) => ({
 const getExploreAction = (coins) => ({
   type: GET_EXPLORE,
   coins,
+});
+
+const getCoinDetailsAction = (coin) => ({
+  type: GET_COIN_DETAILS,
+  coin,
 });
 
 /* ----- THUNKS ----- */
@@ -50,9 +56,28 @@ export const getExploreThunk = () => async (dispatch) => {
   }
 };
 
+export const getCoinDetailsThunk = (coinId) => async (dispatch) => {
+  const res = await fetch(`/api/cryptocurrencies/${coinId}`);
+  if (res.ok) {
+    const coin = await res.json();
+    dispatch(getCoinDetailsAction(coin));
+    return coin;
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return {
+      errors: ["A server error occurred. Please try again in a bit."],
+    };
+  }
+};
+
 /* ----- INITIAL STATE ----- */
 const initialState = {
   coins: null,
+  coin: null,
   featured: null,
 };
 
@@ -65,6 +90,9 @@ const coinsReducer = (state = initialState, action) => {
       return newState;
     case GET_EXPLORE:
       newState.coins = action.coins;
+      return newState;
+    case GET_COIN_DETAILS:
+      newState.coin = action.coin;
       return newState;
     default:
       return state;

@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Explore from "./components/Explore/Explore";
 import Featured from "./components/Featured/Featured";
+import CryptoDetails from "./components/Crypto/CryptoDetails/CryptoDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,6 +24,9 @@ function App() {
           <Route exact path="/">
             {/* Hero */}
             <Featured />
+          </Route>
+          <Route exact path="/cryptocurrencies/:coinId">
+            <CryptoDetails />
           </Route>
           <Route>
             <Explore exact path="/cryptocurrencies" />
