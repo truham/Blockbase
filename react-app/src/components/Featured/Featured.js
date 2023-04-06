@@ -25,7 +25,9 @@ const Featured = () => {
     history.push(`/cryptocurrencies/${coin.id}`);
   };
 
-  if (!featured) return null;
+  if (!featured) {
+    return <span>Loading...</span>;
+  }
 
   return (
     <div className="featured-outer">

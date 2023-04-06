@@ -2,6 +2,7 @@
 const GET_FEATURED = "cryptocurrencies/GET_FEATURED";
 const GET_EXPLORE = "cryptocurrencies/GET_EXPLORE";
 const GET_COIN_DETAILS = "cryptocurrencies/GET_COIN_DETAILS";
+const COINS_ERROR = "cryptocurrencies/COINS_ERROR";
 
 /* ----- ACTIONS ----- */
 const getFeaturedAction = (featured) => ({
@@ -19,6 +20,11 @@ const getCoinDetailsAction = (coin) => ({
   coin,
 });
 
+const coinsErrorAction = (error) => ({
+  type: COINS_ERROR,
+  error,
+});
+
 /* ----- THUNKS ----- */
 export const getFeaturedThunk = () => async (dispatch) => {
   const res = await fetch("/api/cryptocurrencies/featured");
@@ -26,15 +32,9 @@ export const getFeaturedThunk = () => async (dispatch) => {
     const featured = await res.json();
     dispatch(getFeaturedAction(featured));
     return featured;
-  } else if (res.status < 500) {
-    const data = await res.json();
-    if (data.errors) {
-      return data.errors;
-    }
   } else {
-    return {
-      errors: ["A server error occurred. Please try again in a bit."],
-    };
+    const error = await res.json();
+    dispatch(coinsErrorAction(error));
   }
 };
 
@@ -44,15 +44,9 @@ export const getExploreThunk = () => async (dispatch) => {
     const coins = await res.json();
     dispatch(getExploreAction(coins));
     return coins;
-  } else if (res.status < 500) {
-    const data = await res.json();
-    if (data.errors) {
-      return data.errors;
-    }
   } else {
-    return {
-      errors: ["A server error occurred. Please try again in a bit."],
-    };
+    const error = await res.json();
+    dispatch(coinsErrorAction(error));
   }
 };
 
@@ -62,15 +56,9 @@ export const getCoinDetailsThunk = (coinId) => async (dispatch) => {
     const coin = await res.json();
     dispatch(getCoinDetailsAction(coin));
     return coin;
-  } else if (res.status < 500) {
-    const data = await res.json();
-    if (data.errors) {
-      return data.errors;
-    }
   } else {
-    return {
-      errors: ["A server error occurred. Please try again in a bit."],
-    };
+    const error = await res.json();
+    dispatch(coinsErrorAction(error));
   }
 };
 
@@ -79,6 +67,7 @@ const initialState = {
   coins: null,
   coin: null,
   featured: null,
+  error: null,
 };
 
 /* ----- REDUCER ----- */
@@ -93,6 +82,9 @@ const coinsReducer = (state = initialState, action) => {
       return newState;
     case GET_COIN_DETAILS:
       newState.coin = action.coin;
+      return newState;
+    case COINS_ERROR:
+      newState.error = action.error;
       return newState;
     default:
       return state;

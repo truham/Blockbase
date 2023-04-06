@@ -9,16 +9,19 @@ import "./CryptoDetails.css";
 const CryptoDetails = () => {
   const dispatch = useDispatch();
   const coin = useSelector((state) => state.coins.coin);
+  const error = useSelector((state) => state.coins.error);
   const { coinId } = useParams();
-
-  console.log(coin);
 
   useEffect(() => {
     dispatch(getCoinDetailsThunk(coinId));
   }, [dispatch, coinId]);
 
   if (!coin) {
-    return <h1>Loading...</h1>;
+    return <span>Loading...</span>;
+  }
+
+  if (error) {
+    return <span>Error: {error.error}</span>;
   }
 
   return (
@@ -39,7 +42,7 @@ const CryptoDetails = () => {
           </div>
           <div>
             <span>{`$${coin.market_data.current_price.usd}`}</span>
-            {coin.price_change_percentage_24h < 0 ? (
+            {coin.market_data.price_change_percentage_24h < 0 ? (
               <span className="crypto-details-price-down">
                 <AiOutlineArrowDown />
                 {`${coin.market_data.price_change_percentage_24h.toFixed(2)}%`}
@@ -52,8 +55,7 @@ const CryptoDetails = () => {
             )}
           </div>
         </div>
-        <Charts />
-        <div>Crypto Details</div>
+        <Charts coinId={coinId} />
         <div>
           <p dangerouslySetInnerHTML={{ __html: coin.description.en }}></p>
         </div>
