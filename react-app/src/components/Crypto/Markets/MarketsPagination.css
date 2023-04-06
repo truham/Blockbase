@@ -7,9 +7,9 @@
 
 .markets-pagination-buttons {
   background-color: transparent;
-  border: 1px solid #ccc;
+  border: none;
   color: #333;
-  margin: 0 0.25rem;
+  margin: 0 0.25rem 1rem 0.25rem;
   padding: 0.5rem 1rem;
   transition: background-color 0.3s;
   cursor: pointer;

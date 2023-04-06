@@ -25,6 +25,19 @@ const Markets = () => {
     setCurrentPage(newPage);
   };
 
+  // Handle prev & next options
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   useEffect(() => {
     const getExploreCoins = async () => {
       await dispatch(getExploreThunk());
@@ -40,6 +53,16 @@ const Markets = () => {
       <ExploreCoinsTable coins={coinsDisplay} />
       {/* Pagination buttons */}
       <div className="markets-pagination-container">
+        {/* Handle previous */}
+        <button
+          onClick={handlePrevious}
+          disabled={currentPage === 1}
+          className="markets-pagination-buttons"
+        >
+          &lt; Prev
+        </button>
+
+        {/* Handle page display */}
         {Array.from({ length: totalPages }, (_, index) => (
           <button
             key={index}
@@ -50,6 +73,15 @@ const Markets = () => {
             {index + 1}
           </button>
         ))}
+
+        {/* Handle next */}
+        <button
+          onClick={handleNext}
+          disabled={currentPage === totalPages}
+          className="markets-pagination-buttons"
+        >
+          Next &gt;
+        </button>
       </div>
     </div>
   );
