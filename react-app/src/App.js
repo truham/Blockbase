@@ -6,8 +6,9 @@ import LoginFormPage from "./components/Login/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import Explore from "./components/Explore/Explore";
-import Featured from "./components/Featured/Featured";
+import Featured from "./components/HomePage/Featured/Featured";
 import CryptoDetails from "./components/Crypto/CryptoDetails/CryptoDetails";
+import Hero from "./components/HomePage/Hero/Hero";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            {/* Hero */}
+            <Hero />
             <Featured />
           </Route>
           <Route exact path="/cryptocurrencies/:coinId">

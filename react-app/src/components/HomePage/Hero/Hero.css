@@ -1,0 +1,36 @@
+.hero-outer {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 100%;
+  margin: 3rem 0 5rem;
+}
+
+.hero-right > button {
+  align-self: flex-start;
+  color: white;
+  background-color: #344afb;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.hero-right {
+  margin-top: 10%;
+}
+
+.hero-right > * {
+  margin: 0.5rem 0;
+  font-weight: normal;
+}
+
+.hero-img {
+  height: 30em;
+}

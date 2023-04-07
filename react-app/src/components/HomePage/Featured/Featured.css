@@ -1,3 +1,8 @@
+.featured-background {
+  background-color: #f2f2f2;
+  padding: 3rem 0 3rem;
+}
+
 .featured-outer {
   max-width: 1240px;
   margin: 0 auto;
