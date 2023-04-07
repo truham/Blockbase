@@ -1,27 +1,74 @@
-# Flask React Project
+# About Tales
 
-This is the starter for the Flask React project.
+Blockbase is a web application inspired by Coinbase & CoinGecko. It is a personal project to learn more about how to use available resources surrounding cryptocurrencies and NFTs.
+[Click here to visit Blockbase's live site](https://blockbase.onrender.com/).
 
-## Getting started
-1. Clone this repository (only this branch)
+<br>
 
-2. Install dependencies
+# Tech Stack
 
-      ```bash
-      pipenv install -r requirements.txt
-      ```
+Backend:
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
+[![Python][python.js]][python-url]
+[![Flask][flask.js]][flask-url]
+[![PostgreSQL][postgresql.js]][postgresql-url]
 
-4. Make sure the SQLite3 database connection URL is in the **.env** file
+Frontend:
 
-5. This starter organizes all tables inside the `flask_schema` schema, defined
-   by the `SCHEMA` environment variable.  Replace the value for
-   `SCHEMA` with a unique name, **making sure you use the snake_case
-   convention**.
+[![HTML][html.js]][html-url]
+[![CSS][css.js]][css-url]
+[![Javascript][javascript.js]][javascript-url]
+[![React][react.js]][react-url]
+[![Redux][redux.js]][redux-url]
 
-6. Get into your pipenv, migrate your database, seed your database, and run your Flask app
+<br>
+
+# Feature Examples
+
+<!-- All users have access to view the entire website. There is a sign up option for users to create an account and personalzie their PFP. -->
+
+## Home Page - NFTs
+
+The hero features a set of The Memes by 6529 and redirects users to view a table of available NFTs.
+
+## Home Page - Cryptocurrencies
+
+A featured section highlights some of the top cryptocurrencies to familiarize users with available assets, and there is an option to view more assets.
+<!-- ![feature-img-1] -->
+
+<!-- [feature-img-1]: ./react-app/src/assets/1-signup.jpg -->
+
+## Profile Update
+
+Users can update their profile with a new image, bio, and name changes.
+<!-- ![feature-img-7] -->
+
+<!-- [feature-img-7]: ./react-app/src/assets/7-edit-profile.jpg -->
+
+## Future Features
+
+- <input type="checkbox"> Mini chart included in the table of all cryptocurrencies
+- <input type="checkbox"> Search bar with autocomplete functionality to view assets
+- <input type="checkbox"> Wallet integration for wallet connect
+- <input type="checkbox"> Portfolio estimator via wallet connect OR inputting in a wallet address
+
+<br>
+
+# Get Started
+
+To run this project locally, please perform the following steps:
+
+1. Clone the repository
+   ```sh
+   git clone https://github.com/truham/blockbase
+   ```
+2. Install dependencies at the root directory
+   ```sh
+   pipenv install -r requirements.txt
+   ```
+3. Create a **.env** file based on the example with proper settings for your development environment
+
+4. Get into your pipenv, migrate your database, seed your database, and run your Flask app
 
    ```bash
    pipenv shell
@@ -39,110 +86,46 @@ This is the starter for the Flask React project.
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
+5. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory. Install the npm packages while inside of the `react-app` directory.
 
+   ```bash
+   npm install
+   ```
 
-## Deployment through Render.com
+6. Run the backend server at the root directory with pipenv run flask run
+   ```bash
+   pipenv run flask run
+   ```
+7. Run the frontend server inside the `react-app` with npm start
+   ```bash
+   npm start
+   ```
 
-First, refer to your Render.com deployment articles for more detailed
-instructions about getting started with [Render.com], creating a production
-database, and deployment debugging tips.
+<br>
 
-From the [Dashboard], click on the "New +" button in the navigation bar, and
-click on "Web Service" to create the application that will be deployed.
+# Contact
 
-Look for the name of the application you want to deploy, and click the "Connect"
-button to the right of the name.
+Email: [hamiltontruong@gmail.com](mailto:hamiltontruong@gmail.com)
 
-Now, fill out the form to configure the build and start commands, as well as add
-the environment variables to properly deploy the application.
+Portfolio: [https://truham.github.io/](https://truham.github.io/)
 
-### Part A: Configure the Start and Build Commands
+LinkedIn: [https://www.linkedin.com/in/hamiltontruong/](https://www.linkedin.com/in/hamiltontruong/)
 
-Start by giving your application a name.
+<!-- References and Icons -->
 
-Leave the root directory field blank. By default, Render will run commands from
-the root directory.
-
-Make sure the Environment field is set set to "Python 3", the Region is set to
-the location closest to you, and the Branch is set to "main".
-
-Next, add your Build command. This is a script that should include everything
-that needs to happen _before_ starting the server.
-
-For your Flask project, enter the following command into the Build field, all in
-one line:
-
-```shell
-# build command - enter all in one line
-npm install --prefix react-app &&
-npm run build --prefix react-app &&
-pip install -r requirements.txt &&
-pip install psycopg2 &&
-flask db upgrade &&
-flask seed all
-```
-
-This script will install dependencies for the frontend, and run the build
-command in the __package.json__ file for the frontend, which builds the React
-application. Then, it will install the dependencies needed for the Python
-backend, and run the migration and seed files.
-
-Now, add your start command in the Start field:
-
-```shell
-# start script
-gunicorn app:app
-```
-
-_If you are using websockets, use the following start command instead for increased performance:_
-
-`gunicorn --worker-class eventlet -w 1 app:app`
-
-### Part B: Add the Environment Variables
-
-Click on the "Advanced" button at the bottom of the form to configure the
-environment variables your application needs to access to run properly. In the
-development environment, you have been securing these variables in the __.env__
-file, which has been removed from source control. In this step, you will need to
-input the keys and values for the environment variables you need for production
-into the Render GUI.
-
-Click on "Add Environment Variable" to start adding all of the variables you
-need for the production environment.
-
-Add the following keys and values in the Render GUI form:
-
-- SECRET_KEY (click "Generate" to generate a secure secret for production)
-- FLASK_ENV production
-- FLASK_APP app
-- SCHEMA (your unique schema name, in snake_case)
-- REACT_APP_BASE_URL (use render.com url, located at top of page, similar to
-  https://this-application-name.onrender.com)
-
-In a new tab, navigate to your dashboard and click on your Postgres database
-instance.
-
-Add the following keys and values:
-
-- DATABASE_URL (copy value from Internal Database URL field)
-
-_Note: Add any other keys and values that may be present in your local __.env__
-file. As you work to further develop your project, you may need to add more
-environment variables to your local __.env__ file. Make sure you add these
-environment variables to the Render GUI as well for the next deployment._
-
-Next, choose "Yes" for the Auto-Deploy field. This will re-deploy your
-application every time you push to main.
-
-Now, you are finally ready to deploy! Click "Create Web Service" to deploy your
-project. The deployment process will likely take about 10-15 minutes if
-everything works as expected. You can monitor the logs to see your build and
-start commands being executed, and see any errors in the build process.
-
-When deployment is complete, open your deployed site and check to see if you
-successfully deployed your Flask application to Render! You can find the URL for
-your site just below the name of the Web Service at the top of the page.
-
-[Render.com]: https://render.com/
-[Dashboard]: https://dashboard.render.com/# Blockbase
+[html.js]: https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white
+[html-url]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[css.js]: https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white
+[css-url]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[javascript.js]: https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
+[javascript-url]: https://www.javascript.com/
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
+[redux.js]: https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white
+[redux-url]: https://redux.js.org/
+[python.js]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[python-url]: https://www.python.org/
+[flask.js]: https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
+[flask-url]: https://expressjs.com/
+[postgresql.js]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+[postgresql-url]: https://www.postgresql.org/
