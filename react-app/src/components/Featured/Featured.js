@@ -34,7 +34,7 @@ const Featured = () => {
       <div className="featured-container">
         <div className="featured-left">
           <h1>Explore crypto like Bitcoin, Ethereum, and Dogecoin</h1>
-          <h2>View all available assets: Cryptocurrencies and NFTs</h2>
+          <h2>View all available assets: Cryptocurrencies</h2>
           <button onClick={handleSeeAssets}>See more assets</button>
         </div>
 
