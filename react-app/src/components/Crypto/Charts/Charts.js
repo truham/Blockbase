@@ -7,15 +7,15 @@ import {
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
+  // CartesianGrid,
   Tooltip,
-  Legend,
+  // Legend,
   ResponsiveContainer,
 } from "recharts";
 
 const Charts = ({ coinId }) => {
   const dispatch = useDispatch();
-  const marketData = useSelector((state) => state.charts.chart);
+  const marketData = useSelector((state) => state.charts.charts[coinId]);
 
   useEffect(() => {
     dispatch(get24HChartThunk(coinId));
@@ -71,6 +71,7 @@ const Charts = ({ coinId }) => {
             left: 30,
             bottom: 30,
           }}
+          fill="#3182bd"
         >
           <XAxis dataKey="Date" interval={30} />
           <YAxis domain={[minPrice, maxPrice]} tickFormatter={formatY} />
@@ -78,7 +79,7 @@ const Charts = ({ coinId }) => {
           <Area
             type="monotone"
             dataKey="Price"
-            stroke="#344afb"
+            fill="#3182bd"
             activeDot={{ r: 8 }}
           />
         </AreaChart>

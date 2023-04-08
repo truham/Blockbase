@@ -21,27 +21,31 @@ function App() {
   return (
     <>
       <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <Hero />
-            <Featured />
-          </Route>
-          <Route exact path="/cryptocurrencies/:coinId">
-            <CryptoDetails />
-          </Route>
-          <Route>
-            <Explore exact path="/cryptocurrencies" />
-          </Route>
-          <Route path="/login">
-            <LoginFormPage />
-          </Route>
-          <Route path="/signup">
-            <SignupFormPage />
-          </Route>
-        </Switch>
-      )}
-      <Footer />
+      <div className="page-container">
+        <div className="content-wrap">
+          {isLoaded && (
+            <Switch>
+              <Route exact path="/">
+                <Hero />
+                <Featured />
+              </Route>
+              <Route exact path="/cryptocurrencies/:coinId">
+                <CryptoDetails />
+              </Route>
+              <Route>
+                <Explore exact path="/cryptocurrencies" />
+              </Route>
+              <Route path="/login">
+                <LoginFormPage />
+              </Route>
+              <Route path="/signup">
+                <SignupFormPage />
+              </Route>
+            </Switch>
+          )}
+        </div>
+        <Footer />
+      </div>
     </>
   );
 }

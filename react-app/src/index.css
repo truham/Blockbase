@@ -9,3 +9,19 @@
 a {
   text-decoration: none;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  flex-grow: 1;
+}

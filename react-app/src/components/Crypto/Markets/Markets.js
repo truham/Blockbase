@@ -11,7 +11,7 @@ const Markets = () => {
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1); // begin at page 1
-  const coinsPerPage = 10; // limit how many coins to show per page
+  const coinsPerPage = 7; // limit how many coins to show per page
 
   // calc start & end indices for coins slice array
   const endIndex = currentPage * coinsPerPage;

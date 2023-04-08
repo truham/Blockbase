@@ -13,7 +13,7 @@ const Hero = () => {
       <div className="hero-container">
         {/* Left */}
         <div className="hero-left">
-          <img className="hero-img" src={cards}></img>
+          <img className="hero-img" src={cards} alt="Banner Cards"></img>
         </div>
 
         {/* Right */}
