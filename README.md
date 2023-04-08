@@ -29,25 +29,37 @@ Frontend:
 
 ## Home Page - NFTs
 
-The hero features a set of The Memes by 6529 and redirects users to view a table of available NFTs.
+Banner section showcases some wonderful pieces from The Memes collection by 6529, inviting users to explore a comprehensive list of available NFTs.
+![feature-img-banner]
+
+[feature-img-banner]: ./react-app/src/assets/blockbase-banner.png
 
 ## Home Page - Cryptocurrencies
 
-A featured section highlights some of the top cryptocurrencies to familiarize users with available assets, and there is an option to view more assets.
-<!-- ![feature-img-1] -->
+Featured section highlights top cryptocurrencies, introducing users to a diverse range of assets. Users can also choose to explore more assets for a deeper understanding of the cryptocurrency landscape.
+![feature-img-featured]
 
-<!-- [feature-img-1]: ./react-app/src/assets/1-signup.jpg -->
+[feature-img-featured]: ./react-app/src/assets/blockbase-featured.png
+
+## Explore CryptoCurrencies
+
+Explore section features a comprehensive table showcasing various cryptocurrencies and their key metrics. To prevent rate limiting issues and enhance user experience, pagination is implemented, limiting the number of displayed assets per page.
+![feature-img-explore]
+
+[feature-img-explore]: ./react-app/src/assets/blockbase-explore.png
 
 ## Profile Update
 
-Users can update their profile with a new image, bio, and name changes.
+Users have the ability to personalize their profile by updating their profile image, adding a unique bio, and modifying their name as needed.
+
 <!-- ![feature-img-7] -->
 
 <!-- [feature-img-7]: ./react-app/src/assets/7-edit-profile.jpg -->
 
 ## Future Features
 
-- <input type="checkbox"> Mini chart included in the table of all cryptocurrencies
+- <input type="checkbox" checked> Mini chart included in the table of all cryptocurrencies
+- <input type="checkbox"> Flush out the single cryptocurrency details page
 - <input type="checkbox"> Search bar with autocomplete functionality to view assets
 - <input type="checkbox"> Wallet integration for wallet connect
 - <input type="checkbox"> Portfolio estimator via wallet connect OR inputting in a wallet address
