@@ -6,7 +6,6 @@
   position: sticky;
   top: 0;
   width: 100%;
-  border-bottom: 1px solid #f2f2f2;
   background-color: white;
   z-index: 1;
 }
@@ -146,4 +145,20 @@ ul > hr {
   width: 80px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .navbar-content {
+    flex-direction: column;
+    height: 80px;
+    padding-bottom: 10px;
+  }
+
+  .nav-left-section,
+  .nav-right-section,
+  .nav-right-login-signup-buttons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 }

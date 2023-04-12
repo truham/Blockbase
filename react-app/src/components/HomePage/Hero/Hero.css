@@ -1,6 +1,7 @@
 .hero-outer {
   max-width: 1240px;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .hero-container {
@@ -32,5 +33,25 @@
 }
 
 .hero-img {
-  height: 30em;
+  max-height: 30em;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-left {
+    order: 1;
+  }
+
+  .hero-right {
+    order: 2;
+  }
+
+  .hero-right > button {
+    align-self: center;
+  }
 }

@@ -80,3 +80,26 @@
   color: #cf202f;
   margin-top: auto;
 }
+
+@media (max-width: 600px) {
+  .featured-container {
+    flex-direction: column;
+  }
+
+  .featured-left {
+    margin-top: 3rem;
+    order: 2;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .featured-left > button {
+    align-self: center;
+  }
+
+  .featured-right {
+    order: 1;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+  }
+}
