@@ -22,7 +22,7 @@ def handle_api_res(res):
 @nfts_routes.route('/<address>')
 @cache.cached(timeout=60)
 def get_nfts_by_address(address):
-    url = f"{endpoint}/getNFTs?owner={address}&excludeFilters[]=SPAM&pageSize=100"
+    url = f"{endpoint}/getNFTs?owner={address}&excludeFilters[]=SPAM&excludeFilters[]=AIRDROPS&pageSize=50"
 
     res = requests.get(url)
     return handle_api_res(res)
