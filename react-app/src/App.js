@@ -10,6 +10,7 @@ import Featured from "./components/HomePage/Featured/Featured";
 import CryptoDetails from "./components/Crypto/CryptoDetails/CryptoDetails";
 import Hero from "./components/HomePage/Hero/Hero";
 import Footer from "./components/Footer/Footer";
+import NFTView from "./components/NFTs/NFTView/NFTView";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,9 @@ function App() {
               <Route exact path="/">
                 <Hero />
                 <Featured />
+              </Route>
+              <Route exact path="/nft">
+                <NFTView />
               </Route>
               <Route exact path="/cryptocurrencies/:coinId">
                 <CryptoDetails />

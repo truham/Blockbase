@@ -3,11 +3,13 @@ import thunk from "redux-thunk";
 import session from "./session";
 import coins from "./coins";
 import charts from "./charts";
+import nfts from "./nfts";
 
 const rootReducer = combineReducers({
   session,
   coins,
   charts,
+  nfts,
 });
 
 let enhancer;
