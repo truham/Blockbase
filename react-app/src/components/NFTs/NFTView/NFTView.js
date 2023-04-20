@@ -20,8 +20,6 @@ const NFTView = () => {
     await dispatch(getNFTsByAddressThunk(address));
   };
 
-  if (!NFTs) return <h1>Loading...</h1>;
-
   return (
     <div>
       <div className="nft-view-search-container">
