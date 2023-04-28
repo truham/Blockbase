@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/blockbase-logo.png";
-import { Dropdown, Ripple, initTE } from "tw-elements";
 
 function Navigation() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
-
-  initTE({ Dropdown, Ripple });
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     getCurrentWalletConnected();
@@ -82,7 +80,27 @@ function Navigation() {
 
   const nftsRoute = () => {
     history.push("/nft");
+    setShowMenu(false);
   };
+
+  const handleClickOutside = (event) => {
+    const dropDownMenu = document.getElementById("dropdownNavbar");
+    const dropDownButton = document.getElementById("dropdownNavbarLink");
+    if (
+      showMenu &&
+      !dropDownButton.contains(event.target) &&
+      !dropDownMenu.contains(event.target)
+    ) {
+      setShowMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showMenu]);
 
   return (
     <div
@@ -114,18 +132,59 @@ function Navigation() {
             open ? "h-screen top-19 opacity-100" : "top-[-490px]"
           } md:opacity-100 opacity-0`}
         >
-          <li
-            onClick={cryptoRoute}
-            className="md:my-0 my-7 md:ml-8 cursor-pointer hover:text-[#344afb]"
-          >
-            Cryptocurrencies
+          <li onClick={cryptoRoute} className="md:p-0 md:my-0 mt-7 md:ml-8">
+            <p className="cursor-pointer hover:text-[#344afb] pl-3">
+              Cryptocurrencies
+            </p>
           </li>
-          <li
-            onClick={nftsRoute}
-            className="md:my-0 my-7 md:ml-8 cursor-pointer hover:text-[#344afb]"
-          >
-            NFTs
+          <li>
+            <button
+              id="dropdownNavbarLink"
+              onClick={() => setShowMenu(!showMenu)}
+              className="md:my-0 md:ml-8 flex items-center justify-between py-2 pl-3 pr-4 rounded md:border-0 hover:text-[#344afb] md:p-0 md:w-auto"
+            >
+              NFTs{" "}
+              <svg
+                className="w-5 h-5 ml-1"
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </button>
+
+            {showMenu && (
+              <div
+                id="dropdownNavbar"
+                className="absolute z-10 font-normal rounded-lg shadow w-44 bg-white"
+              >
+                <ul
+                  className="py-2 text-sm text-gray-700"
+                  aria-labelledby="dropdownLargeButton"
+                >
+                  <li>
+                    <span
+                      onClick={nftsRoute}
+                      className="cursor-pointer block px-4 py-2 hover:bg-gray-100"
+                    >
+                      By User Address
+                    </span>
+                  </li>
+                  <li>
+                    <span className="cursor-pointer block px-4 py-2 hover:bg-gray-100">
+                      Search Collections
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            )}
           </li>
+
           <button
             onClick={connectWallet}
             className="md:my-0 md:ml-8 bg-[#344afb] text-white px-4 py-2 rounded-lg hover:bg-[#2c3fd6]"
