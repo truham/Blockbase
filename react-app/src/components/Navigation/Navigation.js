@@ -1,10 +1,74 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/blockbase-logo.png";
 
 function Navigation() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
+  const [walletAddress, setWalletAddress] = useState("");
+
+  useEffect(() => {
+    getCurrentWalletConnected();
+    addWalletListener();
+  }, []);
+
+  const connectWallet = async () => {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.ethereum !== "undefined"
+    ) {
+      try {
+        // Metamask is installed
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
+        console.log(accounts[0]);
+        setWalletAddress(accounts[0]);
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      // Metamask NOT installed
+      console.log("Please install MetaMask");
+    }
+  };
+
+  const getCurrentWalletConnected = async () => {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.ethereum !== "undefined"
+    ) {
+      try {
+        const accounts = await window.ethereum.request({
+          method: "eth_accounts",
+        });
+        if (accounts.length > 0) {
+          console.log(accounts[0]);
+          setWalletAddress(accounts[0]);
+        } else {
+          console.log("Connect to MetaMask using the Connect button");
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
+    } else {
+      console.log("Please install MetaMask");
+    }
+  };
+
+  const addWalletListener = async () => {
+    if (
+      typeof window !== "undefined" &&
+      typeof window.ethereum !== "undefined"
+    ) {
+      window.ethereum.on("accountsChanged", (accounts) => {
+        setWalletAddress(accounts[0]);
+        console.log(accounts[0]);
+      });
+    } else {
+      setWalletAddress("");
+    }
+  };
 
   const logoHome = () => {
     history.push("/");
@@ -16,10 +80,6 @@ function Navigation() {
 
   const nftsRoute = () => {
     history.push("/nft");
-  };
-
-  const handleConnect = () => {
-    alert("Coming soon");
   };
 
   return (
@@ -65,10 +125,14 @@ function Navigation() {
             NFTs
           </li>
           <button
-            onClick={handleConnect}
+            onClick={connectWallet}
             className="md:my-0 md:ml-8 bg-[#344afb] text-white px-4 py-2 rounded-lg hover:bg-[#2c3fd6]"
           >
-            Connect
+            {walletAddress?.length > 0
+              ? `${walletAddress.substring(0, 6)}...${walletAddress.substring(
+                  38
+                )}`
+              : "Connect"}
           </button>
         </ul>
       </div>
