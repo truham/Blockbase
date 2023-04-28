@@ -1,4 +1,4 @@
-# About Tales
+# About Blockbase
 
 Blockbase is a web application inspired by Coinbase & CoinGecko. It is a personal project to learn more about how to use available resources surrounding cryptocurrencies and NFTs.
 [Click here to visit Blockbase's live site](https://blockbase.onrender.com/).
