@@ -9,7 +9,7 @@ import Explore from "./components/Explore/Explore";
 import Featured from "./components/HomePage/Featured/Featured";
 import CryptoDetails from "./components/Crypto/CryptoDetails/CryptoDetails";
 import HeroGM from "./components/HomePage/HeroGM/HeroGM";
-import Hero from "./components/HomePage/Hero/Hero";
+import HeroMemes from "./components/HomePage/HeroMemes/HeroMemes";
 import Footer from "./components/Footer/Footer";
 import NFTView from "./components/NFTs/NFTView/NFTView";
 
@@ -31,7 +31,7 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <HeroGM />
-                <Hero />
+                <HeroMemes />
                 <Featured />
               </Route>
               <Route exact path="/nft">

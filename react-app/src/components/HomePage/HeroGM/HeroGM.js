@@ -21,7 +21,7 @@ const HeroGM = () => {
             </p>
             <button
               onClick={gmRedirect}
-              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white border bg-[#485986] border-gray-300 rounded-lg hover:bg-[#232c42]"
+              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white bg-[#485986] border-gray-300 rounded-lg hover:bg-[#232c42]"
             >
               See more NFTs
             </button>
