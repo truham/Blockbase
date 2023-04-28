@@ -37,7 +37,9 @@ const NFTView = () => {
         ></input>
         <button onClick={(e) => findNFTs(e)}>Search</button>
         <span className="pt-2 underline font-bold">Currently viewing:</span>
-        <span>{submittedAddress}</span>
+        <span>{`${submittedAddress.slice(0, 6)}...${submittedAddress.slice(
+          submittedAddress.length - 4
+        )}`}</span>
         {error && <span>Error: {error.error}</span>}
       </div>
       <div className="nft-view-cards-container">
