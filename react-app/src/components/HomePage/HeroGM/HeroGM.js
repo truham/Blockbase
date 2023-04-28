@@ -15,7 +15,7 @@ const HeroGM = () => {
             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-gray-100">
               GM
             </h1>
-            <p className="max-w-2xl mb-6 font-light text-gray-400 lg:mb-8 md:text-lg lg:text-xl">
+            <p className="max-w-2xl mb-6 font-light text-gray-300 lg:mb-8 md:text-lg lg:text-xl">
               This is a personal project centered around exploring Tailwind CSS
               and working with cryptocurrency and NFT APIs. Enjoy!
             </p>
