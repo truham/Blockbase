@@ -28,7 +28,7 @@ function Navigation() {
       }
     } else {
       // Metamask NOT installed
-      alert("Please install MetaMask");
+      console.log("Please install MetaMask");
     }
   };
 
@@ -51,7 +51,7 @@ function Navigation() {
         console.error(err.message);
       }
     } else {
-      alert("Please install MetaMask");
+      console.log("Please install MetaMask");
     }
   };
 
