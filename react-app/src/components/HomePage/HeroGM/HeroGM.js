@@ -5,7 +5,7 @@ import squiggly from "../../../assets/squiggly.png";
 const HeroGM = () => {
   const history = useHistory();
   const gmRedirect = () => {
-    history.push("/nft");
+    history.push("/nft/profile");
   };
 
   return (

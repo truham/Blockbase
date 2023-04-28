@@ -78,8 +78,13 @@ function Navigation() {
     history.push("/cryptocurrencies");
   };
 
-  const nftsRoute = () => {
-    history.push("/nft");
+  const nftsProfileRoute = () => {
+    history.push("/nft/profile");
+    setShowMenu(false);
+  };
+
+  const nftsCollectionRoute = () => {
+    history.push("/nft/collections");
     setShowMenu(false);
   };
 
@@ -169,14 +174,17 @@ function Navigation() {
                 >
                   <li>
                     <span
-                      onClick={nftsRoute}
+                      onClick={nftsProfileRoute}
                       className="cursor-pointer block px-4 py-2 hover:bg-gray-100"
                     >
                       By User Address
                     </span>
                   </li>
                   <li>
-                    <span className="cursor-pointer block px-4 py-2 hover:bg-gray-100">
+                    <span
+                      onClick={nftsCollectionRoute}
+                      className="cursor-pointer block px-4 py-2 hover:bg-gray-100"
+                    >
                       Search Collections
                     </span>
                   </li>

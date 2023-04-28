@@ -10,7 +10,7 @@ const NFTCards = ({ NFT }) => {
   }/${hexToDecimal(NFT.id.tokenId)}`;
 
   return (
-    <div className="nft-card-container flex flex-col justify-between h-full">
+    <div className="nft-card-container flex flex-col justify-center align h-full">
       <p>{NFT.title || "No Title"}</p>
       <img
         src={

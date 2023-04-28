@@ -12,6 +12,7 @@ import HeroGM from "./components/HomePage/HeroGM/HeroGM";
 import HeroMemes from "./components/HomePage/HeroMemes/HeroMemes";
 import Footer from "./components/Footer/Footer";
 import NFTView from "./components/NFTs/NFTView/NFTView";
+import NFTCollections from "./components/NFTs/NFTCollections/NFTCollections";
 
 import "./index.css";
 
@@ -34,8 +35,11 @@ function App() {
                 <HeroMemes />
                 <Featured />
               </Route>
-              <Route exact path="/nft">
+              <Route exact path="/nft/profile">
                 <NFTView />
+              </Route>
+              <Route exact path="/nft/collections/">
+                <NFTCollections />
               </Route>
               <Route exact path="/cryptocurrencies/:coinId">
                 <CryptoDetails />

@@ -19,10 +19,19 @@ def handle_api_res(res):
         return make_response(jsonify({"error": "An error occurred, please confirm the address is correct or try again later."}), 500)
 
 
-@nfts_routes.route('/<address>')
+@nfts_routes.route('/profile/<address>')
 @cache.cached(timeout=60)
 def get_nfts_by_address(address):
     url = f"{endpoint}/getNFTs?owner={address}&withMetadata=true&excludeFilters[]=SPAM&excludeFilters[]=AIRDROPS&spamConfidenceLevel=VERY_HIGH&pageSize=100"
+
+    res = requests.get(url)
+    return handle_api_res(res)
+
+
+@nfts_routes.route('/collections/<address>')
+@cache.cached(timeout=60)
+def get_nfts_by_collection(address):
+    url = f"{endpoint}/getNFTsForCollection?contractAddress={address}&withMetadata=true"
 
     res = requests.get(url)
     return handle_api_res(res)
