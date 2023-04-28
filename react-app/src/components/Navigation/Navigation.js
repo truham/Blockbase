@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import logo from "../../assets/blockbase-logo.png";
+import { Dropdown, Ripple, initTE } from "tw-elements";
 
 function Navigation() {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
+
+  initTE({ Dropdown, Ripple });
 
   useEffect(() => {
     getCurrentWalletConnected();
