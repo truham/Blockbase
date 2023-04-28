@@ -22,14 +22,13 @@ function Navigation() {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        console.log(accounts[0]);
         setWalletAddress(accounts[0]);
       } catch (err) {
         console.error(err);
       }
     } else {
       // Metamask NOT installed
-      console.log("Please install MetaMask");
+      alert("Please install MetaMask");
     }
   };
 
@@ -52,7 +51,7 @@ function Navigation() {
         console.error(err.message);
       }
     } else {
-      console.log("Please install MetaMask");
+      alert("Please install MetaMask");
     }
   };
 
