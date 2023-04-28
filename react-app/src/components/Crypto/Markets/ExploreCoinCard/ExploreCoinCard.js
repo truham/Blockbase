@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+// import { useDispatch } from "react-redux";
 import { BsArrowUpRight, BsArrowDownRight } from "react-icons/bs";
 import { useHistory } from "react-router-dom";
 import "./ExploreCoinCard.css";
-import { get24HChartThunk } from "../../../../store/charts";
-import ECCChart from "../ExploreCoinCardChart/ExploreCoinCardChart";
+// import { get24HChartThunk } from "../../../../store/charts";
+// import ECCChart from "../ExploreCoinCardChart/ExploreCoinCardChart";
 
 const ExploreCoinCard = ({ coin }) => {
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const marketData = useSelector((state) => state.charts.charts[coin.id]);
 
   // useEffect(() => {

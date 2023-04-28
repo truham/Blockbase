@@ -1,11 +1,11 @@
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import cards from "../../../assets/cards.png";
 
 const Hero = () => {
-  const history = useHistory();
-  const handleSeeAssets = () => {
-    history.push("/nft");
-  };
+  // const history = useHistory();
+  // const handleSeeAssets = () => {
+  //   history.push("/nft");
+  // };
 
   return (
     <section className="bg-white">
