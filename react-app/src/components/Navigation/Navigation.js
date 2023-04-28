@@ -83,7 +83,7 @@ function Navigation() {
 
   return (
     <div
-      className="w-full sticky top-0 left-0"
+      className="w-full sticky top-0 left-0 bg-white z-50"
       style={{ borderBottom: "1px solid #312e45" }}
     >
       <div className="md:flex items-center justify-between bg-white py-4 md:px-10 px-7">

@@ -34,8 +34,12 @@ const Featured = () => {
       <div className="featured-outer">
         <div className="featured-container">
           <div className="featured-left">
-            <h1>Explore crypto like Bitcoin, Ethereum, and Dogecoin</h1>
-            <h2>View all available assets: Cryptocurrencies</h2>
+            <p className="text-xl font-bold">
+              Explore crypto like Bitcoin, Ethereum, and Dogecoin
+            </p>
+            <p className="text-lg">
+              View all available assets: Cryptocurrencies
+            </p>
             <button onClick={handleSeeAssets}>See more assets</button>
           </div>
 
@@ -54,16 +58,16 @@ const Featured = () => {
                   ></img>
                 </div>
                 <div>
-                  <h4>{coin.name}</h4>
+                  <h4 className="font-bold">{coin.name}</h4>
                   <span>{`$${coin.current_price.toFixed(2)}`}</span>
                 </div>
                 {coin.price_change_percentage_24h < 0 ? (
-                  <span className="featured-card-down">
+                  <span className="featured-card-down flex flex-row items-center">
                     <AiOutlineArrowDown />
                     {`${coin.price_change_percentage_24h.toFixed(2)}%`}
                   </span>
                 ) : (
-                  <span className="featured-card-up">
+                  <span className="featured-card-up flex flex-row items-center">
                     <AiOutlineArrowUp />
                     {`${coin.price_change_percentage_24h.toFixed(2)}%`}
                   </span>

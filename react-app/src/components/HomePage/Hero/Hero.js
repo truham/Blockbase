@@ -9,7 +9,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero-outer">
+    <div className="hero-outer ">
       <div className="hero-container">
         {/* Left */}
         <div className="hero-left">
@@ -18,7 +18,9 @@ const Hero = () => {
 
         {/* Right */}
         <div className="hero-right">
-          <h1>View available digital collectibles</h1>
+          <p className="text-3xl font-medium">
+            View available digital collectibles
+          </p>
           <button onClick={handleSeeAssets}>See more NFTs</button>
         </div>
       </div>

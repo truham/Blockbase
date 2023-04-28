@@ -25,7 +25,6 @@
 
 .featured-left > * {
   margin: 0.5rem 0;
-  font-weight: normal;
 }
 
 .featured-left > button {
@@ -51,6 +50,7 @@
 .featured-card-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   padding: 15px;
   width: 200px;
   height: 200px;
@@ -70,15 +70,13 @@
 }
 
 .featured-card-up {
-  font-size: 32px;
+  font-size: 30px;
   color: #098551;
-  margin-top: auto;
 }
 
 .featured-card-down {
-  font-size: 32px;
+  font-size: 30px;
   color: #cf202f;
-  margin-top: auto;
 }
 
 @media (max-width: 600px) {
