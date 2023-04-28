@@ -9,7 +9,7 @@ const ExploreCoinsTable = ({ coins }) => {
           <th>Name</th>
           <th>Price</th>
           <th>Chart</th>
-          <th>Change</th>
+          {/* <th>Change</th> */}
           <th>Market Cap</th>
           <th>Total Volume</th>
           <th>Total Supply</th>
