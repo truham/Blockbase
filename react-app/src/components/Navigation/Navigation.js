@@ -10,6 +10,18 @@ function Navigation() {
     history.push("/");
   };
 
+  const cryptoRoute = () => {
+    history.push("/cryptocurrencies");
+  };
+
+  const nftsRoute = () => {
+    history.push("/nft");
+  };
+
+  const handleConnect = () => {
+    alert("Coming soon");
+  };
+
   return (
     <div
       className="w-full sticky top-0 left-0"
@@ -40,13 +52,22 @@ function Navigation() {
             open ? "h-screen top-19 opacity-100" : "top-[-490px]"
           } md:opacity-100 opacity-0`}
         >
-          <li className="md:my-0 my-7 md:ml-8 cursor-pointer hover:text-[#344afb]">
+          <li
+            onClick={cryptoRoute}
+            className="md:my-0 my-7 md:ml-8 cursor-pointer hover:text-[#344afb]"
+          >
             Cryptocurrencies
           </li>
-          <li className="md:my-0 my-7 md:ml-8 cursor-pointer hover:text-[#344afb]">
+          <li
+            onClick={nftsRoute}
+            className="md:my-0 my-7 md:ml-8 cursor-pointer hover:text-[#344afb]"
+          >
             NFTs
           </li>
-          <button className="md:my-0 md:ml-8 bg-[#344afb] text-white px-4 py-2 rounded-full hover:bg-[#2c3fd6]">
+          <button
+            onClick={handleConnect}
+            className="md:my-0 md:ml-8 bg-[#344afb] text-white px-4 py-2 rounded-lg hover:bg-[#2c3fd6]"
+          >
             Connect
           </button>
         </ul>
