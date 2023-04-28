@@ -1,0 +1,40 @@
+import { useHistory } from "react-router-dom";
+import gmdeekay from "../../../assets/gmdeekay.mp4";
+
+const HeroGM = () => {
+  const history = useHistory();
+  const gmRedirect = () => {
+    history.push("/nft");
+  };
+
+  return (
+    <>
+      <section className="bg-[#2f3a58]">
+        <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div className="mr-auto place-self-center lg:col-span-7">
+            <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-gray-100">
+              GM
+            </h1>
+            <p className="max-w-2xl mb-6 font-light text-gray-400 lg:mb-8 md:text-lg lg:text-xl">
+              This is a personal project centered around exploring Tailwind CSS
+              and working with cryptocurrency and NFT APIs. Enjoy!
+            </p>
+            <button
+              onClick={gmRedirect}
+              className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white border bg-[#485986] border-gray-300 rounded-lg hover:bg-[#232c42]"
+            >
+              See more NFTs
+            </button>
+          </div>
+          <div className="mt-8 lg:mt-0 lg:col-span-5 lg:flex">
+            <video className="rounded-lg" autoPlay loop muted alt="Deekay GM">
+              <source src={gmdeekay} type="video/mp4"></source>
+            </video>
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default HeroGM;
