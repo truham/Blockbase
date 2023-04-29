@@ -72,20 +72,26 @@ function Navigation() {
 
   const logoHome = () => {
     history.push("/");
+    setShowMenu(false);
+    setOpen(false);
   };
 
   const cryptoRoute = () => {
     history.push("/cryptocurrencies");
+    setShowMenu(false);
+    setOpen(false);
   };
 
   const nftsProfileRoute = () => {
     history.push("/nft/profile");
     setShowMenu(false);
+    setOpen(false);
   };
 
   const nftsCollectionRoute = () => {
     history.push("/nft/collections");
     setShowMenu(false);
+    setOpen(false);
   };
 
   const handleClickOutside = (event) => {
