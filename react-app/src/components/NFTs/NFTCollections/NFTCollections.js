@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getNFTsByCollectionThunk } from "../../../store/nfts";
-import NFTCards from "../NFTCards/NFTCards";
+import NFTCollectionsCard from "./NFTCollectionsCard";
 
 const NFTCollections = () => {
   const dispatch = useDispatch();
@@ -19,14 +19,11 @@ const NFTCollections = () => {
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-center -m-4">
+      <div class="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {nfts?.map((NFT, idx) => {
           return (
-            <div
-              key={idx}
-              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-2 justify-center items-center"
-            >
-              <NFTCards NFT={NFT} />
+            <div class="mx-auto px-2 py-4 w-64 h-64" key={idx}>
+              <NFTCollectionsCard NFT={NFT} />
             </div>
           );
         })}
