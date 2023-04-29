@@ -19,10 +19,10 @@ const NFTCollections = () => {
 
   return (
     <>
-      <div class="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {nfts?.map((NFT, idx) => {
           return (
-            <div class="mx-auto px-2 py-4 w-64 h-64" key={idx}>
+            <div className="mx-auto px-2 py-4 w-64 h-64" key={idx}>
               <NFTCollectionsCard NFT={NFT} />
             </div>
           );

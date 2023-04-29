@@ -8,7 +8,7 @@ const NFTCollectionsCard = ({ NFT }) => {
   }/${hexToDecimal(NFT.id.tokenId)}`;
 
   return (
-    <div class="card card-compact w-full bg-base-100 shadow-xl aspect-w-1 aspect-h-1 relative">
+    <div className="card card-compact w-full bg-base-100 shadow-xl aspect-w-1 aspect-h-1 relative">
       <img
         className="object-contain h-40 pt-5"
         src={
@@ -17,9 +17,9 @@ const NFTCollectionsCard = ({ NFT }) => {
         }
         alt="NFT Preview"
       ></img>
-      <div class="card-body">
+      <div className="card-body">
         <p className="font-bold">{NFT.title || "No Title"}</p>
-        <div class="card-actions justify-end">
+        <div className="card-actions justify-end">
           <a
             target="_blank"
             rel="noreferrer"
