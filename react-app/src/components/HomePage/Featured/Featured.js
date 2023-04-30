@@ -30,7 +30,7 @@ const Featured = () => {
 
   return (
     <div className="bg-[#2f3a58] py-12">
-      <div className="container mx-auto px-4">
+      <div className="container max-w-screen-xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 flex items-center">
           <div className="space-y-4">
             <p className="text-2xl font-bold text-white">
