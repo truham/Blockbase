@@ -43,7 +43,7 @@ const NFTView = () => {
         {error && <span>Error: {error.error}</span>}
       </div>
       <div className="nft-view-cards-container">
-        {NFTs?.ownedNfts.map((NFT, idx) => {
+        {NFTs?.ownedNfts?.map((NFT, idx) => {
           return <NFTCards NFT={NFT} key={idx} />;
         })}
       </div>
