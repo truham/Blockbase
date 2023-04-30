@@ -83,13 +83,13 @@ const ExploreCoinCard = ({ coin }) => {
       </td> */}
       <td>
         {coin.price_change_percentage_24h < 0 ? (
-          <span className="explore-coin-card-down">
-            <BsArrowDownRight />
+          <span className="explore-coin-card-down flex">
+            <BsArrowDownRight className="mr-2" />
             {`${coin.price_change_percentage_24h.toFixed(2)}%`}
           </span>
         ) : (
-          <span className="explore-coin-card-up">
-            <BsArrowUpRight />
+          <span className="explore-coin-card-up flex">
+            <BsArrowUpRight className="mr-2" />
             {`${coin.price_change_percentage_24h.toFixed(2)}%`}
           </span>
         )}
