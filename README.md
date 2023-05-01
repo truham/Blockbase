@@ -27,19 +27,36 @@ Frontend:
 
 <!-- All users have access to view the entire website. There is a sign up option for users to create an account and personalzie their PFP. -->
 
-## Home Page - NFTs
+## Home Page - GM
 
-Banner section showcases some wonderful pieces from The Memes collection by 6529, inviting users to explore a comprehensive list of available NFTs.
+Banner section showcases a brief intro with a CTA button for users who want to view more NFTs. Animation is created by deekaymotion from The Memes by 6529 collection.
+
 ![feature-img-banner]
 
-[feature-img-banner]: ./react-app/src/assets/blockbase-banner.png
+[feature-img-banner]: ./react-app/src/assets/blockbase-preview.png
+
+## Home Page - The Memes by 6529
+
+Landing page section with CTA button that redirects users to a page where they can insert specific collection addresses to view its assets.
+
+![the-memes]
+
+[the-memes]: ./react-app/src/assets/seize-memes-landing.png
+
+## View NFTs from Specific Collection
+
+User can input a specific wallet address they would like to see the NFTs from and view them in a gallery.
+
+![collection-gallery]
+
+[collection-gallery]: ./react-app/src/assets/collection-view.png
 
 ## Home Page - Cryptocurrencies
 
 Featured section highlights top cryptocurrencies, introducing users to a diverse range of assets. Users can also choose to explore more assets for a deeper understanding of the cryptocurrency landscape.
 ![feature-img-featured]
 
-[feature-img-featured]: ./react-app/src/assets/blockbase-featured.png
+[feature-img-featured]: ./react-app/src/assets/crypto-landing.png
 
 ## Explore CryptoCurrencies
 
@@ -48,9 +65,9 @@ Explore section features a comprehensive table showcasing various cryptocurrenci
 
 [feature-img-explore]: ./react-app/src/assets/blockbase-explore.png
 
-## Profile Update
+<!-- ## Profile Update
 
-Users have the ability to personalize their profile by updating their profile image, adding a unique bio, and modifying their name as needed.
+Users have the ability to personalize their profile by updating their profile image, adding a unique bio, and modifying their name as needed. -->
 
 <!-- ![feature-img-7] -->
 
