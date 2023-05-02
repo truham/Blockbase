@@ -32,17 +32,6 @@ const Featured = () => {
     return <span>Loading...</span>;
   }
 
-  if (error) {
-    return (
-      <div>
-        <p>An error occurred: {error.message}</p>
-        <button onClick={() => window.location.reload()}>
-          Retry fetching data
-        </button>
-      </div>
-    );
-  }
-
   if (!featured) {
     return null;
   }
