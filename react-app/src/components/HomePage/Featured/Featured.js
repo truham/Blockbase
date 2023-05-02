@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
@@ -8,14 +8,10 @@ const Featured = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const featured = useSelector((state) => state.coins.featured);
-  const error = useSelector((state) => state.coins.error);
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getFeatured = async () => {
-      setLoading(true);
       await dispatch(getFeaturedThunk());
-      setLoading(false);
     };
     getFeatured();
   }, [dispatch]);
@@ -28,12 +24,8 @@ const Featured = () => {
     history.push(`/cryptocurrencies/${coin.id}`);
   };
 
-  if (loading) {
-    return <span>Loading...</span>;
-  }
-
   if (!featured) {
-    return null;
+    return <span>Loading...</span>;
   }
 
   return (
@@ -87,20 +79,6 @@ const Featured = () => {
               </div>
             ))}
           </div>
-
-          {error && (
-            <div className="text-center my-8">
-              <p className="text-white font-bold">{error}</p>
-              <button
-                onClick={() => {
-                  dispatch(getFeaturedThunk());
-                }}
-                className="bg-[#485986] text-white px-4 py-2 rounded-md mt-4 hover:bg-[#232c42]"
-              >
-                Retry
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>

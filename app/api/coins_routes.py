@@ -23,6 +23,13 @@ def featured_cryptocurrencies():
     """
     res = requests.get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&locale=en")
+
+    try:
+        res.raise_for_status()
+    except requests.exceptions.HTTPError:
+        res = requests.get(
+            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false&locale=en")
+
     return handle_api_res(res)
 
 
@@ -31,6 +38,11 @@ def featured_cryptocurrencies():
 def explore_cryptocurrencies():
     res = requests.get(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
+    try:
+        res.raise_for_status()
+    except requests.exceptions.HTTPError:
+        res = requests.get(
+            "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
     return handle_api_res(res)
 
 
@@ -39,6 +51,11 @@ def explore_cryptocurrencies():
 def details_cryptocurrency(coin_id):
     res = requests.get(
         f"https://api.coingecko.com/api/v3/coins/{coin_id}?localization=false")
+    try:
+        res.raise_for_status()
+    except requests.exceptions.HTTPError:
+        res = requests.get(
+            f"https://api.coingecko.com/api/v3/coins/{coin_id}?localization=false")
     return handle_api_res(res)
 
 
@@ -47,4 +64,8 @@ def details_cryptocurrency(coin_id):
 def day_chart(coin_id):
     res = requests.get(
         f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart?vs_currency=usd&days=1")
-    return handle_api_res(res)
+    try:
+        res.raise_for_status()
+    except requests.exceptions.HTTPError:
+        res = requests.get(
+            f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart?vs_currency=usd&days=1")
