@@ -69,3 +69,4 @@ def day_chart(coin_id):
     except requests.exceptions.HTTPError:
         res = requests.get(
             f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart?vs_currency=usd&days=1")
+    return handle_api_res(res)
