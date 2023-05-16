@@ -46,8 +46,6 @@ const WalletConnect = () => {
       if (uri) {
         web3Modal.openModal({ uri });
       }
-
-      console.log("uri", uri);
     } catch (e) {}
   };
 
