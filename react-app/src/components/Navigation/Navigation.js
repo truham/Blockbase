@@ -153,8 +153,9 @@ function Navigation() {
             <button
               id="dropdownNavbarLink"
               onClick={() => setShowMenu(!showMenu)}
-              className="md:my-0 md:ml-8 flex items-center justify-between py-2 pl-3 pr-4 rounded md:border-0 hover:text-[#344afb] md:p-0 md:w-auto"
+              className="md:my-0 md:ml-8 flex items-center justify-between py-2 pl-3 pr-4 mr-8 rounded md:border-0 hover:text-[#344afb] md:p-0 md:w-auto"
             >
+              {/* className="md:my-0 md:ml-8 bg-[#344afb] text-white px-4 py-2 rounded-lg hover:bg-[#2c3fd6]" */}
               NFTs{" "}
               <svg
                 className="w-5 h-5 ml-1"
