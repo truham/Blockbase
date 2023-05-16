@@ -13,8 +13,15 @@ import HeroMemes from "./components/HomePage/HeroMemes/HeroMemes";
 import Footer from "./components/Footer/Footer";
 import NFTView from "./components/NFTs/NFTView/NFTView";
 import NFTCollections from "./components/NFTs/NFTCollections/NFTCollections";
+import { SignClient } from "@walletconnect/sign-client";
+import { Web3Modal } from "@web3modal/standalone";
 
 import "./index.css";
+
+const web3Modal = new Web3Modal({
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  standaloneChains: ["eip155:5"],
+});
 
 function App() {
   const dispatch = useDispatch();
@@ -23,9 +30,59 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
+  const [signClient, setSignClient] = useState();
+
+  async function createClient() {
+    try {
+      const client = await SignClient.init({
+        projectId: process.env.REACT_APP_PROJECT_ID,
+      });
+      setSignClient(client);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  useEffect(() => {
+    if (!signClient) {
+      createClient();
+    }
+  }, [signClient]);
+
+  // useEffect(() => {
+  //   dispatch(authenticate()).then(() => setIsLoaded(true));
+  // }, [dispatch]);
+
+  const handleConnect = async () => {
+    if (!signClient) throw Error("Cannot connect. Sign Client is not created");
+    try {
+      // dapp going to send a proposal namespace
+      const proposalNameSpace = {
+        eip155: {
+          chains: ["eip155:5"],
+          methods: ["eth_sendTransaction"],
+          events: ["connect", "disconnect"],
+        },
+      };
+
+      const { uri } = await signClient.connect({
+        requiredNamespaces: proposalNameSpace,
+      });
+
+      if (uri) {
+        web3Modal.openModal({ uri });
+      }
+
+      console.log("uri", uri);
+    } catch (e) {}
+  };
+
   return (
     <>
       <Navigation />
+      <button onClick={handleConnect} disabled={!signClient}>
+        Connect
+      </button>
       <div className="page-container">
         <div className="content-wrap">
           {isLoaded && (
