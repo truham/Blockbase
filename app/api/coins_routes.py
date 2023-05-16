@@ -17,7 +17,7 @@ def handle_api_res(res):
 
 # exponential backoff strategy, wait for increasing amnt of time between retries
 # reduces the chances of hitting the rate limit again
-def req_with_exponential_backoff(url, retries=3, backoff_factor=2):
+def req_with_exponential_backoff(url, retries=10, backoff_factor=2):
     for attempt in range(retries):
         res = requests.get(url)
         if res.status_code != 429:
