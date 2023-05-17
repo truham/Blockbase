@@ -29,6 +29,8 @@ boto3 = "*"
 email-validator = "*"
 requests = "*"
 flask-caching = "*"
+pandas = "*"
+numpy = "*"
 
 [dev-packages]
 
