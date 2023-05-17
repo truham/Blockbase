@@ -13,6 +13,8 @@ import HeroMemes from "./components/HomePage/HeroMemes/HeroMemes";
 import Footer from "./components/Footer/Footer";
 import NFTView from "./components/NFTs/NFTView/NFTView";
 import NFTCollections from "./components/NFTs/NFTCollections/NFTCollections";
+import NFTPortfolioAppraisal from "./components/NFTs/NFTPortfolioAppraisal/NFTPortfolioAppraisal";
+
 import {
   EthereumClient,
   w3mConnectors,
@@ -61,6 +63,9 @@ function App() {
                 </Route>
                 <Route exact path="/nft/profile">
                   <NFTView />
+                </Route>
+                <Route exact path="/nft/profile/appraise">
+                  <NFTPortfolioAppraisal />
                 </Route>
                 <Route exact path="/nft/collections/">
                   <NFTCollections />
