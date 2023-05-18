@@ -32,6 +32,12 @@ function Navigation() {
     setOpen(false);
   };
 
+  const nftsAppraisalRoute = () => {
+    history.push("/nft/profile/appraise");
+    setShowMenu(false);
+    setOpen(false);
+  };
+
   const handleClickOutside = (event) => {
     const dropDownMenu = document.getElementById("dropdownNavbar");
     const dropDownButton = document.getElementById("dropdownNavbarLink");
@@ -131,6 +137,14 @@ function Navigation() {
                       className="cursor-pointer block px-4 py-2 hover:bg-gray-100"
                     >
                       Search Collections
+                    </span>
+                  </li>
+                  <li>
+                    <span
+                      onClick={nftsAppraisalRoute}
+                      className="cursor-pointer block px-4 py-2 hover:bg-gray-100"
+                    >
+                      Portfolio Appraisal
                     </span>
                   </li>
                 </ul>

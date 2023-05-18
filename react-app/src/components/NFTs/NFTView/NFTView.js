@@ -35,7 +35,7 @@ const NFTView = () => {
           onChange={(e) => setAddress(e.target.value)}
           placeholder="Insert wallet address"
         ></input>
-        <button onClick={(e) => findNFTs(e)}>Search</button>
+        <button className="btn btn-sm bg-[#344afb] hover:bg-[#2c3fd6]" onClick={(e) => findNFTs(e)}>Search</button>
         <span className="pt-2 underline font-bold">Currently viewing:</span>
         <span>{`${submittedAddress.slice(0, 6)}...${submittedAddress.slice(
           submittedAddress.length - 4

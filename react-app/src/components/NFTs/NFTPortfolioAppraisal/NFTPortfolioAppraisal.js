@@ -36,7 +36,7 @@ const NFTPortfolioAppraisal = () => {
         onClick={handleNewFind}
         className="btn btn-sm bg-[#344afb] hover:bg-[#2c3fd6]"
       >
-        Submit
+        Search
       </button>
       <br></br>
       <p>Min. Value:</p>
