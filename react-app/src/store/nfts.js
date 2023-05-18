@@ -57,7 +57,9 @@ export const getNFTsPortfolioAppraiseThunk = (address) => async (dispatch) => {
     dispatch(getNFTsPortfolioAppraiseAction(nfts));
     return nfts;
   } else {
+    console.log(res)
     const error = await res.json();
+    console.log(error)
     dispatch(nftsErrorAction(error));
   }
 };
