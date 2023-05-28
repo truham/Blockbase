@@ -14,6 +14,7 @@ import Footer from "./components/Footer/Footer";
 import NFTView from "./components/NFTs/NFTView/NFTView";
 import NFTCollections from "./components/NFTs/NFTCollections/NFTCollections";
 import NFTPortfolioAppraisal from "./components/NFTs/NFTPortfolioAppraisal/NFTPortfolioAppraisal";
+import Chat from "./components/Chat";
 
 import {
   EthereumClient,
@@ -60,6 +61,9 @@ function App() {
                   <HeroGM />
                   <HeroMemes />
                   <Featured />
+                </Route>
+                <Route exact path="/chat">
+                  <Chat />
                 </Route>
                 <Route exact path="/nft/profile">
                   <NFTView />
