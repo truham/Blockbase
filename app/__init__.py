@@ -9,6 +9,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.coins_routes import coins_routes
 from .api.nfts_routes import nfts_routes
+from .api.chat_routes import chat_routes
 from .seeds import seed_commands
 from .config import Config
 from .cache import cache, cache_config
@@ -33,6 +34,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(coins_routes, url_prefix='/api/cryptocurrencies')
 app.register_blueprint(nfts_routes, url_prefix='/api/nfts')
+app.register_blueprint(chat_routes, url_prefix='/api/chat')
 db.init_app(app)
 Migrate(app, db)
 
