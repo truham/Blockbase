@@ -29,3 +29,8 @@ body {
 .content-wrap {
   flex-grow: 1;
 }
+
+.footer {
+  display: flex;
+  flex-direction: row;
+}
