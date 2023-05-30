@@ -33,4 +33,6 @@ body {
 .footer {
   display: flex;
   flex-direction: row;
+  bottom: 0;
+  width: 100%;
 }
