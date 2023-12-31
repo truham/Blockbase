@@ -9,9 +9,9 @@ const Footer = () => {
       <a className="social-icon" href="https://github.com/truham">
         <i className="fab fa-github"></i>
       </a>
-      <a className="social-icon" href="https://truham.github.io/">
+      {/* <a className="social-icon" href="https://truham.github.io/">
         <i className="fas fa-user-circle"></i>
-      </a>
+      </a> */}
       <a className="social-icon" href="mailto:hamiltontruong@gmail.com">
         <i className="fa-solid fa-envelope"></i>
       </a>

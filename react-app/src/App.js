@@ -62,9 +62,9 @@ function App() {
                   <HeroMemes />
                   <Featured />
                 </Route>
-                <Route exact path="/chat">
+                {/* <Route exact path="/chat">
                   <Chat />
-                </Route>
+                </Route> */}
                 <Route exact path="/nft/profile">
                   <NFTView />
                 </Route>

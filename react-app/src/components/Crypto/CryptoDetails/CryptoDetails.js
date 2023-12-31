@@ -28,7 +28,7 @@ const CryptoDetails = () => {
     <div className="crypto-details-outer">
       <div className="crypto-details-container">
         <div className="crypto-details-top-section">
-          <span>{`Rank #${coin.coingecko_rank}`}</span>
+          {/* <span>{`Rank #${coin.coingecko_rank}`}</span> */}
           <div className="crypto-details-img-name-symbol">
             <img
               style={{ height: "30px", width: "30px" }}

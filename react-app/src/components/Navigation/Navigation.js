@@ -152,7 +152,7 @@ function Navigation() {
             )}
           </li>
 
-          <w3m-core-button icon="hide" label="Connect"></w3m-core-button>
+          {/* <w3m-core-button icon="hide" label="Connect"></w3m-core-button> */}
           {/* <Web3Button /> */}
         </ul>
       </div>
