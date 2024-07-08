@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Layout from "../layout";
 import { getCoins } from "../services/coinService";
-import CoinList from "../components/CoinList";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface Coin {
   id: string;
@@ -15,14 +15,33 @@ interface Coin {
 
 const Home = () => {
   const [coins, setCoins] = useState<Coin[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchCoins = async () => {
-      const coinData = await getCoins();
-      setCoins(coinData.slice(0, 5)); // Display only the top 5 coins
+      setLoading(true);
+      setError(null);
+      try {
+        const coinData = await getCoins(5); // Fetch only the top 5 coins
+        setCoins(coinData);
+      } catch (error) {
+        setError("Error fetching coins. Please try again later.");
+        console.error("Error fetching coins:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchCoins();
   }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
+
+  const handleViewAll = () => {
+    router.push("/all-coins");
+  };
 
   return (
     <Layout>
@@ -35,14 +54,39 @@ const Home = () => {
         </p>
         <div className="mt-8">
           <h2 className="text-2xl font-semibold">Top 5 Cryptocurrencies</h2>
-          <CoinList coins={coins} />
-          <div className="mt-4">
-            <Link href="/cryptocurrencies">
-              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                View All Cryptocurrencies
-              </button>
-            </Link>
-          </div>
+          <ul className="mt-4 space-y-4">
+            {coins.map((coin) => (
+              <li key={coin.id} className="p-4 bg-white rounded shadow">
+                <Link href={`/coin/${coin.id}`}>
+                  <div className="flex items-center space-x-4">
+                    <img
+                      src={coin.image}
+                      alt={coin.name}
+                      className="w-12 h-12"
+                    />
+                    <div>
+                      <h3 className="text-lg font-bold">{coin.name}</h3>
+                      <p className="text-gray-500">
+                        ${coin.current_price.toLocaleString()}
+                      </p>
+                      <p className="text-gray-500">
+                        Market Cap: ${coin.market_cap.toLocaleString()}
+                      </p>
+                      <p className="text-gray-500">
+                        Rank: {coin.market_cap_rank}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={handleViewAll}
+            className="mt-6 px-4 py-2 bg-blue-500 text-white rounded"
+          >
+            View All Cryptocurrencies
+          </button>
         </div>
       </div>
     </Layout>
