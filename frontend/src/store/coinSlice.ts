@@ -1,5 +1,3 @@
-// src/store/coinSlice.ts
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Coin, CoinDetail, CoinHistory } from "../types";
