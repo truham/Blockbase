@@ -3,7 +3,7 @@ import Layout from "../layout";
 import { fetchCoins } from "../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Link from "next/link";
-import { Coin } from "../types";
+import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
 import { useRouter } from "next/router";
 
 const Home = () => {
@@ -22,52 +22,61 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-blue-500">
-          Welcome to Next.js with Tailwind CSS!
-        </h1>
-        <p className="mt-4 text-lg text-gray-700">
-          This is the home page of your Crypto NFT App.
-        </p>
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold">Top 5 Cryptocurrencies</h2>
-          <ul className="mt-4 space-y-4">
-            {coins.slice(0, 5).map((coin: Coin) => (
-              <li key={coin.id} className="p-4 bg-white rounded shadow">
-                <Link href={`/coin/${coin.id}`}>
-                  <div className="flex items-center space-x-4">
-                    <img
-                      src={coin.image}
-                      alt={coin.name}
-                      className="w-12 h-12"
-                    />
-                    <div>
-                      <h3 className="text-lg font-bold">{coin.name}</h3>
-                      <p className="text-gray-500">
-                        {coin.current_price !== undefined
-                          ? `$${coin.current_price.toLocaleString()}`
-                          : "Price not available"}
-                      </p>
-                      <p className="text-gray-500">
-                        {coin.market_cap !== undefined
-                          ? `Market Cap: $${coin.market_cap.toLocaleString()}`
-                          : "Market Cap not available"}
-                      </p>
-                      <p className="text-gray-500">
-                        Rank: {coin.market_cap_rank ?? "Not available"}
-                      </p>
-                    </div>
+      <div className="bg-[#2f3a58] py-16">
+        <div className="max-w-screen-xl mx-auto px-4 md:flex md:items-center md:justify-between">
+          <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Explore crypto like Bitcoin, Ethereum, and Dogecoin
+            </h2>
+            <p className="text-lg text-white mb-4">
+              Simply and securely buy, sell, and manage hundreds of
+              cryptocurrencies.
+            </p>
+            <button
+              className="px-4 py-2 bg-[#485986] text-white rounded hover:bg-[#232c42]"
+              onClick={() => router.push("/all-coins")}
+            >
+              See more assets
+            </button>
+          </div>
+          <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:pl-8">
+            {coins.slice(0, 6).map((coin) => (
+              <Link key={coin.id} href={`/coin/${coin.id}`} legacyBehavior>
+                <a className="bg-white p-3 rounded-lg shadow-md flex flex-col items-center space-y-2 cursor-pointer hover:shadow-lg transition-shadow duration-200">
+                  <img src={coin.image} alt={coin.name} className="w-12 h-12" />
+                  <h3 className="text-lg font-bold text-gray-900">
+                    {coin.name ?? "Name not available"}
+                  </h3>
+                  <p className="text-gray-500">
+                    {coin.current_price !== undefined
+                      ? `$${coin.current_price.toLocaleString()}`
+                      : "Price not available"}
+                  </p>
+                  <div className="flex items-center space-x-1">
+                    {coin.price_change_percentage_24h !== undefined &&
+                      (coin.price_change_percentage_24h < 0 ? (
+                        <AiOutlineArrowDown className="text-red-500" />
+                      ) : (
+                        <AiOutlineArrowUp className="text-green-500" />
+                      ))}
+                    <p
+                      className={
+                        coin.price_change_percentage_24h !== undefined
+                          ? coin.price_change_percentage_24h < 0
+                            ? "text-red-500"
+                            : "text-green-500"
+                          : "text-gray-500"
+                      }
+                    >
+                      {coin.price_change_percentage_24h !== undefined
+                        ? `${coin.price_change_percentage_24h.toFixed(2)}%`
+                        : "Change not available"}
+                    </p>
                   </div>
-                </Link>
-              </li>
+                </a>
+              </Link>
             ))}
-          </ul>
-          <button
-            onClick={() => router.push("/all-coins")}
-            className="mt-6 px-4 py-2 bg-blue-500 text-white rounded"
-          >
-            View All Cryptocurrencies
-          </button>
+          </div>
         </div>
       </div>
     </Layout>
