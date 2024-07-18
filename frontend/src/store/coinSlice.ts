@@ -1,47 +1,43 @@
+// src/store/coinSlice.ts
+
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { Coin } from "../types";
-import { getCoins, getCoin, getCoinHistory } from "../services/coinService";
-
-interface CoinState {
-  coins: Coin[];
-  coinDetails: Record<string, Coin | null>;
-  coinHistory: Record<string, any>;
-  loading: boolean;
-  error: string | null;
-}
-
-const initialState: CoinState = {
-  coins: [],
-  coinDetails: {},
-  coinHistory: {},
-  loading: false,
-  error: null,
-};
+import axios from "axios";
+import { Coin, CoinDetail, CoinHistory } from "../types";
 
 export const fetchCoins = createAsyncThunk("coins/fetchCoins", async () => {
-  const response = await getCoins();
-  return response;
+  const response = await axios.get<Coin[]>("http://localhost:5000/api/coins");
+  return response.data;
 });
 
 export const fetchCoinDetails = createAsyncThunk(
   "coins/fetchCoinDetails",
   async (id: string) => {
-    const response = await getCoin(id);
-    return { id, data: response };
+    const response = await axios.get<CoinDetail>(
+      `http://localhost:5000/api/coins/${id}`
+    );
+    return { id, data: response.data };
   }
 );
 
 export const fetchCoinHistory = createAsyncThunk(
   "coins/fetchCoinHistory",
   async (id: string) => {
-    const response = await getCoinHistory(id);
-    return { id, data: response };
+    const response = await axios.get<CoinHistory>(
+      `http://localhost:5000/api/coins/${id}/history`
+    );
+    return { id, data: response.data };
   }
 );
 
 const coinSlice = createSlice({
   name: "coins",
-  initialState,
+  initialState: {
+    coins: [] as Coin[],
+    coinDetails: {} as Record<string, CoinDetail>,
+    coinHistory: {} as Record<string, CoinHistory>,
+    loading: false,
+    error: null as string | null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -50,36 +46,36 @@ const coinSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchCoins.fulfilled, (state, action) => {
-        state.loading = false;
         state.coins = action.payload;
+        state.loading = false;
       })
       .addCase(fetchCoins.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch coins";
+        state.error = action.error.message || null;
       })
       .addCase(fetchCoinDetails.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchCoinDetails.fulfilled, (state, action) => {
-        state.loading = false;
         state.coinDetails[action.payload.id] = action.payload.data;
+        state.loading = false;
       })
       .addCase(fetchCoinDetails.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch coin details";
+        state.error = action.error.message || null;
       })
       .addCase(fetchCoinHistory.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(fetchCoinHistory.fulfilled, (state, action) => {
-        state.loading = false;
         state.coinHistory[action.payload.id] = action.payload.data;
+        state.loading = false;
       })
       .addCase(fetchCoinHistory.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch coin history";
+        state.error = action.error.message || null;
       });
   },
 });

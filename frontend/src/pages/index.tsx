@@ -3,6 +3,7 @@ import Layout from "../layout";
 import { fetchCoins } from "../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Link from "next/link";
+import { Coin } from "../types";
 import { useRouter } from "next/router";
 
 const Home = () => {
@@ -31,25 +32,25 @@ const Home = () => {
         <div className="mt-8">
           <h2 className="text-2xl font-semibold">Top 5 Cryptocurrencies</h2>
           <ul className="mt-4 space-y-4">
-            {coins.slice(0, 5).map((coin) => (
+            {coins.slice(0, 5).map((coin: Coin) => (
               <li key={coin.id} className="p-4 bg-white rounded shadow">
                 <Link href={`/coin/${coin.id}`}>
                   <div className="flex items-center space-x-4">
                     <img
-                      src={coin.image?.small}
+                      src={coin.image}
                       alt={coin.name}
                       className="w-12 h-12"
                     />
                     <div>
                       <h3 className="text-lg font-bold">{coin.name}</h3>
                       <p className="text-gray-500">
-                        {coin.market_data?.current_price?.usd !== undefined
-                          ? `$${coin.market_data.current_price.usd.toLocaleString()}`
+                        {coin.current_price !== undefined
+                          ? `$${coin.current_price.toLocaleString()}`
                           : "Price not available"}
                       </p>
                       <p className="text-gray-500">
-                        {coin.market_data?.market_cap?.usd !== undefined
-                          ? `Market Cap: $${coin.market_data.market_cap.usd.toLocaleString()}`
+                        {coin.market_cap !== undefined
+                          ? `Market Cap: $${coin.market_cap.toLocaleString()}`
                           : "Market Cap not available"}
                       </p>
                       <p className="text-gray-500">

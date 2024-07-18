@@ -5,17 +5,23 @@ import { fetchCoinDetails, fetchCoinHistory } from "../../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import CoinChart from "../../components/CoinChart";
 import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import { CoinDetail, CoinHistory } from "../../types";
 
-const CoinDetail = () => {
+interface ChartData {
+  date: string;
+  price: number;
+}
+
+const CoinDetailPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const dispatch = useAppDispatch();
   const { coinDetails, coinHistory, loading, error } = useAppSelector(
     (state) => state.coins
   );
-  const coin = coinDetails[id as string];
-  const historyData = coinHistory[id as string];
-  const [chartData, setChartData] = useState([]);
+  const coin: CoinDetail | undefined = coinDetails[id as string];
+  const history: CoinHistory | undefined = coinHistory[id as string];
+  const [chartData, setChartData] = useState<ChartData[]>([]);
 
   useEffect(() => {
     if (id) {
@@ -25,8 +31,8 @@ const CoinDetail = () => {
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (historyData) {
-      const formattedData = historyData.prices.map(
+    if (history) {
+      const formattedData: ChartData[] = history.prices.map(
         (entry: [number, number]) => ({
           date: new Date(entry[0]).toLocaleTimeString("en-us", {
             hour: "2-digit",
@@ -37,7 +43,7 @@ const CoinDetail = () => {
       );
       setChartData(formattedData);
     }
-  }, [historyData]);
+  }, [history]);
 
   if (loading) return <span>Loading...</span>;
   if (error) return <span>{error}</span>;
@@ -49,7 +55,7 @@ const CoinDetail = () => {
         <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
-              <img className="h-8 w-8" src={coin.image.small} alt={coin.name} />
+              <img className="h-8 w-8" src={coin.image.large} alt={coin.name} />
               <span className="font-bold mx-2">{coin.name}</span>
               <span className="uppercase">{coin.symbol}</span>
             </div>
@@ -88,4 +94,4 @@ const CoinDetail = () => {
   );
 };
 
-export default CoinDetail;
+export default CoinDetailPage;
