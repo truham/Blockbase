@@ -1,5 +1,3 @@
-// src/types.ts
-
 export interface MarketData {
   current_price: {
     usd: number;
