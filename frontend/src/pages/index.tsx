@@ -1,47 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Layout from "../layout";
-import { getCoins } from "../services/coinService";
+import { fetchCoins } from "../store/coinSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-interface Coin {
-  id: string;
-  name: string;
-  image: string;
-  current_price: number;
-  market_cap: number;
-  market_cap_rank: number;
-}
-
 const Home = () => {
-  const [coins, setCoins] = useState<Coin[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const { coins, loading, error } = useAppSelector((state) => state.coins);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchCoins = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const coinData = await getCoins(5); // Fetch only the top 5 coins
-        setCoins(coinData);
-      } catch (error) {
-        setError("Error fetching coins. Please try again later.");
-        console.error("Error fetching coins:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchCoins();
-  }, []);
+    if (coins.length === 0) {
+      dispatch(fetchCoins());
+    }
+  }, [dispatch, coins.length]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
-
-  const handleViewAll = () => {
-    router.push("/all-coins");
-  };
 
   return (
     <Layout>
@@ -55,25 +31,29 @@ const Home = () => {
         <div className="mt-8">
           <h2 className="text-2xl font-semibold">Top 5 Cryptocurrencies</h2>
           <ul className="mt-4 space-y-4">
-            {coins.map((coin) => (
+            {coins.slice(0, 5).map((coin) => (
               <li key={coin.id} className="p-4 bg-white rounded shadow">
                 <Link href={`/coin/${coin.id}`}>
                   <div className="flex items-center space-x-4">
                     <img
-                      src={coin.image}
+                      src={coin.image?.small}
                       alt={coin.name}
                       className="w-12 h-12"
                     />
                     <div>
                       <h3 className="text-lg font-bold">{coin.name}</h3>
                       <p className="text-gray-500">
-                        ${coin.current_price.toLocaleString()}
+                        {coin.market_data?.current_price?.usd !== undefined
+                          ? `$${coin.market_data.current_price.usd.toLocaleString()}`
+                          : "Price not available"}
                       </p>
                       <p className="text-gray-500">
-                        Market Cap: ${coin.market_cap.toLocaleString()}
+                        {coin.market_data?.market_cap?.usd !== undefined
+                          ? `Market Cap: $${coin.market_data.market_cap.usd.toLocaleString()}`
+                          : "Market Cap not available"}
                       </p>
                       <p className="text-gray-500">
-                        Rank: {coin.market_cap_rank}
+                        Rank: {coin.market_cap_rank ?? "Not available"}
                       </p>
                     </div>
                   </div>
@@ -82,7 +62,7 @@ const Home = () => {
             ))}
           </ul>
           <button
-            onClick={handleViewAll}
+            onClick={() => router.push("/all-coins")}
             className="mt-6 px-4 py-2 bg-blue-500 text-white rounded"
           >
             View All Cryptocurrencies
