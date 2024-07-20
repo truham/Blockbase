@@ -5,7 +5,8 @@ import { getFromCache, setToCache } from "../utils/cache";
 const router = Router();
 
 router.get("/coins", async (req, res) => {
-  const cacheKey = "coins";
+  const { page = 1, per_page = 10 } = req.query;
+  const cacheKey = `coins_${page}_${per_page}`;
   const cachedData = getFromCache(cacheKey);
   if (cachedData) {
     return res.json(cachedData);
@@ -13,7 +14,7 @@ router.get("/coins", async (req, res) => {
 
   try {
     const data = await fetchWithRetry(
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false"
+      `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=${per_page}&page=${page}&sparkline=false`
     );
     setToCache(cacheKey, data);
     res.json(data);

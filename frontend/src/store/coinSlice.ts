@@ -7,6 +7,21 @@ export const fetchCoins = createAsyncThunk("coins/fetchCoins", async () => {
   return response.data;
 });
 
+interface FetchAllCoinsArgs {
+  page: number;
+  perPage: number;
+}
+
+export const fetchAllCoins = createAsyncThunk(
+  "coins/fetchAllCoins",
+  async ({ page, perPage }: FetchAllCoinsArgs) => {
+    const response = await axios.get<Coin[]>(
+      `http://localhost:5000/api/coins?page=${page}&per_page=${perPage}`
+    );
+    return response.data;
+  }
+);
+
 export const fetchCoinDetails = createAsyncThunk(
   "coins/fetchCoinDetails",
   async (id: string) => {
@@ -31,6 +46,7 @@ const coinSlice = createSlice({
   name: "coins",
   initialState: {
     coins: [] as Coin[],
+    allCoins: [] as Coin[],
     coinDetails: {} as Record<string, CoinDetail>,
     coinHistory: {} as Record<string, CoinHistory>,
     loading: false,
@@ -48,6 +64,18 @@ const coinSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchCoins.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || null;
+      })
+      .addCase(fetchAllCoins.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchAllCoins.fulfilled, (state, action) => {
+        state.allCoins = action.payload;
+        state.loading = false;
+      })
+      .addCase(fetchAllCoins.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || null;
       })
