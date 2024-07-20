@@ -28,17 +28,20 @@ const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={handlePrevious}
         disabled={currentPage === 1}
-        className="px-3 py-1 mx-1 bg-gray-200 rounded disabled:opacity-50"
+        className="px-4 py-2 bg-blue-500 text-white rounded mx-2 disabled:opacity-50"
       >
-        Prev
+        Previous
       </button>
       {Array.from({ length: totalPages }, (_, index) => (
         <button
           key={index}
           onClick={() => onPageChange(index + 1)}
-          className={`px-3 py-1 mx-1 ${
-            currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-200"
-          } rounded`}
+          disabled={currentPage === index + 1}
+          className={`px-4 py-2 mx-2 rounded ${
+            currentPage === index + 1
+              ? "bg-gray-500 text-white"
+              : "bg-white text-blue-500 hover:bg-[#485986] hover:text-white transition-colors duration-200"
+          }`}
         >
           {index + 1}
         </button>
@@ -46,7 +49,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <button
         onClick={handleNext}
         disabled={currentPage === totalPages}
-        className="px-3 py-1 mx-1 bg-gray-200 rounded disabled:opacity-50"
+        className="px-4 py-2 bg-blue-500 text-white rounded mx-2 disabled:opacity-50"
       >
         Next
       </button>

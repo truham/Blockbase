@@ -5,7 +5,7 @@ import { getFromCache, setToCache } from "../utils/cache";
 const router = Router();
 
 router.get("/coins", async (req, res) => {
-  const { page = 1, per_page = 10 } = req.query;
+  const { page = 1, per_page = 100 } = req.query; // Increase per_page to 100
   const cacheKey = `coins_${page}_${per_page}`;
   const cachedData = getFromCache(cacheKey);
   if (cachedData) {

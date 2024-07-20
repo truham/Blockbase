@@ -12,22 +12,27 @@ const AllCoins = () => {
   const coinsPerPage = 10;
 
   useEffect(() => {
-    dispatch(fetchAllCoins({ page: currentPage, perPage: coinsPerPage }));
-  }, [dispatch, currentPage]);
+    dispatch(fetchAllCoins({ page: 1, perPage: 100 }));
+  }, [dispatch]);
+
+  const indexOfLastCoin = currentPage * coinsPerPage;
+  const indexOfFirstCoin = indexOfLastCoin - coinsPerPage;
+  const currentCoins = allCoins.slice(indexOfFirstCoin, indexOfLastCoin);
+  const totalPages = Math.ceil(allCoins.length / coinsPerPage);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
   return (
     <Layout>
-      <div className="text-center">
-        <h1 className="text-4xl font-bold text-blue-500">
-          All Cryptocurrencies
+      <div>
+        <h1 className="py-4 text-4xl font-bold text-blue-500">
+          Cryptocurrencies
         </h1>
-        <ExploreCoinsTable coins={allCoins} />
+        <ExploreCoinsTable coins={currentCoins} />
         <Pagination
           currentPage={currentPage}
-          totalPages={Math.ceil(allCoins.length / coinsPerPage)}
+          totalPages={totalPages}
           onPageChange={(page) => setCurrentPage(page)}
         />
       </div>
