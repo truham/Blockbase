@@ -25,18 +25,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Link>
             <ul className="flex space-x-4">
               <li>
-                <Link href="/" legacyBehavior>
-                  <a className="hover:underline">Home</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" legacyBehavior>
-                  <a className="hover:underline">About</a>
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" legacyBehavior>
-                  <a className="hover:underline">Contact</a>
+                <Link href="/all-coins" legacyBehavior>
+                  <a className="hover:underline">Cryptocurrencies</a>
                 </Link>
               </li>
             </ul>
