@@ -10,15 +10,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <>
       <Head>
-        <title>My Crypto NFT App</title>
-        <meta name="description" content="An app for viewing crypto and NFTs" />
+        <title>BLOCKBASE</title>
+        <meta
+          name="description"
+          content="BLOCKBASE - Your Crypto and NFT Portfolio Viewer"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen flex flex-col bg-gray-100">
         <header className="bg-blue-600 text-white p-4">
           <nav className="max-w-screen-xl mx-auto flex justify-between items-center">
             <Link href="/" legacyBehavior>
-              <a className="text-xl font-bold">Crypto NFT App</a>
+              <a className="text-xl font-bold">BLOCKBASE</a>
             </Link>
             <ul className="flex space-x-4">
               <li>
@@ -42,8 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <main className="flex-grow w-full">{children}</main>
         <footer className="bg-gray-800 text-white p-4 text-center">
           <div className="max-w-screen-xl mx-auto">
-            &copy; {new Date().getFullYear()} Crypto NFT App. All rights
-            reserved.
+            &copy; {new Date().getFullYear()} BLOCKBASE. All rights reserved.
           </div>
         </footer>
       </div>
