@@ -22,7 +22,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <div className="bg-[#2f3a58] py-16">
+      <div className="bg-[#2f3a58] py-16 min-h-screen">
         <div className="max-w-screen-xl mx-auto px-4 md:flex md:items-center md:justify-between">
           <div className="md:w-1/2 mb-8 md:mb-0 md:pr-8">
             <h2 className="text-4xl font-bold text-white mb-4">

@@ -4,7 +4,11 @@ import Layout from "../../layout";
 import { fetchCoinDetails, fetchCoinHistory } from "../../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import CoinChart from "../../components/CoinChart";
-import { AiOutlineArrowUp, AiOutlineArrowDown } from "react-icons/ai";
+import {
+  AiOutlineArrowUp,
+  AiOutlineArrowDown,
+  AiOutlineArrowLeft,
+} from "react-icons/ai";
 import { CoinDetail, CoinHistory } from "../../types";
 
 interface ChartData {
@@ -53,6 +57,12 @@ const CoinDetailPage = () => {
     <Layout>
       <div className="flex justify-center p-5">
         <div className="w-full max-w-3xl bg-white p-6 rounded-lg shadow-md">
+          <button
+            onClick={() => router.back()}
+            className="mb-4 flex items-center text-blue-500 hover:underline"
+          >
+            <AiOutlineArrowLeft className="mr-2" /> Back
+          </button>
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center">
               <img className="h-8 w-8" src={coin.image.large} alt={coin.name} />

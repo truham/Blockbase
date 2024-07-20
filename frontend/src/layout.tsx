@@ -17,7 +17,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="min-h-screen flex flex-col bg-gray-100">
         <header className="bg-blue-600 text-white p-4">
           <nav className="max-w-screen-xl mx-auto flex justify-between items-center">
-            <div className="text-xl font-bold">Crypto NFT App</div>
+            <Link href="/" legacyBehavior>
+              <a className="text-xl font-bold">Crypto NFT App</a>
+            </Link>
             <ul className="flex space-x-4">
               <li>
                 <Link href="/" legacyBehavior>
@@ -37,7 +39,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </ul>
           </nav>
         </header>
-        <main className="flex-grow w-full p-4 bg-[#2f3a58]">{children}</main>
+        <main className="flex-grow w-full">{children}</main>
         <footer className="bg-gray-800 text-white p-4 text-center">
           <div className="max-w-screen-xl mx-auto">
             &copy; {new Date().getFullYear()} Crypto NFT App. All rights

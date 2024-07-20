@@ -25,16 +25,18 @@ const AllCoins = () => {
 
   return (
     <Layout>
-      <div>
-        <h1 className="py-4 text-4xl font-bold text-blue-500">
-          Cryptocurrencies
-        </h1>
-        <ExploreCoinsTable coins={currentCoins} />
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={(page) => setCurrentPage(page)}
-        />
+      <div className="bg-gray-100 py-16 w-full">
+        <div className="max-w-screen-xl mx-auto px-4">
+          <h1 className="py-4 text-4xl font-bold text-blue-500">
+            Cryptocurrencies
+          </h1>
+          <ExploreCoinsTable coins={currentCoins} />
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={(page) => setCurrentPage(page)}
+          />
+        </div>
       </div>
     </Layout>
   );
