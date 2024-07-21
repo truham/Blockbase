@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import blockbaseLogo from "../assets/blockbase-logo.png";
 
 const Nav: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -21,7 +23,15 @@ const Nav: React.FC = () => {
   return (
     <nav className="max-w-screen-xl mx-auto flex justify-between items-center">
       <Link href="/" legacyBehavior>
-        <a className="text-xl font-bold">BLOCKBASE</a>
+        <a className="flex items-center">
+          <Image
+            src={blockbaseLogo}
+            alt="BLOCKBASE Logo"
+            width={40}
+            height={40}
+          />
+          <span className="ml-2 text-xl font-bold">BLOCKBASE</span>
+        </a>
       </Link>
       <ul className="flex space-x-4">
         <li>
