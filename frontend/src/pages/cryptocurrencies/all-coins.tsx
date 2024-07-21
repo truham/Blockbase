@@ -25,7 +25,7 @@ const AllCoins = () => {
 
   return (
     <Layout>
-      <div className="bg-gray-100 py-16 w-full">
+      <div className="bg-gray-100 py-8 w-full">
         <div className="max-w-screen-xl mx-auto px-4">
           <h1 className="py-4 text-4xl font-bold text-blue-500">
             Cryptocurrencies

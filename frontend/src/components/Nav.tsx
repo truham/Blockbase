@@ -34,7 +34,6 @@ const Nav: React.FC = () => {
           </a>
         </Link>
         <ul className="flex space-x-8">
-          {" "}
           <li>
             <Link href="/cryptocurrencies/all-coins" legacyBehavior>
               <a className="hover:underline text-gray-700">Cryptocurrencies</a>
@@ -63,7 +62,7 @@ const Nav: React.FC = () => {
             {showMenu && (
               <div
                 id="dropdownNavbar"
-                className="absolute z-10 font-normal bg-white text-gray-700 mt-1 rounded shadow-lg w-52 right-0"
+                className="absolute z-10 font-normal bg-white text-gray-700 mt-1 rounded-lg shadow-xl w-52 right-0 border border-gray-300"
                 ref={menuRef}
               >
                 <ul className="py-2 text-sm text-gray-700">
