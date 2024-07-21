@@ -22,7 +22,7 @@ const CoinList: React.FC<CoinListProps> = ({ coins }) => {
           <div className="flex items-center space-x-4">
             <img src={coin.image} alt={coin.name} className="w-12 h-12" />
             <div>
-              <Link href={`/coin/${coin.id}`}>
+              <Link href={`/cryptocurrencies/coin/${coin.id}`}>
                 <h3 className="text-lg font-bold cursor-pointer text-blue-500 hover:underline">
                   {coin.name}
                 </h3>

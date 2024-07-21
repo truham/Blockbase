@@ -34,14 +34,18 @@ const Home = () => {
             </p>
             <button
               className="px-4 py-2 bg-[#485986] text-white rounded hover:bg-[#232c42]"
-              onClick={() => router.push("/all-coins")}
+              onClick={() => router.push("/cryptocurrencies/all-coins")}
             >
               See more assets
             </button>
           </div>
           <div className="md:w-1/2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:pl-8">
             {coins.slice(0, 6).map((coin) => (
-              <Link key={coin.id} href={`/coin/${coin.id}`} legacyBehavior>
+              <Link
+                key={coin.id}
+                href={`/cryptocurrencies/coin/${coin.id}`}
+                legacyBehavior
+              >
                 <a className="bg-white p-3 rounded-lg shadow-md flex flex-col items-center space-y-2 cursor-pointer hover:shadow-lg transition-shadow duration-200">
                   <img src={coin.image} alt={coin.name} className="w-12 h-12" />
                   <h3 className="text-lg font-bold text-gray-900">

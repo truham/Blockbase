@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </Link>
             <ul className="flex space-x-4">
               <li>
-                <Link href="/all-coins" legacyBehavior>
+                <Link href="/cryptocurrencies/all-coins" legacyBehavior>
                   <a className="hover:underline">Cryptocurrencies</a>
                 </Link>
               </li>

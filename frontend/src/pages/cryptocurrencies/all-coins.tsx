@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import Layout from "../layout";
-import { fetchAllCoins } from "../store/coinSlice";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import ExploreCoinsTable from "../components/ExploreCoinsTable";
-import Pagination from "../components/Pagination";
+import Layout from "../../layout";
+import { fetchAllCoins } from "../../store/coinSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import ExploreCoinsTable from "../../components/ExploreCoinsTable";
+import Pagination from "../../components/Pagination";
 
 const AllCoins = () => {
   const dispatch = useAppDispatch();

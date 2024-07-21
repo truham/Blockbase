@@ -32,7 +32,7 @@ const ExploreCoinCard: React.FC<ExploreCoinCardProps> = ({ coin }) => {
   };
 
   const handleDetailsDirect = () => {
-    router.push(`/coin/${coin.id}`);
+    router.push(`/cryptocurrencies/coin/${coin.id}`);
   };
 
   return (

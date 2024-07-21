@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import Layout from "../../layout";
-import { fetchCoinDetails, fetchCoinHistory } from "../../store/coinSlice";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import CoinChart from "../../components/CoinChart";
+import Layout from "../../../layout";
+import { fetchCoinDetails, fetchCoinHistory } from "../../../store/coinSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import CoinChart from "../../../components/CoinChart";
 import {
   AiOutlineArrowUp,
   AiOutlineArrowDown,
   AiOutlineArrowLeft,
 } from "react-icons/ai";
-import { CoinDetail, CoinHistory } from "../../types";
+import { CoinDetail, CoinHistory } from "../../../types";
 
 interface ChartData {
   date: string;
