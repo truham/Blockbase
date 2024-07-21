@@ -18,7 +18,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen flex flex-col bg-gray-100">
-        <header className="bg-blue-600 text-white p-4">
+        <header>
           <Nav />
         </header>
         <main className="flex-grow w-full">{children}</main>
