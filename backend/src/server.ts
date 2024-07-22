@@ -1,5 +1,4 @@
 import express from "express";
-import axios from "axios";
 import dotenv from "dotenv";
 import cors from "cors";
 import coinsRoutes from "./routes/coins";
@@ -10,7 +9,24 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
-app.use(cors());
+const allowedOrigins = process.env.FRONTEND_URL
+  ? [process.env.FRONTEND_URL]
+  : [];
+
+const corsOptions = {
+  origin: function (origin: string | undefined, callback: Function) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
 app.use("/api", coinsRoutes);
 app.use("/api", nftsRoutes);
 
