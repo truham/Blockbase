@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Coin, CoinDetail, CoinHistory } from "../types";
 
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
 export const fetchCoins = createAsyncThunk("coins/fetchCoins", async () => {
-  const response = await axios.get<Coin[]>("http://localhost:5000/api/coins");
+  const response = await axios.get<Coin[]>(`${apiUrl}/api/coins`);
   return response.data;
 });
 
@@ -16,7 +18,7 @@ export const fetchAllCoins = createAsyncThunk(
   "coins/fetchAllCoins",
   async ({ page, perPage }: FetchAllCoinsArgs) => {
     const response = await axios.get<Coin[]>(
-      `http://localhost:5000/api/coins?page=${page}&per_page=${perPage}`
+      `${apiUrl}/api/coins?page=${page}&per_page=${perPage}`
     );
     return response.data;
   }
@@ -25,9 +27,7 @@ export const fetchAllCoins = createAsyncThunk(
 export const fetchCoinDetails = createAsyncThunk(
   "coins/fetchCoinDetails",
   async (id: string) => {
-    const response = await axios.get<CoinDetail>(
-      `http://localhost:5000/api/coins/${id}`
-    );
+    const response = await axios.get<CoinDetail>(`${apiUrl}/api/coins/${id}`);
     return { id, data: response.data };
   }
 );
@@ -36,7 +36,7 @@ export const fetchCoinHistory = createAsyncThunk(
   "coins/fetchCoinHistory",
   async (id: string) => {
     const response = await axios.get<CoinHistory>(
-      `http://localhost:5000/api/coins/${id}/history`
+      `${apiUrl}/api/coins/${id}/history`
     );
     return { id, data: response.data };
   }
