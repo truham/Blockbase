@@ -23,8 +23,11 @@ const HeroGM = () => {
             ></img>
           </div>
           <p className="max-w-2xl mb-6 font-light text-gray-300 lg:mb-8 md:text-lg lg:text-xl">
-            This is a personal project centered around exploring Tailwind CSS
-            and working with cryptocurrency and NFT APIs. Enjoy!
+            This project is centered around integrating cryptocurrency and NFT
+            APIs. Enjoy exploring!
+            {/* This project is part of my portfolio, showcasing my
+            skills in Tailwind CSS, TypeScript, and integrating cryptocurrency
+            and NFT APIs. Enjoy exploring! */}
           </p>
           <button
             onClick={gmRedirect}

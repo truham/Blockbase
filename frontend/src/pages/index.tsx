@@ -4,6 +4,7 @@ import { fetchCoins } from "../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import HeroGM from "../components/HeroGM";
 import FeaturedCards from "../components/FeaturedCards";
+import HeroMemes from "../components/HeroMemes";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,7 @@ const Home = () => {
   return (
     <Layout>
       <HeroGM />
+      <HeroMemes />
       <FeaturedCards coins={coins} />
     </Layout>
   );
