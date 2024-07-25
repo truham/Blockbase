@@ -10,16 +10,6 @@
         "PORT": "5001",
         "FRONTEND_URL": "https://blockbase-phi.vercel.app"
       }
-    },
-    {
-      "name": "frontend",
-      "build": {
-        "context": "./frontend",
-        "dockerfile": "./frontend/Dockerfile"
-      },
-      "env": {
-        "NEXT_PUBLIC_API_URL": "https://your-backend-service-url.onrailway.app"
-      }
     }
   ]
 }
