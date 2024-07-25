@@ -3,8 +3,8 @@
     {
       "name": "backend",
       "path": "backend",
-      "buildCommand": "npm install",
-      "startCommand": "npm run start",
+      "buildCommand": "docker build -t backend .",
+      "startCommand": "docker run -p 5001:5001 backend",
       "env": {
         "PORT": "5001",
         "FRONTEND_URL": "https://blockbase-phi.vercel.app"
