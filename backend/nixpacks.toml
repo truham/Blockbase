@@ -1,0 +1,7 @@
+[nixpacks]
+entrypoint = "backend"
+
+[phases]
+setup = "cd backend && npm install"
+build = "npm install"
+start = "npm run start"
