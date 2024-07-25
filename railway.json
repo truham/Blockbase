@@ -2,13 +2,17 @@
   "services": [
     {
       "name": "backend",
-      "build": "cd backend && npm install",
-      "start": "cd backend && npm run start"
+      "build": {
+        "context": "./backend",
+        "dockerfile": "./backend/Dockerfile"
+      }
     },
     {
       "name": "frontend",
-      "build": "cd frontend && npm install",
-      "start": "cd frontend && npm run start"
+      "build": {
+        "context": "./frontend",
+        "dockerfile": "./frontend/Dockerfile"
+      }
     }
   ]
 }
