@@ -2,14 +2,9 @@
   "services": [
     {
       "name": "backend",
-      "build": {
-        "context": "./backend",
-        "dockerfile": "./backend/Dockerfile"
-      },
-      "env": {
-        "PORT": "5001",
-        "FRONTEND_URL": "https://blockbase-phi.vercel.app"
-      }
+      "path": "backend",
+      "startCommand": "npm run start",
+      "buildCommand": "npm install"
     }
   ]
 }
