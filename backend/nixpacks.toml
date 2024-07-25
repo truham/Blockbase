@@ -1,7 +1,0 @@
-[nixpacks]
-entrypoint = "backend"
-
-[phases]
-setup = "npm install"
-build = "npm install"
-start = "npm run start"
