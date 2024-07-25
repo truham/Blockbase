@@ -1,3 +1,4 @@
+// server.ts
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -9,9 +10,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5001;
 
-const allowedOrigins = process.env.FRONTEND_URL
-  ? [process.env.FRONTEND_URL]
-  : [];
+const allowedOrigins = [process.env.FRONTEND_URL];
 
 const corsOptions = {
   origin: function (origin: string | undefined, callback: Function) {
