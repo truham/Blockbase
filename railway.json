@@ -3,8 +3,8 @@
     {
       "name": "backend",
       "path": "backend",
-      "buildCommand": "npm install",
-      "startCommand": "npm run start",
+      "buildCommand": "cd backend && npm install",
+      "startCommand": "cd backend && npm run start",
       "env": {
         "PORT": "5001",
         "FRONTEND_URL": "https://blockbase-phi.vercel.app"

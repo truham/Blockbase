@@ -2,6 +2,6 @@
 entrypoint = "backend"
 
 [phases]
-setup = "cd backend && npm install"
+setup = "npm install"
 build = "npm install"
 start = "npm run start"
