@@ -10,8 +10,5 @@
         "FRONTEND_URL": "https://blockbase-phi.vercel.app"
       }
     }
-  ],
-  "build": {
-    "builder": "node"
-  }
+  ]
 }
