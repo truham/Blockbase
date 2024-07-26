@@ -9,3 +9,7 @@ export const getFromCache = (key: string) => {
 export const setToCache = (key: string, value: any) => {
   cache.set(key, value);
 };
+
+export const clearCache = () => {
+  cache.flushAll();
+};

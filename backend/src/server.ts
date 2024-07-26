@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import coinsRoutes from "./routes/coins";
 import nftsRoutes from "./routes/nfts";
+import { clearCache } from "./utils/cache";
 
 dotenv.config();
 
@@ -30,6 +31,11 @@ app.use("/api", nftsRoutes);
 
 app.get("/", (req, res) => {
   res.send(" ");
+});
+
+app.get("/clear-cache", (req, res) => {
+  clearCache();
+  res.send("Cache cleared");
 });
 
 app.listen(port, () => {
