@@ -30,7 +30,7 @@ app.use("/api", coinsRoutes);
 app.use("/api", nftsRoutes);
 
 app.get("/", (req, res) => {
-  res.send(" ");
+  res.send("xoxo");
 });
 
 app.get("/clear-cache", (req, res) => {
