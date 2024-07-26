@@ -19,10 +19,14 @@ jobs:
         node-version: '16'
 
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd backend
+        npm install
 
     - name: Run tests
-      run: npm test
+      run: |
+        cd backend
+        npm test
 
     - name: Deploy to EC2
       uses: appleboy/ssh-action@master
@@ -36,4 +40,3 @@ jobs:
           git pull origin main
           npm install
           pm2 restart blockbase-backend
-
