@@ -29,7 +29,7 @@ app.use("/api", coinsRoutes);
 app.use("/api", nftsRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello from the backend!");
+  res.send("");
 });
 
 app.listen(port, () => {
