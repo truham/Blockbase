@@ -1,12 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { getNFTs } from "../services/nftService";
-import { NFT } from "../types";
+import { NFT, RawNFTResponse } from "../types";
 
 export const fetchNFTs = createAsyncThunk(
   "nfts/fetchNFTs",
   async (address: string) => {
-    const response = await getNFTs(address);
-    return response;
+    const response: RawNFTResponse = await getNFTs(address);
+
+    // Parse the response to match the NFT type
+    const parsedNFTs: NFT[] = response.ownedNfts.map((nft) => ({
+      tokenId: nft.tokenId,
+      title: nft.name || "Untitled",
+      description: nft.description || "No description",
+      image: nft.image?.cachedUrl || "default-image-url",
+      collection: nft.collection?.name || "Unknown Collection",
+    }));
+
+    return parsedNFTs;
   }
 );
 
