@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import coinReducer from "./coinSlice";
+import nftReducer from "./nftSlice";
 
 const store = configureStore({
   reducer: {
     coins: coinReducer,
+    nfts: nftReducer,
   },
 });
 

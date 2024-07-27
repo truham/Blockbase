@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import coinsRoutes from "./routes/coins";
 import nftsRoutes from "./routes/nfts";
+import nftPortfolioRoutes from "./routes/nftPortfolio";
 import { clearCache } from "./utils/cache";
 
 dotenv.config();
@@ -28,6 +29,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use("/api", coinsRoutes);
 app.use("/api", nftsRoutes);
+app.use("/api", nftPortfolioRoutes);
 
 app.get("/", (req, res) => {
   res.send("xoxo");

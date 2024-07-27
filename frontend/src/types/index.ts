@@ -55,3 +55,24 @@ export interface CoinDetail {
 export interface CoinHistory {
   prices: [number, number][];
 }
+export interface RawNFTResponse {
+  ownedNfts: {
+    tokenId: string;
+    name?: string;
+    description?: string;
+    image?: {
+      cachedUrl?: string;
+    };
+    collection?: {
+      name?: string;
+    };
+  }[];
+}
+
+export interface NFT {
+  tokenId: string;
+  title: string;
+  description: string;
+  image: string;
+  collection: string;
+}
