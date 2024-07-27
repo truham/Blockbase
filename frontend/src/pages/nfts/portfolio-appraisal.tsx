@@ -50,18 +50,20 @@ const PortfolioAppraisal: React.FC = () => {
           {nfts.length === 0 ? (
             <p>No NFTs found for this address.</p>
           ) : (
-            <ul>
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {nfts.map((nft) => (
-                <li key={nft.tokenId}>
-                  <div className="border p-4 mb-4">
-                    <h2 className="text-2xl font-semibold">{nft.title}</h2>
+                <li key={nft.tokenId} className="flex flex-col items-center">
+                  <div className="border p-4 w-full max-w-xs bg-white rounded-lg shadow-md h-full max-h-[400px] flex flex-col">
+                    <h2 className="text-xl font-semibold mb-2 text-center">
+                      {nft.title}
+                    </h2>
                     <img
                       src={nft.image}
                       alt={nft.title}
-                      className="w-32 h-32"
+                      className="w-full h-48 object-cover rounded-lg mb-2"
                     />
-                    <p>{nft.description}</p>
-                    <p>
+                    {/* <p className="text-sm text-gray-600">{nft.description}</p> */}
+                    <p className="text-sm text-gray-600 text-center mt-auto">
                       <strong>Collection:</strong> {nft.collection}
                     </p>
                   </div>
