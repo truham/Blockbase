@@ -57,7 +57,8 @@ export interface CoinHistory {
 }
 
 export interface RawNFTResponse {
-  ownedNfts: RawNFT[];
+  nfts: RawNFT[];
+  pageKey: string | null;
 }
 
 export interface RawNFT {
