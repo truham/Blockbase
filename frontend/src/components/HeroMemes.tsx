@@ -5,7 +5,7 @@ import cards from "../assets/cards.png";
 const HeroMemes = () => {
   const router = useRouter();
   const handleSeeAssets = () => {
-    router.push("/nft/collections");
+    router.push("/nfts/collections");
   };
 
   return (
