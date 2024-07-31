@@ -4,6 +4,7 @@ import Layout from "../../layout";
 import { fetchNFTsForContract } from "../../store/nftCollectionsSlice";
 import { RootState, AppDispatch } from "../../store";
 import { RawNFT } from "../../types";
+import Image from "next/image";
 
 const NFTCollections: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -141,11 +142,17 @@ const NFTCollections: React.FC = () => {
                         <h2 className="text-xl font-semibold mb-2 text-center">
                           {nft.name || "Untitled"}
                         </h2>
-                        <img
-                          src={nft.image?.cachedUrl || "default-image-url"}
-                          alt={nft.name || "Untitled"}
-                          className="w-full h-48 object-cover rounded-lg mb-2"
-                        />
+                        <div className="w-full h-48 relative mb-2">
+                          <Image
+                            src={
+                              nft.image?.cachedUrl || "/default-image-url.jpg"
+                            }
+                            alt={nft.name || "Untitled"}
+                            layout="fill"
+                            objectFit="cover"
+                            className="rounded-lg"
+                          />
+                        </div>
                         <p className="text-sm text-gray-600 text-center mt-auto">
                           <strong>Collection:</strong>{" "}
                           {nft.collection?.name || "Unknown Collection"}

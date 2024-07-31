@@ -34,6 +34,9 @@ const nextConfig = {
       },
     ];
   },
+  images: {
+    domains: ["nft-cdn.alchemy.com"],
+  },
 };
 
 export default nextConfig;
