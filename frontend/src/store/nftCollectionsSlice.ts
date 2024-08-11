@@ -35,7 +35,14 @@ const nftCollectionSlice = createSlice({
     error: null,
     nextPageKey: null,
   } as NFTCollectionState,
-  reducers: {},
+  reducers: {
+    resetNFTs(state) {
+      state.nfts = [];
+      state.loading = false;
+      state.error = null;
+      state.nextPageKey = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchNFTsForContract.pending, (state) => {
@@ -43,8 +50,8 @@ const nftCollectionSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchNFTsForContract.fulfilled, (state, action) => {
-        const { nfts, pageKey } = action.payload as RawNFTResponse;
-        state.nfts = [...state.nfts, ...nfts];
+        const { nfts, pageKey } = action.payload;
+        state.nfts.push(...nfts);
         state.loading = false;
         state.nextPageKey = pageKey;
       })
@@ -55,4 +62,5 @@ const nftCollectionSlice = createSlice({
   },
 });
 
+export const { resetNFTs } = nftCollectionSlice.actions;
 export default nftCollectionSlice.reducer;

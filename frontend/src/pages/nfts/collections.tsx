@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../layout";
-import { fetchNFTsForContract } from "../../store/nftCollectionsSlice";
+import {
+  fetchNFTsForContract,
+  resetNFTs,
+} from "../../store/nftCollectionsSlice";
 import { RootState, AppDispatch } from "../../store";
 import { RawNFT } from "../../types";
 import Image from "next/image";
@@ -24,6 +27,7 @@ const NFTCollections: React.FC = () => {
     if (contractAddress) {
       setSubmittedAddress(contractAddress);
       localStorage.setItem("lastSearchedContract", contractAddress);
+      dispatch(resetNFTs());
       dispatch(fetchNFTsForContract({ contractAddress, limit: 50 }));
     }
   };
@@ -33,6 +37,7 @@ const NFTCollections: React.FC = () => {
     setContractAddress(testAddress);
     setSubmittedAddress(testAddress);
     localStorage.setItem("lastSearchedContract", testAddress);
+    dispatch(resetNFTs());
     dispatch(fetchNFTsForContract({ contractAddress: testAddress, limit: 50 }));
   };
 
@@ -40,6 +45,7 @@ const NFTCollections: React.FC = () => {
     const savedAddress = localStorage.getItem("lastSearchedContract");
     if (savedAddress) {
       setContractAddress(savedAddress);
+      dispatch(resetNFTs());
       dispatch(
         fetchNFTsForContract({ contractAddress: savedAddress, limit: 50 })
       );
@@ -88,7 +94,7 @@ const NFTCollections: React.FC = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        <div className="text-center py-8">
+        <div className="text-center py-20">
           <h1 className="text-5xl font-bold text-blue-600 mb-4">
             Welcome to NFT Collections
           </h1>
