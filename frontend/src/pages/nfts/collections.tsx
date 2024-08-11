@@ -15,6 +15,11 @@ const NFTCollections: React.FC = () => {
   const [submittedAddress, setSubmittedAddress] = useState<string | null>(null);
   const observer = useRef<IntersectionObserver | null>(null);
 
+  const [collectionName, setCollectionName] = useState<string | null>(null);
+  const [collectionDescription, setCollectionDescription] = useState<
+    string | null
+  >(null);
+
   const handleSearch = () => {
     if (contractAddress) {
       setSubmittedAddress(contractAddress);
@@ -41,6 +46,16 @@ const NFTCollections: React.FC = () => {
       setSubmittedAddress(savedAddress);
     }
   }, [dispatch]);
+
+  useEffect(() => {
+    if (submittedAddress && nfts.length > 0) {
+      const firstNFT = nfts[0];
+      setCollectionName(firstNFT.collection?.name || "Unknown Collection");
+      setCollectionDescription(
+        firstNFT.contract?.openSeaMetadata?.description || ""
+      );
+    }
+  }, [nfts, submittedAddress]);
 
   useEffect(() => {
     if (submittedAddress) {
@@ -73,104 +88,82 @@ const NFTCollections: React.FC = () => {
   return (
     <Layout>
       <div className="container mx-auto px-4 py-8">
-        {!submittedAddress ? (
-          <div className="text-center py-20">
-            <h1 className="text-5xl font-bold text-blue-600 mb-4">
-              Welcome to NFT Collections
-            </h1>
-            <p className="text-lg text-gray-700 mb-8">
-              Enter a contract address to view its NFTs.
-            </p>
-            <div className="flex flex-col items-center mb-4">
-              <input
-                type="text"
-                placeholder="Enter contract address"
-                value={contractAddress}
-                onChange={(e) => setContractAddress(e.target.value)}
-                className="border rounded-lg px-4 py-2 w-full max-w-md bg-white text-black mb-2"
-              />
-              <div className="flex space-x-4">
-                <button
-                  onClick={handleSearch}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-                >
-                  Search
-                </button>
-                <button
-                  onClick={useTestAddress}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                >
-                  Use Test Address
-                </button>
-              </div>
+        <div className="text-center py-8">
+          <h1 className="text-5xl font-bold text-blue-600 mb-4">
+            Welcome to NFT Collections
+          </h1>
+          <p className="text-lg text-gray-700 mb-8">
+            Enter a contract address to view its NFTs.
+          </p>
+          <div className="flex flex-col items-center mb-4">
+            <input
+              type="text"
+              placeholder="Enter contract address"
+              value={contractAddress}
+              onChange={(e) => setContractAddress(e.target.value)}
+              className="border rounded-lg px-4 py-2 w-full max-w-md bg-white text-black mb-2"
+            />
+            <div className="flex space-x-4">
+              <button
+                onClick={handleSearch}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+              >
+                Search
+              </button>
+              <button
+                onClick={useTestAddress}
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+              >
+                Use Test Address
+              </button>
             </div>
           </div>
+        </div>
+
+        {submittedAddress && (
+          <>
+            <h2 className="text-3xl font-bold text-left mb-4">
+              {collectionName || "Collection Name"}
+            </h2>
+            {collectionDescription && (
+              <p className="text-left text-lg text-gray-600 mb-8">
+                {collectionDescription}
+              </p>
+            )}
+          </>
+        )}
+
+        {error ? (
+          <div>Error: {error}</div>
         ) : (
           <>
-            <div className="flex flex-col items-center mb-4">
-              <input
-                type="text"
-                placeholder="Enter contract address"
-                value={contractAddress}
-                onChange={(e) => setContractAddress(e.target.value)}
-                className="border rounded-lg px-4 py-2 w-full max-w-md bg-white text-black mb-2"
-              />
-              <div className="flex space-x-4">
-                <button
-                  onClick={handleSearch}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {nfts.map((nft: RawNFT, index) => (
+                <li
+                  key={nft.tokenId}
+                  className="flex flex-col items-center"
+                  ref={nfts.length === index + 1 ? lastNFTElementRef : null}
                 >
-                  Search
-                </button>
-                <button
-                  onClick={useTestAddress}
-                  className="bg-blue-500 text-white px-4 py-2 rounded-lg"
-                >
-                  Use Test Address
-                </button>
-              </div>
-            </div>
-            <p className="text-center text-lg text-gray-700 mb-8">
-              Currently viewing NFTs for: {submittedAddress}
-            </p>
-            {error ? (
-              <div>Error: {error}</div>
-            ) : (
-              <>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {nfts.map((nft: RawNFT, index) => (
-                    <li
-                      key={nft.tokenId}
-                      className="flex flex-col items-center"
-                      ref={nfts.length === index + 1 ? lastNFTElementRef : null}
-                    >
-                      <div className="border p-4 w-full max-w-xs bg-white rounded-lg shadow-md h-full max-h-[400px] flex flex-col">
-                        <h2 className="text-xl font-semibold mb-2 text-center">
-                          {nft.name || "Untitled"}
-                        </h2>
-                        <div className="w-full h-48 relative mb-2">
-                          <Image
-                            src={
-                              nft.image?.thumbnailUrl ||
-                              "/default-image-url.jpg"
-                            }
-                            alt={nft.name || "Untitled"}
-                            layout="fill"
-                            objectFit="cover"
-                            className="rounded-lg"
-                          />
-                        </div>
-                        <p className="text-sm text-gray-600 text-center mt-auto">
-                          <strong>Collection:</strong>{" "}
-                          {nft.collection?.name || "Unknown Collection"}
-                        </p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                {loading && <div className="text-center mt-4">Loading...</div>}
-              </>
-            )}
+                  <div className="border p-4 w-full max-w-xs bg-white rounded-lg shadow-md h-full max-h-[400px] flex flex-col">
+                    <h2 className="text-xl font-semibold mb-2 text-center">
+                      {nft.name || "Untitled"}
+                    </h2>
+                    <div className="w-full h-48 relative mb-2">
+                      <Image
+                        src={
+                          nft.image?.thumbnailUrl || "/default-image-url.jpg"
+                        }
+                        alt={nft.name || "Untitled"}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-lg"
+                      />
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            {loading && <div className="text-center mt-4">Loading...</div>}
           </>
         )}
       </div>

@@ -67,10 +67,15 @@ export interface RawNFT {
   description: string;
   image: {
     cachedUrl: string;
-    thumbnailUrl: string | null;
+    thumbnailUrl: string;
   };
   collection: {
     name: string;
+  };
+  contract: {
+    openSeaMetadata: {
+      description: string;
+    };
   };
 }
 
