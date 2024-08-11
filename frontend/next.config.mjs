@@ -35,7 +35,7 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ["nft-cdn.alchemy.com"],
+    domains: ["nft-cdn.alchemy.com", "res.cloudinary.com"],
   },
 };
 

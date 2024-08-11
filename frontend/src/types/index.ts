@@ -67,6 +67,7 @@ export interface RawNFT {
   description: string;
   image: {
     cachedUrl: string;
+    thumbnailUrl: string | null;
   };
   collection: {
     name: string;

@@ -145,7 +145,8 @@ const NFTCollections: React.FC = () => {
                         <div className="w-full h-48 relative mb-2">
                           <Image
                             src={
-                              nft.image?.cachedUrl || "/default-image-url.jpg"
+                              nft.image?.thumbnailUrl ||
+                              "/default-image-url.jpg"
                             }
                             alt={nft.name || "Untitled"}
                             layout="fill"
