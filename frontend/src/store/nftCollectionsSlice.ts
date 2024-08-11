@@ -43,8 +43,8 @@ const nftCollectionSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchNFTsForContract.fulfilled, (state, action) => {
-        const { nfts, pageKey } = action.payload;
-        state.nfts = nfts;
+        const { nfts, pageKey } = action.payload as RawNFTResponse;
+        state.nfts = [...state.nfts, ...nfts];
         state.loading = false;
         state.nextPageKey = pageKey;
       })

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../layout";
 import { fetchNFTsForContract } from "../../store/nftCollectionsSlice";
@@ -13,6 +13,7 @@ const NFTCollections: React.FC = () => {
   );
   const [contractAddress, setContractAddress] = useState<string>("");
   const [submittedAddress, setSubmittedAddress] = useState<string | null>(null);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const handleSearch = () => {
     if (contractAddress) {
@@ -49,17 +50,25 @@ const NFTCollections: React.FC = () => {
     }
   }, [submittedAddress]);
 
-  const handlePagination = (startToken?: string) => {
-    if (submittedAddress) {
-      dispatch(
-        fetchNFTsForContract({
-          contractAddress: submittedAddress,
-          startToken,
-          limit: 50,
-        })
-      );
-    }
-  };
+  const lastNFTElementRef = useCallback(
+    (node: HTMLLIElement | null) => {
+      if (loading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && nextPageKey) {
+          dispatch(
+            fetchNFTsForContract({
+              contractAddress: submittedAddress!,
+              startToken: nextPageKey,
+              limit: 50,
+            })
+          );
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [loading, nextPageKey, dispatch, submittedAddress]
+  );
 
   return (
     <Layout>
@@ -124,19 +133,16 @@ const NFTCollections: React.FC = () => {
             <p className="text-center text-lg text-gray-700 mb-8">
               Currently viewing NFTs for: {submittedAddress}
             </p>
-            {loading ? (
-              <div>Loading...</div>
-            ) : error ? (
+            {error ? (
               <div>Error: {error}</div>
-            ) : nfts.length === 0 ? (
-              <p>No NFTs found for this contract address.</p>
             ) : (
               <>
                 <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {nfts.map((nft: RawNFT) => (
+                  {nfts.map((nft: RawNFT, index) => (
                     <li
                       key={nft.tokenId}
                       className="flex flex-col items-center"
+                      ref={nfts.length === index + 1 ? lastNFTElementRef : null}
                     >
                       <div className="border p-4 w-full max-w-xs bg-white rounded-lg shadow-md h-full max-h-[400px] flex flex-col">
                         <h2 className="text-xl font-semibold mb-2 text-center">
@@ -162,16 +168,7 @@ const NFTCollections: React.FC = () => {
                     </li>
                   ))}
                 </ul>
-                <div className="text-center mt-4">
-                  {nextPageKey && (
-                    <button
-                      onClick={() => handlePagination(nextPageKey)}
-                      className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-                    >
-                      Next
-                    </button>
-                  )}
-                </div>
+                {loading && <div className="text-center mt-4">Loading...</div>}
               </>
             )}
           </>
