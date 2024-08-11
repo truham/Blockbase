@@ -73,6 +73,13 @@ const Nav: React.FC = () => {
                       </a>
                     </Link>
                   </li>
+                  <li>
+                    <Link href="/nfts/collections" legacyBehavior>
+                      <a className="block px-4 py-2 hover:bg-gray-100">
+                        Collections
+                      </a>
+                    </Link>
+                  </li>
                 </ul>
               </div>
             )}
