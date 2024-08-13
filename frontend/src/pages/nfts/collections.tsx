@@ -8,6 +8,8 @@ import {
 import { RootState, AppDispatch } from "../../store";
 import { RawNFT } from "../../types";
 import Image from "next/image";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const NFTCollections: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -128,13 +130,25 @@ const NFTCollections: React.FC = () => {
 
         {submittedAddress && (
           <>
-            <h2 className="text-3xl font-bold text-left mb-4">
+            <h2 className="text-3xl font-bold text-left mb-8">
               {collectionName || "Collection Name"}
             </h2>
             {collectionDescription && (
-              <p className="text-left text-lg text-gray-600 mb-8">
-                {collectionDescription}
-              </p>
+              <div
+                className="text-left text-lg text-gray-600 mb-8"
+                style={{ whiteSpace: "pre-line" }}
+              >
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    a: ({ node, ...props }) => (
+                      <a {...props} target="_blank" rel="noopener noreferrer" />
+                    ),
+                  }}
+                >
+                  {collectionDescription}
+                </ReactMarkdown>
+              </div>
             )}
           </>
         )}
