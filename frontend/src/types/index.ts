@@ -83,6 +83,17 @@ export interface NFT {
   tokenId: string;
   title: string;
   description: string;
-  image: string;
-  collection: string;
+  image: {
+    cachedUrl: string;
+    thumbnailUrl: string;
+  };
+  collection: {
+    name: string;
+  };
+  contract: {
+    address: string;
+    openSeaMetadata?: {
+      description: string;
+    };
+  };
 }
