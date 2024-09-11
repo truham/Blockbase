@@ -7,9 +7,9 @@ import {
 } from "../../store/nftCollectionsSlice";
 import { RootState, AppDispatch } from "../../store";
 import { RawNFT } from "../../types";
-import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import NFTCard from "../../components/NFTCard";
 
 const NFTCollections: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -164,22 +164,7 @@ const NFTCollections: React.FC = () => {
                   className="flex flex-col items-center"
                   ref={nfts.length === index + 1 ? lastNFTElementRef : null}
                 >
-                  <div className="border p-4 w-full max-w-xs bg-white rounded-lg shadow-md h-full max-h-[400px] flex flex-col">
-                    <h2 className="text-xl font-semibold mb-2 text-center">
-                      {nft.name || "Untitled"}
-                    </h2>
-                    <div className="w-full h-48 relative mb-2">
-                      <Image
-                        src={
-                          nft.image?.thumbnailUrl || "/default-image-url.jpg"
-                        }
-                        alt={nft.name || "Untitled"}
-                        layout="fill"
-                        objectFit="cover"
-                        className="rounded-lg"
-                      />
-                    </div>
-                  </div>
+                  <NFTCard nft={nft} />
                 </li>
               ))}
             </ul>

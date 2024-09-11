@@ -27,32 +27,29 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
         />
       </div>
       <div className="mt-auto flex justify-center space-x-2">
-        <Link href={openSeaUrl} passHref>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
-          >
-            OpenSea
-          </a>
+        <Link
+          href={openSeaUrl}
+          className="text-blue-600 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          OpenSea
         </Link>
-        <Link href={etherscanUrl} passHref>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
-          >
-            Etherscan
-          </a>
+        <Link
+          href={etherscanUrl}
+          className="text-blue-600 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Etherscan
         </Link>
-        <Link href={looksRareUrl} passHref>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-600 hover:underline"
-          >
-            LooksRare
-          </a>
+        <Link
+          href={looksRareUrl}
+          className="text-blue-600 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          LooksRare
         </Link>
       </div>
     </div>
