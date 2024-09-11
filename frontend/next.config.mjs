@@ -35,7 +35,15 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: ["nft-cdn.alchemy.com", "res.cloudinary.com"],
+    domains: [
+      "nft-cdn.alchemy.com",
+      "res.cloudinary.com",
+      "storage.googleapis.com",
+      "assets.website-files.com",
+      "blur.io",
+      "looksrare.org",
+      "etherscan.io",
+    ],
   },
 };
 

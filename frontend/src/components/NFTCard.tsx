@@ -9,8 +9,10 @@ interface NFTCardProps {
 
 const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
   const openSeaUrl = `https://opensea.io/assets/ethereum/${nft.contract.address}/${nft.tokenId}`;
-  const etherscanUrl = `https://etherscan.io/token/${nft.contract.address}?a=${nft.tokenId}`;
+  const magicEdenUrl = `https://magiceden.io/item-details/${nft.contract.address}/${nft.tokenId}`;
+  const blurUrl = `https://blur.io/asset/${nft.contract.address}/${nft.tokenId}`;
   const looksRareUrl = `https://looksrare.org/collections/${nft.contract.address}/${nft.tokenId}`;
+  const etherscanUrl = `https://etherscan.io/token/${nft.contract.address}?a=${nft.tokenId}`;
 
   return (
     <div className="border p-4 w-full max-w-xs bg-white rounded-lg shadow-md h-full max-h-[400px] flex flex-col">
@@ -26,30 +28,71 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
           className="rounded-lg"
         />
       </div>
-      <div className="mt-auto flex justify-center space-x-2">
+      <div className="mt-auto flex justify-center items-center gap-4">
         <Link
           href={openSeaUrl}
-          className="text-blue-600 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
+          title="View on OpenSea"
         >
-          OpenSea
+          <Image
+            src="https://storage.googleapis.com/opensea-static/Logomark/Logomark-Blue.svg"
+            alt="OpenSea"
+            width={24}
+            height={24}
+          />
         </Link>
         <Link
-          href={etherscanUrl}
-          className="text-blue-600 hover:underline"
+          href={magicEdenUrl}
           target="_blank"
           rel="noopener noreferrer"
+          title="View on Magic Eden"
         >
-          Etherscan
+          <Image
+            src="https://assets.website-files.com/62d868f7d50b42d9dfa0fc85/62d8d1c9f128e6a6b7f6b5e8_logo-icon.svg"
+            alt="Magic Eden"
+            width={24}
+            height={24}
+          />
+        </Link>
+        <Link
+          href={blurUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View on Blur"
+        >
+          <Image
+            src="https://blur.io/favicons/favicon-32x32.png"
+            alt="Blur"
+            width={24}
+            height={24}
+          />
         </Link>
         <Link
           href={looksRareUrl}
-          className="text-blue-600 hover:underline"
           target="_blank"
           rel="noopener noreferrer"
+          title="View on LooksRare"
         >
-          LooksRare
+          <Image
+            src="https://looksrare.org/favicon.png"
+            alt="LooksRare"
+            width={24}
+            height={24}
+          />
+        </Link>
+        <Link
+          href={etherscanUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View on Etherscan"
+        >
+          <Image
+            src="https://etherscan.io/images/favicon3.ico"
+            alt="Etherscan"
+            width={24}
+            height={24}
+          />
         </Link>
       </div>
     </div>
