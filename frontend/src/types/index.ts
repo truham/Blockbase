@@ -76,6 +76,7 @@ export interface RawNFT {
     openSeaMetadata: {
       description: string;
     };
+    address: string;
   };
 }
 
