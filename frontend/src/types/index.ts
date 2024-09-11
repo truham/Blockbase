@@ -71,6 +71,7 @@ export interface RawNFT {
   };
   collection: {
     name: string;
+    slug?: string;
   };
   contract: {
     openSeaMetadata: {

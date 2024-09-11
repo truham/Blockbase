@@ -9,7 +9,9 @@ interface NFTCardProps {
 
 const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
   const openSeaUrl = `https://opensea.io/assets/ethereum/${nft.contract.address}/${nft.tokenId}`;
-  const magicEdenUrl = `https://magiceden.io/item-details/${nft.contract.address}/${nft.tokenId}`;
+  const magicEdenUrl = `https://magiceden.us/collections/ethereum/${
+    nft.collection?.slug ?? nft.collection?.name ?? "unknown"
+  }`;
   const blurUrl = `https://blur.io/asset/${nft.contract.address}/${nft.tokenId}`;
   const looksRareUrl = `https://looksrare.org/collections/${nft.contract.address}/${nft.tokenId}`;
   const etherscanUrl = `https://etherscan.io/token/${nft.contract.address}?a=${nft.tokenId}`;
