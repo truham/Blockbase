@@ -19,7 +19,9 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
   const magicEdenUrl = `https://magiceden.us/collections/ethereum/${
     nft.collection?.slug ?? nft.collection?.name ?? "unknown"
   }`;
-  const blurUrl = `https://blur.io/asset/${nft.contract.address}/${nft.tokenId}`;
+  const blurUrl = `https://blur.io/collection/${
+    nft.collection?.slug ?? nft.collection?.name ?? "unknown"
+  }`;
   const looksRareUrl = `https://looksrare.org/collections/${nft.contract.address}/${nft.tokenId}`;
   const etherscanUrl = `https://etherscan.io/token/${nft.contract.address}?a=${nft.tokenId}`;
 
@@ -51,8 +53,14 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
           target="_blank"
           rel="noopener noreferrer"
           title="View on Magic Eden"
+          className="relative w-6 h-6 overflow-hidden rounded-full"
         >
-          <Image src={magicEdenLogo} alt="Magic Eden" width={24} height={24} />
+          <Image
+            src={magicEdenLogo}
+            alt="Magic Eden"
+            layout="fill"
+            objectFit="cover"
+          />
         </Link>
         <Link
           href={blurUrl}
