@@ -48,7 +48,7 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
         <h2 className="text-2xl font-bold mb-4">{nft.name || "Untitled"}</h2>
         <div className="mb-4">
           <Image
-            src={nft.image?.thumbnailUrl || "/default-image-url.jpg"}
+            src={nft.image?.cachedUrl || "/default-image-url.jpg"}
             alt={nft.name || "Untitled"}
             width={400}
             height={400}
