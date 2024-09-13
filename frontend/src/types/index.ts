@@ -79,6 +79,14 @@ export interface RawNFT {
     };
     address: string;
   };
+  raw?: {
+    metadata?: {
+      attributes?: Array<{
+        trait_type: string;
+        value: string | number;
+      }>;
+    };
+  };
 }
 
 export interface NFT {
