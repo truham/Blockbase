@@ -13,7 +13,7 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
   onClose,
   nft,
 }) => {
-  const [isTraitsOpen, setIsTraitsOpen] = useState(false);
+  const [isTraitsOpen, setIsTraitsOpen] = useState(true);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
