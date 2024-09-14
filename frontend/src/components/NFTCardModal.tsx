@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { RawNFT } from "../types";
 
@@ -13,6 +13,7 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
   onClose,
   nft,
 }) => {
+  const [isTraitsOpen, setIsTraitsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -66,17 +67,25 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
           <strong>Contract Address:</strong> {nft.contract.address}
         </p>
 
-        {/* Add traits section */}
+        {/* Replace the traits section with this dropdown */}
         <div className="mt-4">
-          <h3 className="text-xl font-semibold mb-2">Traits</h3>
-          <div className="grid grid-cols-2 gap-2">
-            {nft.raw?.metadata?.attributes?.map((trait, index) => (
-              <div key={index} className="bg-gray-100 p-2 rounded">
-                <p className="font-semibold">{trait.trait_type}</p>
-                <p>{trait.value}</p>
-              </div>
-            ))}
-          </div>
+          <button
+            onClick={() => setIsTraitsOpen(!isTraitsOpen)}
+            className="flex items-center text-xl font-semibold mb-2"
+          >
+            <span className="mr-2">Traits</span>
+            <span className="text-2xl">{isTraitsOpen ? "▲" : "▼"}</span>
+          </button>
+          {isTraitsOpen && (
+            <div className="grid grid-cols-2 gap-2">
+              {nft.raw?.metadata?.attributes?.map((trait, index) => (
+                <div key={index} className="bg-gray-100 p-2 rounded">
+                  <p className="font-semibold">{trait.trait_type}</p>
+                  <p>{trait.value}</p>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
