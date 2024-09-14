@@ -2,6 +2,38 @@ import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { RawNFT } from "../types";
 
+const ChevronDown = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="6 9 12 15 18 9"></polyline>
+  </svg>
+);
+
+const ChevronUp = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <polyline points="18 15 12 9 6 15"></polyline>
+  </svg>
+);
+
 interface NFTCardModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -74,7 +106,7 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
             className="flex items-center text-xl font-semibold mb-2"
           >
             <span className="mr-2">Traits</span>
-            <span className="text-2xl">{isTraitsOpen ? "▲" : "▼"}</span>
+            {isTraitsOpen ? <ChevronUp /> : <ChevronDown />}
           </button>
           {isTraitsOpen && (
             <div className="grid grid-cols-2 gap-2">
