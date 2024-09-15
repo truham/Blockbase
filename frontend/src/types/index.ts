@@ -90,43 +90,18 @@ export interface RawNFT {
 }
 
 export interface NFT {
-  contract: {
-    address: string;
-    name?: string;
-    symbol?: string;
-    totalSupply?: string;
-    tokenType?: string;
-    isSpam?: boolean;
-    spamClassifications?: string[];
-  };
-  id: {
-    tokenId: string;
-    tokenMetadata: {
-      tokenType: string;
-    };
-  };
-  balance: string;
-  title: string;
-  description: string;
-  tokenUri: {
-    raw: string;
-    gateway: string;
-  };
-  media: {
-    raw: string;
-    gateway: string;
-  }[];
-  metadata: {
-    image: string;
-    external_url: string;
-    background_color: string;
-    name: string;
-    description: string;
-    attributes: {
-      value: string;
-      trait_type: string;
-    }[];
-  };
-  timeLastUpdated: string;
-  error?: string;
+  imageUrl: string | null;
+  name: string;
+  collectionName: string;
+  tokenId: string;
+  description?: string;
+  contractAddress?: string;
+  tokenType?: string;
+  balance?: string;
+  attributes?: Array<{ trait_type: string; value: string }>;
+  externalUrl?: string | null;
+}
+
+export interface NFTResponse {
+  ownedNfts: NFT[];
 }
