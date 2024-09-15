@@ -19,19 +19,33 @@ const SPAM_CLASSIFICATIONS = [
   "HoneyPotsOwnMultipleTokens",
 ];
 
+const MAX_NFTS = 1000;
+const MAX_RETRIES = 3;
+
 const fetchAllNFTs = async (walletAddress: string): Promise<NFT[]> => {
   let allNFTs: NFT[] = [];
   let pageKey: string | null = null;
 
-  do {
+  while (pageKey !== undefined && allNFTs.length < MAX_NFTS) {
     const url = `${ALCHEMY_BASE_URL}/getNFTsForOwner?owner=${walletAddress}&withMetadata=true${
       pageKey ? `&pageKey=${pageKey}` : ""
     }`;
-    const response = await fetchWithRetry(url);
-    const { ownedNfts, pageKey: newPageKey } = response;
-    pageKey = newPageKey;
-    allNFTs = [...allNFTs, ...ownedNfts];
-  } while (pageKey);
+    console.log(`Fetching NFTs from: ${url}`);
+    try {
+      const response = await fetchWithRetry(url, 5, 1000, 30000); // 5 retries, 1s initial delay, 30s max delay
+      console.log(`Received response for page ${pageKey || "initial"}`);
+      const { ownedNfts, pageKey: newPageKey } = response;
+      pageKey = newPageKey;
+      allNFTs = [...allNFTs, ...ownedNfts];
+      console.log(`Total NFTs fetched so far: ${allNFTs.length}`);
+    } catch (error) {
+      console.error(
+        `Error fetching NFTs for page ${pageKey || "initial"}:`,
+        error
+      );
+      break; // Exit the loop if we've exhausted all retries
+    }
+  }
 
   return allNFTs;
 };
@@ -39,12 +53,16 @@ const fetchAllNFTs = async (walletAddress: string): Promise<NFT[]> => {
 router.get("/nfts-for-owner", async (req, res) => {
   const { walletAddress } = req.query;
 
-  if (!walletAddress) {
-    return res.status(400).json({ error: "Wallet address is required" });
+  if (!walletAddress || typeof walletAddress !== "string") {
+    return res.status(400).json({ error: "Invalid wallet address" });
   }
 
+  console.log(`Received request for wallet: ${walletAddress}`);
+
   try {
-    const nftsResponse = await fetchAllNFTs(walletAddress as string);
+    console.log(`Fetching NFTs for wallet: ${walletAddress}`);
+    const nftsResponse = await fetchAllNFTs(walletAddress);
+    console.log(`Successfully fetched ${nftsResponse.length} NFTs`);
 
     // Filter out spam NFTs based on spam classifications
     const filteredNfts = nftsResponse.filter((nft) => {
@@ -56,6 +74,7 @@ router.get("/nfts-for-owner", async (req, res) => {
       );
     });
 
+    console.log(`Filtered NFTs: ${filteredNfts.length}`);
     res.json({ ownedNfts: filteredNfts });
   } catch (error: unknown) {
     console.error("Error fetching NFTs for owner:", error);

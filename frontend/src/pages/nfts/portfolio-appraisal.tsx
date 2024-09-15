@@ -8,13 +8,19 @@ const PortfolioAppraisal: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const sampleWalletAddress = "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD";
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    await fetchNFTs(walletAddress);
+  };
+
+  const fetchNFTs = async (address: string) => {
     setLoading(true);
     setError("");
 
     try {
-      const ownedNfts = await fetchNFTsForOwner(walletAddress);
+      const ownedNfts = await fetchNFTsForOwner(address);
       setNfts(ownedNfts);
     } catch (err) {
       setError("Error fetching NFTs. Please try again.");
@@ -22,6 +28,11 @@ const PortfolioAppraisal: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const useSampleAddress = () => {
+    setWalletAddress(sampleWalletAddress);
+    fetchNFTs(sampleWalletAddress);
   };
 
   return (
@@ -37,10 +48,18 @@ const PortfolioAppraisal: React.FC = () => {
         />
         <button
           type="submit"
-          className="bg-blue-500 text-white p-2 rounded"
+          className="bg-blue-500 text-white p-2 rounded mr-2"
           disabled={loading}
         >
           {loading ? "Loading..." : "Fetch NFTs"}
+        </button>
+        <button
+          type="button"
+          onClick={useSampleAddress}
+          className="bg-green-500 text-white p-2 rounded"
+          disabled={loading}
+        >
+          Use Test Address
         </button>
       </form>
       {error && <p className="text-red-500">{error}</p>}
