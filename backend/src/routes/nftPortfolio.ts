@@ -64,18 +64,41 @@ router.get("/nfts-for-owner", async (req, res) => {
     const nftsResponse = await fetchAllNFTs(walletAddress);
     console.log(`Successfully fetched ${nftsResponse.length} NFTs`);
 
-    // Filter out spam NFTs based on spam classifications
-    const filteredNfts = nftsResponse.filter((nft) => {
-      return (
-        !nft.contract.isSpam &&
-        !SPAM_CLASSIFICATIONS.some((classification) =>
-          nft.contract.spamClassifications?.includes(classification)
-        )
-      );
-    });
+    // Filter out spam NFTs and format the response
+    const formattedNfts = nftsResponse
+      .filter((nft) => {
+        return (
+          !nft.contract.isSpam &&
+          !SPAM_CLASSIFICATIONS.some((classification) =>
+            nft.contract.spamClassifications?.includes(classification)
+          )
+        );
+      })
+      .map((nft) => ({
+        collectionName:
+          nft.contract.openSeaMetadata?.collectionName ||
+          nft.contract.name ||
+          "Unknown Collection",
+        imageUrl:
+          nft.image?.thumbnailUrl ||
+          nft.image?.cachedUrl ||
+          nft.contract.openSeaMetadata?.imageUrl ||
+          null,
+        name: nft.name || `Token ID: ${nft.tokenId}`,
+        tokenId: nft.tokenId,
+        description: nft.description || "No description available",
+        contractAddress: nft.contract.address,
+        tokenType: nft.tokenType,
+        balance: nft.balance,
+        attributes: nft.raw?.metadata?.attributes || [],
+        externalUrl:
+          nft.raw?.metadata?.external_url ||
+          nft.collection?.externalUrl ||
+          null,
+      }));
 
-    console.log(`Filtered NFTs: ${filteredNfts.length}`);
-    res.json({ ownedNfts: filteredNfts });
+    console.log(`Formatted ${formattedNfts.length} NFTs`);
+    res.json({ ownedNfts: formattedNfts });
   } catch (error: unknown) {
     console.error("Error fetching NFTs for owner:", error);
     res.status(500).json({ error: "Failed to fetch NFTs for owner" });
