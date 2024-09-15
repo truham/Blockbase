@@ -58,12 +58,20 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
       }
     };
 
+    const handleEscKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("keydown", handleEscKey);
     }
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleEscKey);
     };
   }, [isOpen, onClose]);
 
