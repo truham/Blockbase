@@ -95,11 +95,8 @@ const NFTCardModal: React.FC<NFTCardModalProps> = ({
         <p className="mb-2">
           <strong>Token ID:</strong> {nft.tokenId}
         </p>
-        <p className="mb-2">
-          <strong>Contract Address:</strong> {nft.contract.address}
-        </p>
 
-        {/* Replace the traits section with this dropdown */}
+        {/* Traits section with dropdown */}
         <div className="mt-4">
           <button
             onClick={() => setIsTraitsOpen(!isTraitsOpen)}
