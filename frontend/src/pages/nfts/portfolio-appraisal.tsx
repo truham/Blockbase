@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NFT } from "../../types";
+import { fetchNFTsForOwner } from "../../services/nftService";
 
 const PortfolioAppraisal: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -13,14 +14,8 @@ const PortfolioAppraisal: React.FC = () => {
     setError("");
 
     try {
-      const response = await fetch(
-        `/api/nfts-for-owner?walletAddress=${walletAddress}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch NFTs");
-      }
-      const data = await response.json();
-      setNfts(data.ownedNfts);
+      const ownedNfts = await fetchNFTsForOwner(walletAddress);
+      setNfts(ownedNfts);
     } catch (err) {
       setError("Error fetching NFTs. Please try again.");
       console.error(err);

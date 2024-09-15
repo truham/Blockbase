@@ -31,3 +31,10 @@ export const getNFTsForContract = async (
   });
   return response.data;
 };
+
+export const fetchNFTsForOwner = async (walletAddress: string) => {
+  const response = await axios.get(`${apiUrl}/api/nfts-for-owner`, {
+    params: { walletAddress },
+  });
+  return response.data.ownedNfts;
+};

@@ -90,20 +90,43 @@ export interface RawNFT {
 }
 
 export interface NFT {
-  tokenId: string;
-  title: string;
-  description: string;
-  image: {
-    cachedUrl: string;
-    thumbnailUrl: string;
-  };
-  collection: {
-    name: string;
-  };
   contract: {
     address: string;
-    openSeaMetadata?: {
-      description: string;
+    name?: string;
+    symbol?: string;
+    totalSupply?: string;
+    tokenType?: string;
+    isSpam?: boolean;
+    spamClassifications?: string[];
+  };
+  id: {
+    tokenId: string;
+    tokenMetadata: {
+      tokenType: string;
     };
   };
+  balance: string;
+  title: string;
+  description: string;
+  tokenUri: {
+    raw: string;
+    gateway: string;
+  };
+  media: {
+    raw: string;
+    gateway: string;
+  }[];
+  metadata: {
+    image: string;
+    external_url: string;
+    background_color: string;
+    name: string;
+    description: string;
+    attributes: {
+      value: string;
+      trait_type: string;
+    }[];
+  };
+  timeLastUpdated: string;
+  error?: string;
 }
