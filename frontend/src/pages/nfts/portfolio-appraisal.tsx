@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NFT } from "../../types";
 import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
+
+const ITEMS_PER_PAGE = 10;
 
 const PortfolioAppraisal: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   const sampleWalletAddress = "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setCurrentPage(1);
     await fetchNFTs(walletAddress);
   };
 
@@ -33,7 +37,17 @@ const PortfolioAppraisal: React.FC = () => {
 
   const useSampleAddress = () => {
     setWalletAddress(sampleWalletAddress);
+    setCurrentPage(1);
     fetchNFTs(sampleWalletAddress);
+  };
+
+  const totalPages = Math.ceil(nfts.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentNFTs = nfts.slice(startIndex, endIndex);
+
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -68,8 +82,8 @@ const PortfolioAppraisal: React.FC = () => {
         {nfts.length > 0 && (
           <div>
             <h2 className="text-xl font-semibold mb-2">Owned NFTs:</h2>
-            <ul className="space-y-4">
-              {nfts.map((nft, index) => (
+            <ul className="space-y-4 mb-4">
+              {currentNFTs.map((nft, index) => (
                 <li
                   key={index}
                   className="flex items-center bg-gray-100 p-4 rounded-lg"
@@ -91,6 +105,27 @@ const PortfolioAppraisal: React.FC = () => {
                 </li>
               ))}
             </ul>
+            {totalPages > 1 && (
+              <div className="flex justify-center space-x-2">
+                <button
+                  onClick={() => goToPage(currentPage - 1)}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                >
+                  Previous
+                </button>
+                <span className="px-3 py-1">
+                  Page {currentPage} of {totalPages}
+                </span>
+                <button
+                  onClick={() => goToPage(currentPage + 1)}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                >
+                  Next
+                </button>
+              </div>
+            )}
           </div>
         )}
       </div>
