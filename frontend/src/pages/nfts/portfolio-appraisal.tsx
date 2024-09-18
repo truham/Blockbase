@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { NFT } from "../../types";
 import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
+import NFTModal from "../../components/NFTModal";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 12;
 
 const PortfolioAppraisal: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -11,6 +12,7 @@ const PortfolioAppraisal: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
 
   const sampleWalletAddress = "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD";
 
@@ -50,6 +52,14 @@ const PortfolioAppraisal: React.FC = () => {
     setCurrentPage(page);
   };
 
+  const openModal = (nft: NFT) => {
+    setSelectedNFT(nft);
+  };
+
+  const closeModal = () => {
+    setSelectedNFT(null);
+  };
+
   return (
     <Layout>
       <div className="container mx-auto p-4">
@@ -82,26 +92,23 @@ const PortfolioAppraisal: React.FC = () => {
         {nfts.length > 0 && (
           <div>
             <h2 className="text-xl font-semibold mb-2">Owned NFTs:</h2>
-            <ul className="space-y-4 mb-4">
+            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
               {currentNFTs.map((nft, index) => (
                 <li
                   key={index}
-                  className="flex items-center bg-gray-100 p-4 rounded-lg"
+                  className="bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200"
+                  onClick={() => openModal(nft)}
                 >
                   <img
                     src={nft.imageUrl || "https://via.placeholder.com/100"}
                     alt={nft.name}
-                    className="w-20 h-20 object-cover rounded-md mr-4"
+                    className="w-full h-48 object-cover rounded-md mb-2"
                   />
-                  <div>
-                    <h3 className="font-semibold text-lg">{nft.name}</h3>
-                    <p className="text-sm text-gray-600">
-                      {nft.collectionName}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      Token ID: {nft.tokenId}
-                    </p>
-                  </div>
+                  <h3 className="font-semibold text-lg">{nft.name}</h3>
+                  <p className="text-sm text-gray-600">{nft.collectionName}</p>
+                  <p className="text-xs text-gray-500">
+                    Token ID: {nft.tokenId}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -129,6 +136,13 @@ const PortfolioAppraisal: React.FC = () => {
           </div>
         )}
       </div>
+      {selectedNFT && (
+        <NFTModal
+          isOpen={!!selectedNFT}
+          onClose={closeModal}
+          nft={selectedNFT}
+        />
+      )}
     </Layout>
   );
 };
