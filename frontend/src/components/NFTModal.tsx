@@ -73,6 +73,10 @@ const NFTModal: React.FC<NFTModalProps> = ({ isOpen, onClose, nft }) => {
 
   if (!isOpen) return null;
 
+  const imageUrl = nft.imageUrl || "/default-image-url.jpg";
+  const isExternalImage =
+    imageUrl.startsWith("http") || imageUrl.startsWith("https");
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div
@@ -84,13 +88,21 @@ const NFTModal: React.FC<NFTModalProps> = ({ isOpen, onClose, nft }) => {
         </button>
         <h2 className="text-2xl font-bold mb-4">{nft.name || "Untitled"}</h2>
         <div className="mb-4">
-          <Image
-            src={nft.imageUrl || "/default-image-url.jpg"}
-            alt={nft.name || "Untitled"}
-            width={400}
-            height={400}
-            objectFit="contain"
-          />
+          {isExternalImage ? (
+            <img
+              src={imageUrl}
+              alt={nft.name || "Untitled"}
+              className="max-w-full h-auto"
+            />
+          ) : (
+            <Image
+              src={imageUrl}
+              alt={nft.name || "Untitled"}
+              width={400}
+              height={400}
+              objectFit="contain"
+            />
+          )}
         </div>
         <p className="mb-2">
           <strong>Collection:</strong> {nft.collectionName}

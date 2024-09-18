@@ -43,6 +43,7 @@ const nextConfig = {
       "blur.io",
       "looksrare.org",
       "etherscan.io",
+      "i.seadn.io",
     ],
   },
 };
