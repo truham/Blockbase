@@ -4,7 +4,7 @@ import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
 import NFTModal from "../../components/NFTModal";
 
-const ITEMS_PER_PAGE = 16;
+const ITEMS_PER_PAGE = 12;
 
 const PortfolioAppraisal: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState("");
@@ -136,20 +136,27 @@ const PortfolioAppraisal: React.FC = () => {
               <h2 className="text-xl font-semibold mb-2">
                 Filter by Collection
               </h2>
-              {Object.entries(collections).map(
-                ([collectionName, isSelected]) => (
-                  <div key={collectionName} className="flex items-center mb-2">
-                    <input
-                      type="checkbox"
-                      id={collectionName}
-                      checked={isSelected}
-                      onChange={() => toggleCollection(collectionName)}
-                      className="mr-2"
-                    />
-                    <label htmlFor={collectionName}>{collectionName}</label>
-                  </div>
-                )
-              )}
+              <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
+                {Object.entries(collections).map(
+                  ([collectionName, isSelected]) => (
+                    <div
+                      key={collectionName}
+                      className="flex items-center mb-2"
+                    >
+                      <input
+                        type="checkbox"
+                        id={collectionName}
+                        checked={isSelected}
+                        onChange={() => toggleCollection(collectionName)}
+                        className="mr-2"
+                      />
+                      <label htmlFor={collectionName} className="text-sm">
+                        {collectionName}
+                      </label>
+                    </div>
+                  )
+                )}
+              </div>
             </div>
             {/* NFT Grid */}
             <div className="w-3/4">
