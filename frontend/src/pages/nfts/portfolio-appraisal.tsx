@@ -4,15 +4,19 @@ import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
 import NFTModal from "../../components/NFTModal";
 
-const ITEMS_PER_PAGE = 12;
+const ITEMS_PER_PAGE = 16;
 
 const PortfolioAppraisal: React.FC = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [nfts, setNfts] = useState<NFT[]>([]);
+  const [filteredNfts, setFilteredNfts] = useState<NFT[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
+  const [collections, setCollections] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const sampleWalletAddress = "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD";
 
@@ -29,6 +33,20 @@ const PortfolioAppraisal: React.FC = () => {
     try {
       const ownedNfts = await fetchNFTsForOwner(address);
       setNfts(ownedNfts);
+      setFilteredNfts(ownedNfts);
+
+      // Generate collections object
+      const collectionsObj = ownedNfts.reduce(
+        (acc: { [key: string]: boolean }, nft: NFT) => {
+          if (nft.collectionName) {
+            acc[nft.collectionName] = true;
+          }
+          return acc;
+        },
+        {}
+      );
+
+      setCollections(collectionsObj);
     } catch (err) {
       setError("Error fetching NFTs. Please try again.");
       console.error(err);
@@ -43,10 +61,32 @@ const PortfolioAppraisal: React.FC = () => {
     fetchNFTs(sampleWalletAddress);
   };
 
-  const totalPages = Math.ceil(nfts.length / ITEMS_PER_PAGE);
+  const toggleCollection = (collectionName: string) => {
+    setCollections((prev) => ({
+      ...prev,
+      [collectionName]: !prev[collectionName],
+    }));
+  };
+
+  useEffect(() => {
+    const selectedCollections = Object.entries(collections)
+      .filter(([_, isSelected]) => isSelected)
+      .map(([name, _]) => name);
+
+    if (selectedCollections.length === 0) {
+      setFilteredNfts(nfts);
+    } else {
+      setFilteredNfts(
+        nfts.filter((nft) => selectedCollections.includes(nft.collectionName))
+      );
+    }
+    setCurrentPage(1);
+  }, [collections, nfts]);
+
+  const totalPages = Math.ceil(filteredNfts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentNFTs = nfts.slice(startIndex, endIndex);
+  const currentNFTs = filteredNfts.slice(startIndex, endIndex);
 
   const goToPage = (page: number) => {
     setCurrentPage(page);
@@ -90,49 +130,74 @@ const PortfolioAppraisal: React.FC = () => {
         </form>
         {error && <p className="text-red-500">{error}</p>}
         {nfts.length > 0 && (
-          <div>
-            <h2 className="text-xl font-semibold mb-2">Owned NFTs:</h2>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
-              {currentNFTs.map((nft, index) => (
-                <li
-                  key={index}
-                  className="bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200"
-                  onClick={() => openModal(nft)}
-                >
-                  <img
-                    src={nft.imageUrl || "https://via.placeholder.com/100"}
-                    alt={nft.name}
-                    className="w-full h-48 object-cover rounded-md mb-2"
-                  />
-                  <h3 className="font-semibold text-lg">{nft.name}</h3>
-                  <p className="text-sm text-gray-600">{nft.collectionName}</p>
-                  <p className="text-xs text-gray-500">
-                    Token ID: {nft.tokenId}
-                  </p>
-                </li>
-              ))}
-            </ul>
-            {totalPages > 1 && (
-              <div className="flex justify-center space-x-2">
-                <button
-                  onClick={() => goToPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
-                >
-                  Previous
-                </button>
-                <span className="px-3 py-1">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <button
-                  onClick={() => goToPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
-                >
-                  Next
-                </button>
-              </div>
-            )}
+          <div className="flex">
+            {/* Filter Section */}
+            <div className="w-1/4 pr-4">
+              <h2 className="text-xl font-semibold mb-2">
+                Filter by Collection
+              </h2>
+              {Object.entries(collections).map(
+                ([collectionName, isSelected]) => (
+                  <div key={collectionName} className="flex items-center mb-2">
+                    <input
+                      type="checkbox"
+                      id={collectionName}
+                      checked={isSelected}
+                      onChange={() => toggleCollection(collectionName)}
+                      className="mr-2"
+                    />
+                    <label htmlFor={collectionName}>{collectionName}</label>
+                  </div>
+                )
+              )}
+            </div>
+            {/* NFT Grid */}
+            <div className="w-3/4">
+              <h2 className="text-xl font-semibold mb-2">Owned NFTs:</h2>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
+                {currentNFTs.map((nft, index) => (
+                  <li
+                    key={index}
+                    className="bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200"
+                    onClick={() => openModal(nft)}
+                  >
+                    <img
+                      src={nft.imageUrl || "https://via.placeholder.com/100"}
+                      alt={nft.name}
+                      className="w-full h-48 object-cover rounded-md mb-2"
+                    />
+                    <h3 className="font-semibold text-lg">{nft.name}</h3>
+                    <p className="text-sm text-gray-600">
+                      {nft.collectionName}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      Token ID: {nft.tokenId}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+              {totalPages > 1 && (
+                <div className="flex justify-center space-x-2">
+                  <button
+                    onClick={() => goToPage(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                  >
+                    Previous
+                  </button>
+                  <span className="px-3 py-1">
+                    Page {currentPage} of {totalPages}
+                  </span>
+                  <button
+                    onClick={() => goToPage(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
