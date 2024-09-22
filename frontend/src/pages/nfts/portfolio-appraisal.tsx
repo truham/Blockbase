@@ -130,13 +130,13 @@ const PortfolioAppraisal: React.FC = () => {
         </form>
         {error && <p className="text-red-500">{error}</p>}
         {nfts.length > 0 && (
-          <div className="flex">
+          <div className="flex relative">
             {/* Filter Section */}
-            <div className="w-1/4 pr-4">
-              <h2 className="text-xl font-semibold mb-2">
+            <div className="w-1/4 pr-4 sticky top-4 self-start max-h-[calc(100vh-200px)] overflow-y-auto">
+              <h3 className="text-lg font-semibold mb-2">
                 Filter by Collection
-              </h2>
-              <div className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2">
+              </h3>
+              <div className="overflow-y-auto pr-2">
                 {Object.entries(collections).map(
                   ([collectionName, isSelected]) => (
                     <div
@@ -160,7 +160,7 @@ const PortfolioAppraisal: React.FC = () => {
             </div>
             {/* NFT Grid */}
             <div className="w-3/4">
-              <h2 className="text-xl font-semibold mb-2">Owned NFTs:</h2>
+              <h2 className="text-xl font-semibold mb-4">Owned NFTs:</h2>
               <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-4">
                 {currentNFTs.map((nft, index) => (
                   <li
