@@ -3,6 +3,7 @@ import { NFT } from "../../types";
 import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
 import NFTModal from "../../components/NFTModal";
+import LoadingSquiggle from "../../components/LoadingSquiggle";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -11,7 +12,7 @@ const NFTPortfolio: React.FC = () => {
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [filteredNfts, setFilteredNfts] = useState<NFT[]>([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedNFT, setSelectedNFT] = useState<NFT | null>(null);
   const [collections, setCollections] = useState<{ [key: string]: boolean }>(
@@ -20,23 +21,21 @@ const NFTPortfolio: React.FC = () => {
 
   const sampleWalletAddress = "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD";
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (
+    e: React.FormEvent | null,
+    address: string = walletAddress
+  ) => {
+    if (e) e.preventDefault();
     setCurrentPage(1);
-    await fetchNFTs(walletAddress);
-  };
-
-  const fetchNFTs = async (address: string) => {
     setLoading(true);
-    setError("");
-
+    setError(null);
     try {
-      const ownedNfts = await fetchNFTsForOwner(address);
-      setNfts(ownedNfts);
-      setFilteredNfts(ownedNfts);
+      const fetchedNfts = await fetchNFTsForOwner(address);
+      setNfts(fetchedNfts);
+      setFilteredNfts(fetchedNfts);
 
       // Generate collections object
-      const collectionsObj = ownedNfts.reduce(
+      const collectionsObj = fetchedNfts.reduce(
         (acc: { [key: string]: boolean }, nft: NFT) => {
           if (nft.collectionName) {
             acc[nft.collectionName] = true;
@@ -48,7 +47,7 @@ const NFTPortfolio: React.FC = () => {
 
       setCollections(collectionsObj);
     } catch (err) {
-      setError("Error fetching NFTs. Please try again.");
+      setError("Failed to fetch NFTs. Please try again.");
       console.error(err);
     } finally {
       setLoading(false);
@@ -57,8 +56,7 @@ const NFTPortfolio: React.FC = () => {
 
   const useSampleAddress = () => {
     setWalletAddress(sampleWalletAddress);
-    setCurrentPage(1);
-    fetchNFTs(sampleWalletAddress);
+    handleSubmit(null, sampleWalletAddress);
   };
 
   const toggleCollection = (collectionName: string) => {
@@ -104,7 +102,7 @@ const NFTPortfolio: React.FC = () => {
     <Layout>
       <div className="container mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">NFT Portfolio</h1>
-        <form onSubmit={handleSubmit} className="mb-4">
+        <form onSubmit={(e) => handleSubmit(e)} className="mb-4">
           <input
             type="text"
             value={walletAddress}
@@ -129,7 +127,9 @@ const NFTPortfolio: React.FC = () => {
           </button>
         </form>
         {error && <p className="text-red-500">{error}</p>}
-        {nfts.length > 0 && (
+        {loading ? (
+          <LoadingSquiggle />
+        ) : nfts.length > 0 ? (
           <div className="flex relative">
             {/* Filter Section */}
             <div className="w-1/4 pr-4 sticky top-4 self-start max-h-[calc(100vh-200px)] overflow-y-auto">
@@ -206,7 +206,7 @@ const NFTPortfolio: React.FC = () => {
               )}
             </div>
           </div>
-        )}
+        ) : null}
       </div>
       {selectedNFT && (
         <NFTModal

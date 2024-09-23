@@ -32,3 +32,16 @@ body {
     text-wrap: balance;
   }
 }
+
+@keyframes draw {
+  0% {
+    stroke-dasharray: 0 300;
+  }
+  100% {
+    stroke-dasharray: 300 300;
+  }
+}
+
+.animate-draw {
+  animation: draw 2s ease-in-out infinite alternate;
+}
