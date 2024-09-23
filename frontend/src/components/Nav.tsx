@@ -67,7 +67,7 @@ const Nav: React.FC = () => {
               >
                 <ul className="py-2 text-sm text-gray-700">
                   <li>
-                    <Link href="/nfts/portfolio-appraisal" legacyBehavior>
+                    <Link href="/nfts/portfolio" legacyBehavior>
                       <a className="block px-4 py-2 hover:bg-gray-100">
                         Portfolio Appraisal
                       </a>
