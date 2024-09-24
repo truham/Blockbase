@@ -5,7 +5,7 @@ import squiggly from "../assets/squiggly.png";
 const HeroGM = () => {
   const router = useRouter();
   const gmRedirect = () => {
-    router.push("/nft/profile");
+    router.push("/nfts/portfolio");
   };
 
   return (
