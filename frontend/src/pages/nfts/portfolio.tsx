@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { NFT } from "../../types";
 import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
@@ -18,6 +18,9 @@ const NFTPortfolio: React.FC = () => {
   const [collections, setCollections] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const [hasMore, setHasMore] = useState(true);
+  const [currentNFTs, setCurrentNFTs] = useState<NFT[]>([]);
+  const observer = useRef<IntersectionObserver | null>(null);
 
   const sampleWalletAddress = "0xc6400A5584db71e41B0E5dFbdC769b54B91256CD";
 
@@ -81,14 +84,40 @@ const NFTPortfolio: React.FC = () => {
     setCurrentPage(1);
   }, [collections, nfts]);
 
-  const totalPages = Math.ceil(filteredNfts.length / ITEMS_PER_PAGE);
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
-  const currentNFTs = filteredNfts.slice(startIndex, endIndex);
+  const loadMoreNFTs = useCallback(() => {
+    const nextPage = currentPage + 1;
+    const startIndex = (nextPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const nextNFTs = filteredNfts.slice(startIndex, endIndex);
 
-  const goToPage = (page: number) => {
-    setCurrentPage(page);
-  };
+    if (nextNFTs.length > 0) {
+      setCurrentNFTs((prevNFTs) => [...prevNFTs, ...nextNFTs]);
+      setCurrentPage(nextPage);
+    }
+
+    if (endIndex >= filteredNfts.length) {
+      setHasMore(false);
+    }
+  }, [currentPage, filteredNfts]);
+
+  const lastNFTElementRef = useCallback(
+    (node: HTMLLIElement | null) => {
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          loadMoreNFTs();
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [hasMore, loadMoreNFTs]
+  );
+
+  useEffect(() => {
+    setCurrentNFTs(filteredNfts.slice(0, ITEMS_PER_PAGE));
+    setCurrentPage(1);
+    setHasMore(filteredNfts.length > ITEMS_PER_PAGE);
+  }, [filteredNfts]);
 
   const openModal = (nft: NFT) => {
     setSelectedNFT(nft);
@@ -165,6 +194,11 @@ const NFTPortfolio: React.FC = () => {
                 {currentNFTs.map((nft, index) => (
                   <li
                     key={index}
+                    ref={
+                      index === currentNFTs.length - 1
+                        ? lastNFTElementRef
+                        : null
+                    }
                     className="bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200"
                     onClick={() => openModal(nft)}
                   >
@@ -183,25 +217,9 @@ const NFTPortfolio: React.FC = () => {
                   </li>
                 ))}
               </ul>
-              {totalPages > 1 && (
-                <div className="flex justify-center space-x-2">
-                  <button
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
-                  >
-                    Previous
-                  </button>
-                  <span className="px-3 py-1">
-                    Page {currentPage} of {totalPages}
-                  </span>
-                  <button
-                    onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="px-3 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
-                  >
-                    Next
-                  </button>
+              {hasMore && (
+                <div className="flex justify-center">
+                  <LoadingSquiggle />
                 </div>
               )}
             </div>
