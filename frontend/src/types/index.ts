@@ -50,6 +50,14 @@ export interface CoinDetail {
     large: string;
   };
   market_data: MarketData;
+  links: {
+    homepage: string[];
+    whitepaper: string;
+    blockchain_site: string[];
+    repos_url: {
+      github: string[];
+    };
+  };
 }
 
 export interface CoinHistory {
