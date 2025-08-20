@@ -42,6 +42,12 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
             layout="fill"
             objectFit="cover"
             className="rounded-lg"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (target.src !== "/default-nft-image.svg") {
+                target.src = "/default-nft-image.svg";
+              }
+            }}
           />
         </div>
         <div className="mt-auto flex justify-center items-center gap-4">

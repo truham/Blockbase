@@ -84,15 +84,17 @@ const NFTModal: React.FC<NFTModalProps> = ({ isOpen, onClose, nft }) => {
         </button>
         <h2 className="text-2xl font-bold mb-4">{nft.name || "Untitled"}</h2>
         <div className="mb-4 flex justify-center">
-          <div className="relative w-96 h-96">
-            <Image
-              src={nft.imageUrl || "/default-nft-image.svg"}
-              alt={nft.name || "Untitled"}
-              layout="fill"
-              objectFit="contain"
-              className="rounded-lg"
-            />
-          </div>
+          <img
+            src={nft.imageUrl || "/default-nft-image.svg"}
+            alt={nft.name || "Untitled"}
+            className="max-w-96 max-h-96 object-contain rounded-lg"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              if (target.src !== "/default-nft-image.svg") {
+                target.src = "/default-nft-image.svg";
+              }
+            }}
+          />
         </div>
         <p className="mb-2">
           <strong>Collection:</strong> {nft.collectionName}
