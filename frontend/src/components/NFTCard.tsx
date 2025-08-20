@@ -19,12 +19,10 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openSeaUrl = `https://opensea.io/assets/ethereum/${nft.contract.address}/${nft.tokenId}`;
-  const magicEdenUrl = `https://magiceden.us/collections/ethereum/${
-    nft.collection?.slug ?? nft.collection?.name ?? "unknown"
-  }`;
-  const blurUrl = `https://blur.io/collection/${
-    nft.collection?.slug ?? nft.collection?.name ?? "unknown"
-  }`;
+  const magicEdenUrl = `https://magiceden.us/collections/ethereum/${nft.collection?.slug ?? nft.collection?.name ?? "unknown"
+    }`;
+  const blurUrl = `https://blur.io/collection/${nft.collection?.slug ?? nft.collection?.name ?? "unknown"
+    }`;
   const looksRareUrl = `https://looksrare.org/collections/${nft.contract.address}/${nft.tokenId}`;
   const etherscanUrl = `https://etherscan.io/token/${nft.contract.address}?a=${nft.tokenId}`;
 
@@ -39,7 +37,7 @@ const NFTCard: React.FC<NFTCardProps> = ({ nft }) => {
           onClick={() => setIsModalOpen(true)}
         >
           <Image
-            src={nft.image?.thumbnailUrl || "/default-image-url.jpg"}
+            src={nft.image?.thumbnailUrl || nft.image?.cachedUrl || "/default-nft-image.svg"}
             alt={nft.name || "Untitled"}
             layout="fill"
             objectFit="cover"

@@ -27,9 +27,8 @@ const fetchAllNFTs = async (walletAddress: string): Promise<NFT[]> => {
   let pageKey: string | null = null;
 
   while (pageKey !== undefined && allNFTs.length < MAX_NFTS) {
-    const url = `${ALCHEMY_BASE_URL}/getNFTsForOwner?owner=${walletAddress}&withMetadata=true${
-      pageKey ? `&pageKey=${pageKey}` : ""
-    }`;
+    const url = `${ALCHEMY_BASE_URL}/getNFTsForOwner?owner=${walletAddress}&withMetadata=true${pageKey ? `&pageKey=${pageKey}` : ""
+      }`;
     console.log(`Fetching NFTs from: ${url}`);
     try {
       const response = await fetchWithRetry(url, 5, 1000, 30000); // 5 retries, 1s initial delay, 30s max delay

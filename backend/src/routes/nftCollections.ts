@@ -13,9 +13,8 @@ const fetchNFTsForContract = async (
   startToken: string | null,
   limit: number
 ): Promise<any> => {
-  const url = `${ALCHEMY_BASE_URL}/getNFTsForContract?contractAddress=${contractAddress}&withMetadata=true${
-    startToken ? `&startToken=${startToken}` : ""
-  }&limit=${limit}`;
+  const url = `${ALCHEMY_BASE_URL}/getNFTsForContract?contractAddress=${contractAddress}&withMetadata=true${startToken ? `&startToken=${startToken}` : ""
+    }&limit=${limit}`;
   const response = await fetchWithRetry(url);
   return response;
 };

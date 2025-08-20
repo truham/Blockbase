@@ -35,15 +35,51 @@ const nextConfig = {
     ];
   },
   images: {
-    domains: [
-      "nft-cdn.alchemy.com",
-      "res.cloudinary.com",
-      "storage.googleapis.com",
-      "assets.website-files.com",
-      "blur.io",
-      "looksrare.org",
-      "etherscan.io",
-      "i.seadn.io",
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'nft-cdn.alchemy.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.website-files.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'blur.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'looksrare.org',
+      },
+      {
+        protocol: 'https',
+        hostname: 'etherscan.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.seadn.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'arweave.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ipfs.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'gateway.pinata.cloud',
+      },
     ],
   },
 };
