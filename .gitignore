@@ -20,3 +20,5 @@ backend/dist/
 # Environment variables
 frontend/.env.local
 backend/.env
+.vercel
+.env*.local
