@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
+import { GetStaticProps } from "next";
 import Layout from "../../layout";
 import { fetchAllCoins } from "../../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import ExploreCoinsTable from "../../components/ExploreCoinsTable";
 import Pagination from "../../components/Pagination";
 
-const AllCoins = () => {
+interface AllCoinsProps {
+  fallback?: boolean;
+}
+
+const AllCoins = ({ fallback }: AllCoinsProps) => {
   const dispatch = useAppDispatch();
   const { allCoins, loading, error } = useAppSelector((state) => state.coins);
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +45,16 @@ const AllCoins = () => {
       </div>
     </Layout>
   );
+};
+
+// Enable static generation
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      fallback: true,
+    },
+    revalidate: 3600, // Revalidate every hour
+  };
 };
 
 export default AllCoins;

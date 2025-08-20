@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { GetStaticProps } from "next";
 import { NFT } from "../../types";
 import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
@@ -7,7 +8,11 @@ import LoadingSquiggle from "../../components/LoadingSquiggle";
 
 const ITEMS_PER_PAGE = 12;
 
-const NFTPortfolio: React.FC = () => {
+interface NFTPortfolioProps {
+  fallback?: boolean;
+}
+
+const NFTPortfolio: React.FC<NFTPortfolioProps> = ({ fallback }) => {
   const [walletAddress, setWalletAddress] = useState("");
   const [nfts, setNfts] = useState<NFT[]>([]);
   const [filteredNfts, setFilteredNfts] = useState<NFT[]>([]);
@@ -243,6 +248,16 @@ const NFTPortfolio: React.FC = () => {
       )}
     </Layout>
   );
+};
+
+// Enable static generation
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      fallback: true,
+    },
+    revalidate: 3600, // Revalidate every hour
+  };
 };
 
 export default NFTPortfolio;

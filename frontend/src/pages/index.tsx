@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { GetStaticProps } from "next";
 import Layout from "../layout";
 import { fetchCoins } from "../store/coinSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -6,7 +7,11 @@ import HeroGM from "../components/HeroGM";
 import FeaturedCards from "../components/FeaturedCards";
 import HeroMemes from "../components/HeroMemes";
 
-const Home = () => {
+interface HomeProps {
+  fallback?: boolean;
+}
+
+const Home = ({ fallback }: HomeProps) => {
   const dispatch = useAppDispatch();
   const { coins, loading, error } = useAppSelector((state) => state.coins);
 
@@ -26,6 +31,17 @@ const Home = () => {
       <FeaturedCards coins={coins} />
     </Layout>
   );
+};
+
+// Enable static generation for the homepage
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      fallback: true,
+    },
+    // Revalidate every hour to keep data fresh
+    revalidate: 3600,
+  };
 };
 
 export default Home;

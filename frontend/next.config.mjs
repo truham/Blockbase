@@ -8,6 +8,11 @@ const __dirname = path.dirname(__filename);
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  experimental: {
+    // Enable pages in src directory
+    srcDir: true,
+  },
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.(mp4|webm|ogg|swf|ogv)$/,
@@ -26,14 +31,7 @@ const nextConfig = {
 
     return config;
   },
-  async rewrites() {
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${process.env.NEXT_PUBLIC_API_URL}/api/:path*`,
-      },
-    ];
-  },
+  // Removed API rewrites - using internal Next.js API routes instead
   images: {
     remotePatterns: [
       {

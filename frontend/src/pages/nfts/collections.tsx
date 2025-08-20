@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { GetStaticProps } from "next";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../layout";
 import {
@@ -11,7 +12,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import NFTCard from "../../components/NFTCard";
 
-const NFTCollections: React.FC = () => {
+interface NFTCollectionsProps {
+  fallback?: boolean;
+}
+
+const NFTCollections: React.FC<NFTCollectionsProps> = ({ fallback }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { nfts, loading, error, nextPageKey } = useSelector(
     (state: RootState) => state.nftCollections
@@ -174,6 +179,16 @@ const NFTCollections: React.FC = () => {
       </div>
     </Layout>
   );
+};
+
+// Enable static generation
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      fallback: true,
+    },
+    revalidate: 3600, // Revalidate every hour
+  };
 };
 
 export default NFTCollections;
