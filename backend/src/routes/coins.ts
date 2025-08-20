@@ -1,10 +1,10 @@
-import { Router } from "express";
+import { Router, Request, Response } from "express";
 import fetchWithRetry from "../utils/fetchWithRetry";
 import { getFromCache, setToCache } from "../utils/cache";
 
 const router = Router();
 
-router.get("/coins", async (req, res) => {
+router.get("/coins", async (req: Request, res: Response) => {
   const { page = 1, per_page = 100 } = req.query; // Increase per_page to 100
   const cacheKey = `coins_${page}_${per_page}`;
   const cachedData = getFromCache(cacheKey);
@@ -24,7 +24,7 @@ router.get("/coins", async (req, res) => {
   }
 });
 
-router.get("/coins/:id", async (req, res) => {
+router.get("/coins/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   const cacheKey = `coin_${id}`;
   const cachedData = getFromCache(cacheKey);
@@ -46,7 +46,7 @@ router.get("/coins/:id", async (req, res) => {
   }
 });
 
-router.get("/coins/:id/history", async (req, res) => {
+router.get("/coins/:id/history", async (req: Request, res: Response) => {
   const { id } = req.params;
   const cacheKey = `coin_${id}_history`;
   const cachedData = getFromCache(cacheKey);
