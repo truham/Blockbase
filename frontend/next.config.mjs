@@ -8,11 +8,6 @@ const __dirname = path.dirname(__filename);
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
-  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
-  experimental: {
-    // Enable pages in src directory
-    srcDir: true,
-  },
   webpack(config, { isServer }) {
     config.module.rules.push({
       test: /\.(mp4|webm|ogg|swf|ogv)$/,
