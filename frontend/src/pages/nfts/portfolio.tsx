@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import Image from "next/image";
 import { NFT } from "../../types";
 import { fetchNFTsForOwner } from "../../services/nftService";
 import Layout from "../../layout";
@@ -202,11 +203,15 @@ const NFTPortfolio: React.FC = () => {
                     className="bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200"
                     onClick={() => openModal(nft)}
                   >
-                    <img
-                      src={nft.imageUrl || "https://via.placeholder.com/100"}
-                      alt={nft.name}
-                      className="w-full h-48 object-cover rounded-md mb-2"
-                    />
+                    <div className="w-full h-48 relative mb-2">
+                      <Image
+                        src={nft.imageUrl || "/default-nft-image.svg"}
+                        alt={nft.name}
+                        layout="fill"
+                        objectFit="cover"
+                        className="rounded-md"
+                      />
+                    </div>
                     <h3 className="font-semibold text-lg">{nft.name}</h3>
                     <p className="text-sm text-gray-600">
                       {nft.collectionName}

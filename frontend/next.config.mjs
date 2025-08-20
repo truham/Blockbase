@@ -46,6 +46,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'media-proxy.artblocks.io',
+      },
+      {
+        protocol: 'https',
         hostname: 'storage.googleapis.com',
       },
       {
@@ -67,6 +71,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'i.seadn.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i2.seadn.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'openseauserdata.com',
       },
       {
         protocol: 'https',
