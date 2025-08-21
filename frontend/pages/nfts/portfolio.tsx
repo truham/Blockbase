@@ -207,7 +207,7 @@ const NFTPortfolio: React.FC<NFTPortfolioProps> = ({ fallback }) => {
                     className="bg-gray-100 p-4 rounded-lg cursor-pointer hover:shadow-lg transition-shadow duration-200 overflow-hidden"
                     onClick={() => openModal(nft)}
                   >
-                    <div className="w-full h-48 relative mb-2">
+                    <div className="w-full h-48 relative mb-3">
                       <img
                         src={nft.imageUrl || "/default-nft-image.svg"}
                         alt={nft.name}
@@ -220,13 +220,16 @@ const NFTPortfolio: React.FC<NFTPortfolioProps> = ({ fallback }) => {
                         }}
                       />
                     </div>
-                    <h3 className="font-semibold text-lg truncate">{nft.name}</h3>
-                    <p className="text-sm text-gray-600 truncate">
-                      {nft.collectionName}
-                    </p>
-                    <p className="text-xs text-gray-500 truncate" title={`Token ID: ${nft.tokenId}`}>
-                      Token ID: {nft.tokenId}
-                    </p>
+                    <div className="space-y-1 px-1">
+                      <h3 className="font-semibold text-lg truncate leading-tight">{nft.name}</h3>
+                      <p className="text-sm text-gray-600 truncate">
+                        {nft.collectionName}
+                      </p>
+                      <p className="text-xs text-gray-500 break-all leading-relaxed" title={`Token ID: ${nft.tokenId}`}>
+                        <span className="font-medium">Token ID:</span><br />
+                        <span className="font-mono text-gray-400">{nft.tokenId}</span>
+                      </p>
+                    </div>
                   </li>
                 ))}
               </ul>
