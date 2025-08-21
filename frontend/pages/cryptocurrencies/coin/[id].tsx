@@ -17,23 +17,26 @@ interface ChartData {
   price: number;
 }
 
-const CoinDetailPage = () => {
+interface CoinDetailPageProps {
+  coinId: string;
+}
+
+const CoinDetailPage = ({ coinId }: CoinDetailPageProps) => {
   const router = useRouter();
-  const { id } = router.query;
   const dispatch = useAppDispatch();
   const { coinDetails, coinHistory, loading, error } = useAppSelector(
     (state) => state.coins
   );
-  const coin: CoinDetail | undefined = coinDetails[id as string];
-  const history: CoinHistory | undefined = coinHistory[id as string];
+  const coin: CoinDetail | undefined = coinDetails[coinId];
+  const history: CoinHistory | undefined = coinHistory[coinId];
   const [chartData, setChartData] = useState<ChartData[]>([]);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchCoinDetails(id as string));
-      dispatch(fetchCoinHistory(id as string));
+    if (coinId) {
+      dispatch(fetchCoinDetails(coinId));
+      dispatch(fetchCoinHistory(coinId));
     }
-  }, [dispatch, id]);
+  }, [dispatch, coinId]);
 
   useEffect(() => {
     if (history) {
@@ -194,5 +197,38 @@ const CoinDetailPage = () => {
     </Layout>
   );
 };
+
+// Generate static paths for popular coins
+export async function getStaticPaths() {
+  // Pre-generate pages for top 50 coins
+  try {
+    const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=50&page=1');
+    const coins = await response.json();
+    
+    const paths = coins.map((coin: any) => ({
+      params: { id: coin.id }
+    }));
+
+    return {
+      paths,
+      fallback: 'blocking' // Generate other pages on-demand
+    };
+  } catch (error) {
+    return {
+      paths: [],
+      fallback: 'blocking'
+    };
+  }
+}
+
+// Generate static props for each coin
+export async function getStaticProps({ params }: { params: { id: string } }) {
+  return {
+    props: {
+      coinId: params.id
+    },
+    revalidate: 3600 // Revalidate every hour
+  };
+}
 
 export default CoinDetailPage;
