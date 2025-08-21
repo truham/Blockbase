@@ -220,15 +220,17 @@ const NFTPortfolio: React.FC<NFTPortfolioProps> = ({ fallback }) => {
                         }}
                       />
                     </div>
-                    <div className="space-y-1 px-1">
+                    <div className="space-y-2 px-2 py-1">
                       <h3 className="font-semibold text-lg truncate leading-tight">{nft.name}</h3>
                       <p className="text-sm text-gray-600 truncate">
                         {nft.collectionName}
                       </p>
-                      <p className="text-xs text-gray-500 break-all leading-relaxed" title={`Token ID: ${nft.tokenId}`}>
-                        <span className="font-medium">Token ID:</span><br />
-                        <span className="font-mono text-gray-400">{nft.tokenId}</span>
-                      </p>
+                      <div className="text-xs text-gray-500">
+                        <p className="font-medium mb-1">Token ID:</p>
+                        <p className="font-mono text-gray-400 break-all leading-4 pr-2">
+                          {nft.tokenId}
+                        </p>
+                      </div>
                     </div>
                   </li>
                 ))}
